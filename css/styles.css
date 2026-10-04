@@ -151,6 +151,17 @@ h3{font-size:22px;line-height:1.2;letter-spacing:-.01em}
 .proof .card{border:1px solid var(--cloud);border-radius:16px;padding:22px;background:#fff}
 .proof strong{font-size:34px;color:var(--teal2);display:block;font-family:Montserrat,Arial,sans-serif;font-weight:800}
 
+/* Attract/Capture/Connect/Convert grid */
+.acc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.acc-grid .card{border:1px solid var(--cloud);border-radius:16px;padding:24px;background:#fff}
+.acc-grid .card h3{margin:6px 0 8px}
+
+/* One commercial process flow */
+.flow{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+.flow div{background:var(--mist);border:1px solid var(--cloud);border-radius:12px;padding:18px 12px;text-align:center}
+.flow div b{display:block;font-family:Montserrat,Arial,sans-serif;font-weight:800;color:var(--navy);margin-bottom:4px}
+.flow div span{font-size:12px;color:var(--slate)}
+
 .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .team-grid .card{border:1px solid var(--cloud);border-radius:16px;padding:24px;background:#fff;text-align:center}
 .team-grid .avatar{width:64px;height:64px;border-radius:50%;background:var(--navy);color:var(--teal);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-family:Montserrat,Arial,sans-serif;font-weight:800;font-size:20px}
@@ -171,7 +182,7 @@ h3{font-size:22px;line-height:1.2;letter-spacing:-.01em}
   .photo-split.reverse{direction:ltr}
   .photo-split img{max-height:280px}
   .side{display:none}
-  .offers,.proof,.stat-strip,.team-grid{grid-template-columns:1fr}
+  .offers,.proof,.stat-strip,.team-grid,.acc-grid,.flow{grid-template-columns:1fr}
   .bridge{grid-template-columns:1fr}
   .arrow{transform:rotate(90deg);text-align:center}
   .row,.kpis{grid-template-columns:repeat(2,1fr)}
