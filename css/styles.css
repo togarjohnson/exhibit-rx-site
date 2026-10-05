@@ -165,16 +165,24 @@ table.compare tr:last-child td{border-bottom:none}
 .faq-item h3{font-size:18px;margin-bottom:8px}
 .faq-item p{color:var(--slate);font-size:16px;margin:0}
 
-/* Attract/Capture/Connect/Convert grid */
-.acc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
-.acc-grid .card{border:1px solid var(--cloud);border-radius:16px;padding:24px;background:#fff}
-.acc-grid .card h3{margin:6px 0 8px}
+/* Exhibit RX Method: Prescribe / Prepare / Perform / Prove / Progress */
+.acc-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+.acc-grid .card{border:1px solid var(--cloud);border-radius:16px;padding:22px 20px;background:#fff}
+.acc-grid .card h3{margin:6px 0 8px;font-size:19px}
+.acc-grid .step-num{font-family:Montserrat,Arial,sans-serif;font-weight:800;font-size:12px;color:#fff;background:var(--navy);border-radius:999px;width:28px;height:28px;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
 
 /* One commercial process flow */
 .flow{display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
 .flow div{background:var(--mist);border:1px solid var(--cloud);border-radius:12px;padding:18px 12px;text-align:center}
 .flow div b{display:block;font-family:Montserrat,Arial,sans-serif;font-weight:800;color:var(--navy);margin-bottom:4px}
 .flow div span{font-size:12px;color:var(--slate)}
+
+/* Solutions by problem (2-col) */
+.offers.two-col{grid-template-columns:repeat(2,1fr)}
+
+/* Pulse / Continuum split blocks */
+.pulse-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+.pulse-grid .showcard{margin-top:0}
 
 .team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .team-grid .card{border:1px solid var(--cloud);border-radius:16px;padding:24px;background:#fff;text-align:center}
@@ -196,7 +204,7 @@ table.compare tr:last-child td{border-bottom:none}
   .photo-split.reverse{direction:ltr}
   .photo-split img{max-height:280px}
   .side{display:none}
-  .offers,.proof,.stat-strip,.team-grid,.acc-grid,.flow{grid-template-columns:1fr}
+  .offers,.proof,.stat-strip,.team-grid,.acc-grid,.flow,.offers.two-col,.pulse-grid{grid-template-columns:1fr}
   .bridge{grid-template-columns:1fr}
   .arrow{transform:rotate(90deg);text-align:center}
   .row,.kpis{grid-template-columns:repeat(2,1fr)}
