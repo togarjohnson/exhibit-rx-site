@@ -130,5 +130,19 @@
   <div class="flinks"><a href="method.html">Method</a><a href="services.html">Solutions</a><a href="platform.html">Continuum</a><a href="scorecard.html">Show Diagnosis</a><a href="about.html">About</a></div>
   <p>Cure the Chaos. Prove the Value.</p>
 </div></footer>
+<script>
+document.querySelectorAll('.carousel').forEach(function(c){
+  var t=c.querySelector('.carousel-track'),s=[].slice.call(t.children),d=c.querySelector('.carousel-dots');
+  s.forEach(function(_,i){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Go to photo '+(i+1));b.onclick=function(){go(i)};d.appendChild(b)});
+  function cur(){var x=t.scrollLeft,best=0;s.forEach(function(el,i){if(Math.abs(el.offsetLeft-t.offsetLeft-x)<Math.abs(s[best].offsetLeft-t.offsetLeft-x))best=i});return best}
+  function go(i){i=(i+s.length)%s.length;t.scrollTo({left:s[i].offsetLeft-t.offsetLeft,behavior:'smooth'})}
+  function mark(){var i=cur();[].forEach.call(d.children,function(b,j){b.classList.toggle('on',j===i)})}
+  c.querySelector('.prev').onclick=function(){go(cur()-1)};
+  c.querySelector('.next').onclick=function(){go(cur()+1)};
+  t.addEventListener('scroll',function(){clearTimeout(t._m);t._m=setTimeout(mark,80)});
+  t.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){e.preventDefault();go(cur()+1)}if(e.key==='ArrowLeft'){e.preventDefault();go(cur()-1)}});
+  mark();
+});
+</script>
 </body>
 </html>
