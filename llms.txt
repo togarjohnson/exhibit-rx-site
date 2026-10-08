@@ -1,0 +1,46 @@
+# Exhibit RX
+
+> Exhibit RX is the trade-show performance partner for pharma and life sciences companies. We help teams turn trade shows into measurable new business, from defining success before the show to reporting what it produced at 30, 60 and 90 days after.
+
+## Positioning
+
+Most of what a flagship trade show costs quietly goes to dinners and meetings with customers a company already has. New prospects get whoever on the team happens to be free. Leadership sees a booth bill and a badge count, but not the opportunities the show created. Exhibit RX exists to close that gap: define the new-business target before the show, run the plan on site, get every lead to an owner in the client's CRM, and report results at 30, 60 and 90 days.
+
+## The Exhibit RX Method
+
+Five stages, run for every show:
+
+1. **Prescribe:** Define success and what stands in the way, including the new-business target.
+2. **Prepare:** Align people, meetings, systems and messaging before the doors open.
+3. **Perform:** Keep the show running to plan, with daily briefs and fast issue resolution.
+4. **Prove:** Get every lead to an owner and show leadership what the show produced.
+5. **Progress:** Make the next show better, or help decide it's time to walk away from it.
+
+## Show Engagement
+
+A single-show engagement that runs the full Method for one trade show, start to finish.
+
+## RX Continuum
+
+For companies with four or more shows a year. Every show still runs through the Method, but setup, systems and lessons carry over, so each show starts ahead of the last.
+
+## RX Pulse
+
+The follow-through system for the 30, 60 and 90 days after a show: every lead routed to an owner, follow-up tracked, and a report back to leadership on what the show produced.
+
+## Who this is a good fit for
+
+Pharma and life sciences companies running flagship or recurring trade shows who want the time after the show to be run as deliberately as the time on the floor. Best suited to teams who already see a booth bill and a badge count but not a clear picture of the business the show created.
+
+## Founder
+
+Togar G. Johnson has spent 20 years in marketing, including as Global Marketing Manager in pharma ingredients running global trade shows, and more than five years leading marketing and communications for the 436th Force Support Squadron at Dover Air Force Base. Connect on LinkedIn: https://www.linkedin.com/in/togarjohnson
+
+## Contact
+
+Request a free Show Diagnosis: togarjohnson@gmail.com
+
+## Pages
+
+- Home: https://exhibit-rx-site.vercel.app/
+- About: https://exhibit-rx-site.vercel.app/about.html
