@@ -363,3 +363,12 @@ table.compare tr:last-child td{border-bottom:none}
 .fstats dt{font-family:Montserrat,Arial,sans-serif;font-weight:800;font-size:30px;line-height:1.1;color:var(--teal2);letter-spacing:-.01em}
 .fstats dd{margin:6px 0 0;color:var(--slate);font-size:15px}
 @media(max-width:420px){.fstats dt{font-size:24px}.fstats div{padding:18px}}
+
+/* Show Rescue urgency door */
+.rescue-strip{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:24px;padding:16px 20px;border:1px solid #F0D9A0;border-left:5px solid #E0A43A;border-radius:14px;background:#FFF8E8;text-decoration:none;color:var(--navy);transition:transform .2s,box-shadow .2s}
+.rescue-strip:hover{transform:translateY(-2px);box-shadow:var(--shadow)}
+.rescue-strip:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.rescue-strip>span:nth-child(2){flex:1 1 280px}
+.rescue-tag{font-family:Montserrat,Arial,sans-serif;font-weight:800;font-size:11px;letter-spacing:.14em;text-transform:uppercase;background:#E0A43A;color:#fff;border-radius:999px;padding:6px 12px}
+.rescue-go{font-family:Montserrat,Arial,sans-serif;font-weight:800;font-size:14px;color:var(--teal2);white-space:nowrap}
+.pk-rescue{margin:0 0 22px;padding:12px 16px;border-left:4px solid #E0A43A;background:#FFF8E8;border-radius:0 12px 12px 0;font-size:15px}
