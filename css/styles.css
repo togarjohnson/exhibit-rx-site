@@ -354,3 +354,12 @@ table.compare tr:last-child td{border-bottom:none}
   .timing li::after{top:2px}
 }
 @media(max-width:580px){.svc-grid{grid-template-columns:1fr}}
+
+/* About: founder stats in the bio column */
+.fstats{display:grid;grid-template-columns:1fr 1fr;margin:30px 0 0;background:#fff;border:1px solid var(--cloud);border-radius:18px;overflow:hidden}
+.fstats div{padding:22px 24px;border-top:1px solid var(--cloud)}
+.fstats div:nth-child(-n+2){border-top:0}
+.fstats div:nth-child(odd){border-right:1px solid var(--cloud)}
+.fstats dt{font-family:Montserrat,Arial,sans-serif;font-weight:800;font-size:30px;line-height:1.1;color:var(--teal2);letter-spacing:-.01em}
+.fstats dd{margin:6px 0 0;color:var(--slate);font-size:15px}
+@media(max-width:420px){.fstats dt{font-size:24px}.fstats div{padding:18px}}
