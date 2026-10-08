@@ -307,3 +307,50 @@ table.compare tr:last-child td{border-bottom:none}
 
 /* Hero show-floor photo */
 .hero-visual img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:22px;display:block;box-shadow:0 30px 70px rgba(0,0,0,.3)}
+
+/* Solutions layout options (internal preview page + reusable) */
+.opt-banner{background:#FFF6E0;border-bottom:1px solid #F0D9A0;padding:12px 0;font-size:15px}
+.opt-banner a{color:var(--teal2);font-weight:700;margin-left:6px}
+.opt-label{display:inline-block;font-family:Montserrat,Arial,sans-serif;font-weight:800;font-size:12px;letter-spacing:.15em;text-transform:uppercase;background:#E0A43A;color:#fff;border-radius:999px;padding:6px 14px;margin-bottom:18px}
+.picker{display:grid;grid-template-columns:minmax(260px,.9fr) 1.4fr;gap:24px;align-items:stretch}
+.pk-tabs{display:grid;gap:10px;align-content:start}
+.pk-tab{display:flex;gap:14px;align-items:center;text-align:left;font:inherit;font-family:Montserrat,Arial,sans-serif;font-weight:700;font-size:15px;line-height:1.3;color:var(--navy);background:#fff;border:1px solid var(--cloud);border-radius:14px;padding:16px 18px;cursor:pointer;transition:background .2s,border-color .2s,transform .2s}
+.pk-tab:hover{border-color:var(--teal2);transform:translateX(3px)}
+.pk-tab[aria-selected="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.pk-tab:focus-visible{outline:3px solid var(--blue);outline-offset:3px}
+.pk-num{flex:0 0 auto;font-size:12px;color:var(--teal);letter-spacing:.08em}
+.pk-panels{background:#fff;border:1px solid var(--cloud);border-radius:20px;padding:32px;box-shadow:var(--shadow)}
+.pk-panel h3{font-size:28px;margin:8px 0 10px}
+.pk-panel:not([hidden]){animation:pkIn .35s ease}
+@keyframes pkIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.pk-list{list-style:none;padding:0;margin:18px 0;display:grid;gap:10px}
+.pk-list li{padding-left:28px;position:relative}
+.pk-list li::before{content:"";position:absolute;left:0;top:5px;width:14px;height:14px;border-radius:4px;background:var(--teal)}
+.pk-out{background:var(--mist);border-radius:12px;padding:14px 16px;margin:0 0 22px}
+.svc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.svc{border:1px solid var(--cloud);border-radius:18px;padding:24px;background:#fff;display:flex;flex-direction:column;border-top:5px solid var(--teal2)}
+.svc-top{display:flex;flex-direction:column;gap:8px;margin-bottom:10px}
+.svc-num{font-family:Montserrat,Arial,sans-serif;font-weight:800;font-size:28px;color:var(--cloud)}
+.svc .tag{font-family:Montserrat,Arial,sans-serif;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--teal2)}
+.svc h3{font-size:20px;margin-bottom:14px}
+.svc dl{margin:0;display:grid;gap:4px}
+.svc dt{font-family:Montserrat,Arial,sans-serif;font-weight:800;font-size:12px;text-transform:uppercase;letter-spacing:.1em;color:var(--navy);margin-top:10px}
+.svc dd{margin:0;color:var(--slate);font-size:15px}
+.svc dd ul{padding-left:18px;margin:4px 0 0}
+.timing{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
+.timing li{position:relative;padding:44px 20px 0 0}
+.timing li::before{content:"";position:absolute;left:0;right:0;top:14px;height:3px;background:linear-gradient(90deg,var(--blue),var(--teal))}
+.timing li::after{content:"";position:absolute;left:0;top:6px;width:19px;height:19px;border-radius:6px;background:var(--navy);box-shadow:0 0 0 5px var(--mist)}
+.timing li:last-child::after{background:var(--teal2)}
+.tm-when{font-family:Montserrat,Arial,sans-serif;font-weight:800;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--teal2);margin-bottom:8px}
+.tm-body h3{font-size:20px;margin-bottom:8px}
+@media(max-width:1000px){.svc-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:900px){
+  .picker{grid-template-columns:1fr}
+  .pk-panels{padding:24px}
+  .timing{grid-template-columns:1fr;gap:6px}
+  .timing li{padding:0 0 22px 40px}
+  .timing li::before{left:8px;right:auto;top:0;bottom:0;width:3px;height:auto;background:linear-gradient(180deg,var(--blue),var(--teal))}
+  .timing li::after{top:2px}
+}
+@media(max-width:580px){.svc-grid{grid-template-columns:1fr}}

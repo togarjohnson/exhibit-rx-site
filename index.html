@@ -181,7 +181,7 @@
   var ps=document.getElementById('ps');
   if(!ps||!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   ps.classList.add('pre');
-  new IntersectionObserver(function(e,o){if(e[0].isIntersecting){ps.classList.add('in');o.disconnect()}},{threshold:.35}).observe(ps);
+  new IntersectionObserver(function(e){var r=e[0];if(r.intersectionRatio>=.35)ps.classList.add('in');else if(!r.isIntersecting)ps.classList.remove('in')},{threshold:[0,.35]}).observe(ps);
 })();
 </script>
 </body>
