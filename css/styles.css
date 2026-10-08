@@ -272,3 +272,35 @@ table.compare tr:last-child td{border-bottom:none}
 .cycle li:last-child{padding-bottom:0}
 .cycle li:last-child::after{display:none}
 @media(max-width:900px){.pulse-cards{grid-template-columns:1fr}.measures li{grid-template-columns:48px 1fr}}
+
+/* Animated Five Ps: tiles start scattered, then snap into line */
+.ps{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(5,1fr);gap:18px;position:relative;counter-reset:none}
+.ps::before{content:"";position:absolute;left:10%;right:10%;top:36px;height:2px;background:linear-gradient(90deg,#008CAF,#00A298);transform-origin:left;transition:transform 1s ease .5s}
+.ps li{text-align:center;position:relative}
+.ps-tile{display:flex;align-items:center;justify-content:center;width:72px;height:72px;margin:0 auto 18px;border-radius:16px;background:var(--c);color:#fff;font-family:Montserrat,Arial,sans-serif;font-weight:800;font-size:20px;box-shadow:0 0 0 6px var(--navy);transition:transform .8s cubic-bezier(.2,.8,.2,1) var(--d),opacity .6s ease var(--d)}
+.ps h3{font-size:20px;margin-bottom:6px;transition:opacity .6s ease calc(var(--d) + .35s),transform .6s ease calc(var(--d) + .35s)}
+.ps p{color:#cbd8de;margin:0;font-size:16px;transition:opacity .6s ease calc(var(--d) + .45s)}
+.ps li:hover .ps-tile{transform:translateY(-4px)}
+.ps.pre .ps-tile{transform:translate(var(--x),var(--y)) rotate(var(--r));opacity:.55}
+.ps.pre h3,.ps.pre p{opacity:0}
+.ps.pre h3{transform:translateY(8px)}
+.ps.pre::before{transform:scaleX(0)}
+.ps.pre.in .ps-tile{transform:none;opacity:1}
+.ps.pre.in h3,.ps.pre.in p{opacity:1}
+.ps.pre.in h3{transform:none}
+.ps.pre.in::before{transform:scaleX(1)}
+.doors{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.door{background:var(--navy2);border:1px solid #285165;border-radius:18px;padding:30px;display:flex;flex-direction:column;align-items:flex-start}
+.door h3{margin:10px 0 10px}
+.door p{color:#D1DCE0;margin:0 0 22px;flex:1}
+@media(max-width:900px){
+  .ps{grid-template-columns:1fr;gap:22px;max-width:520px;margin:auto}
+  .ps::before{left:35px;right:auto;top:20px;bottom:20px;width:2px;height:auto;background:linear-gradient(180deg,#008CAF,#00A298);transform-origin:top}
+  .ps.pre::before{transform:scaleY(0)}
+  .ps.pre.in::before{transform:scaleY(1)}
+  .ps li{display:grid;grid-template-columns:72px 1fr;column-gap:20px;text-align:left;align-items:center}
+  .ps-tile{grid-row:span 2;margin:0}
+  .ps h3{margin:0;align-self:end}
+  .ps p{align-self:start}
+  .doors{grid-template-columns:1fr}
+}
