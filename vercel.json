@@ -3,7 +3,7 @@
   "trailingSlash": false,
   "redirects": [
     { "source": "/method", "destination": "/#how", "permanent": true },
-    { "source": "/services", "destination": "/#offer", "permanent": true },
+    { "source": "/services", "destination": "/#solutions", "permanent": true },
     { "source": "/scorecard", "destination": "/#audit", "permanent": true },
     { "source": "/platform", "destination": "/", "permanent": true }
   ]

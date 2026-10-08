@@ -244,3 +244,31 @@ table.compare tr:last-child td{border-bottom:none}
   .carousel-btn.prev{left:4px}
   .carousel-btn.next{right:4px}
 }
+
+/* Positioning update: pieces, keep list, RX Pulse, five measures, Continuum */
+.pieces{list-style:none;padding:0;margin:0 0 8px;display:flex;flex-wrap:wrap;gap:10px}
+.pieces li{font-family:Montserrat,Arial,sans-serif;font-weight:700;font-size:14px;padding:10px 16px;border:1px solid var(--cloud);border-radius:999px;background:#fff}
+.keep{margin-top:36px;max-width:820px}
+.keep-list{font-family:Montserrat,Arial,sans-serif;font-weight:800;font-size:clamp(20px,2.4vw,26px);line-height:1.35;margin:0 0 14px}
+.keep-list span:last-child{color:var(--teal2)}
+.keep .muted{font-size:19px;margin:0}
+.pulse-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.pulse-cards div{background:var(--navy2);border:1px solid #285165;border-radius:16px;padding:26px}
+.pulse-cards h3{margin:12px 0 8px}
+.pulse-cards p{color:#cbd8de;margin:0}
+.pulse-num{font-family:Montserrat,Arial,sans-serif;font-weight:800;font-size:13px;letter-spacing:.1em;color:var(--teal)}
+.measures{list-style:none;padding:0;margin:0;display:grid;gap:0;max-width:880px;border-top:1px solid var(--cloud)}
+.measures li{display:grid;grid-template-columns:64px 1fr;gap:18px;align-items:baseline;padding:20px 0;border-bottom:1px solid var(--cloud)}
+.measures li>span{font-family:Montserrat,Arial,sans-serif;font-weight:800;font-size:22px;color:var(--teal2)}
+.measures h3{font-size:20px;margin-bottom:4px}
+.measures p{margin:0}
+.callout{margin:32px 0 0;max-width:880px;padding:22px 26px;border-left:4px solid var(--teal2);background:var(--mist);border-radius:0 16px 16px 0;font-size:19px;font-weight:600;color:var(--navy)}
+.cycle{list-style:none;padding:0;margin:0;display:grid;gap:10px;justify-items:center}
+.cycle li{position:relative;text-align:center;font-family:Montserrat,Arial,sans-serif;font-weight:800}
+.cycle .show{width:100%;max-width:340px;padding:16px;border-radius:14px;background:var(--navy);color:#fff;letter-spacing:.08em;text-transform:uppercase;font-size:15px}
+.cycle .step{color:var(--teal2);font-size:14px;letter-spacing:.2em;text-transform:uppercase;padding:2px 0 20px}
+.cycle .step::after{content:"\2193";position:absolute;left:50%;bottom:-4px;transform:translateX(-50%);font-size:18px;letter-spacing:0}
+.cycle li:nth-child(5){background:var(--teal2)}
+.cycle li:last-child{padding-bottom:0}
+.cycle li:last-child::after{display:none}
+@media(max-width:900px){.pulse-cards{grid-template-columns:1fr}.measures li{grid-template-columns:48px 1fr}}
