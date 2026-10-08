@@ -307,7 +307,7 @@ table.compare tr:last-child td{border-bottom:none}
 
 /* Hero photo with floating Post-Show Health Check sample */
 .hero-visual{position:relative;padding:0 0 70px 0}
-.hero-visual img{width:100%;height:auto;aspect-ratio:1200/1096;object-fit:cover;border-radius:22px;display:block;box-shadow:0 30px 70px rgba(0,0,0,.3)}
+.hero-visual img{width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;border-radius:22px;display:block;box-shadow:0 30px 70px rgba(0,0,0,.3)}
 .hc-card{position:absolute;left:-34px;bottom:0;width:min(340px,82%);background:#fff;color:var(--navy);border-radius:18px;padding:18px 20px;box-shadow:0 24px 60px rgba(0,0,0,.35)}
 .hc-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding-bottom:12px;margin-bottom:4px;border-bottom:1px solid var(--cloud);font-family:Montserrat,Arial,sans-serif;font-size:15px}
 .hc-card .pill{color:var(--teal2);border-color:var(--teal2)}
