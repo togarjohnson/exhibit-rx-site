@@ -77,17 +77,9 @@
 </div></section>
 
 <section class="section" id="solutions"><div class="wrap">
-  <div class="head"><div class="eyebrow">Solutions</div><h2>Start with the problem you're trying to solve.</h2></div>
-  <div class="offers two-col">
-    <article class="offer"><div class="tag">Need more internal capacity?</div><h3 style="margin-top:8px">Fractional Show Management</h3><p class="muted" style="margin-bottom:0">For organizations with more events than their internal team has capacity to manage.</p></article>
-    <article class="offer"><div class="tag">Events run, but commercial performance is unclear?</div><h3 style="margin-top:8px">Commercial Show Accelerator</h3><p class="muted" style="margin-bottom:0">For organizations that want stronger alignment, preparation, meeting coordination, execution and follow-through.</p></article>
-    <article class="offer"><div class="tag">Leads collected, but little visibility after?</div><h3 style="margin-top:8px">Lead Performance RX</h3><p class="muted" style="margin-bottom:0">Improve how event interactions are captured, qualified, routed and measured, working with the systems you already use.</p></article>
-    <article class="offer"><div class="tag">Multiple shows, no connected strategy?</div><h3 style="margin-top:8px">Exhibit RX Continuum&trade;</h3><p class="muted" style="margin-bottom:0">Connect events across the year so processes, insights and lessons improve the entire program.</p></article>
-  </div>
-  <div class="showcard" style="margin-top:28px;display:flex;justify-content:space-between;gap:20px;align-items:center;flex-wrap:wrap">
-    <div><h3>Not sure where you fit?</h3><p class="muted" style="margin:6px 0 0">Start with a Show Diagnosis. We'll point you to the right path.</p></div>
-    <a class="btn btn-primary" href="#audit">Get your Show Diagnosis</a>
-  </div>
+  <div class="head"><div class="eyebrow">Solutions</div><h2>What's getting in the way of your next show?</h2><p>Choose the challenge that sounds most like yours.</p></div>
+  <div class="picker"><div class="pk-tabs" role="tablist" aria-label="Choose your challenge"><button type="button" class="pk-tab" role="tab" aria-selected="true" data-i="0"><span class="pk-num">01</span>Need more internal capacity?</button><button type="button" class="pk-tab" role="tab" aria-selected="false" data-i="1"><span class="pk-num">02</span>Events run, but commercial performance is unclear?</button><button type="button" class="pk-tab" role="tab" aria-selected="false" data-i="2"><span class="pk-num">03</span>Leads collected, but little visibility after?</button><button type="button" class="pk-tab" role="tab" aria-selected="false" data-i="3"><span class="pk-num">04</span>Multiple shows, no connected strategy?</button></div><div class="pk-panels"><div class="pk-panel" role="tabpanel" ><div class="eyebrow">The fit</div><h3>Fractional Show Management</h3><p class="muted" style="font-size:18px">For organizations with more events than their internal team has capacity to manage.</p><ul class="pk-list"><li>Show planning and timelines</li><li>Vendor and booth-builder coordination</li><li>Onsite management on show days</li></ul><p class="pk-out"><b>You get:</b> A show that runs to plan without overloading your team.</p><a class="btn btn-primary" href="index.html#audit">Get your Show Diagnosis</a></div><div class="pk-panel" role="tabpanel" hidden><div class="eyebrow">The fit</div><h3>Commercial Show Accelerator</h3><p class="muted" style="font-size:18px">For organizations that want stronger alignment, preparation, meeting coordination, execution and follow-through.</p><ul class="pk-list"><li>Success defined before the show</li><li>Sales and technical teams aligned</li><li>Meetings coordinated before and during the show</li></ul><p class="pk-out"><b>You get:</b> A show judged by commercial outcomes, not badge counts.</p><a class="btn btn-primary" href="index.html#audit">Get your Show Diagnosis</a></div><div class="pk-panel" role="tabpanel" hidden><div class="eyebrow">The fit</div><h3>Lead Performance RX</h3><p class="muted" style="font-size:18px">Improve how event interactions are captured, qualified, routed and measured, working with the systems you already use.</p><ul class="pk-list"><li>Capture and qualification built on your questions</li><li>Routing into your existing CRM</li><li>A Post-Show Health Check</li></ul><p class="pk-out"><b>You get:</b> A clear view of what happened to your show conversations.</p><a class="btn btn-primary" href="index.html#audit">Get your Show Diagnosis</a></div><div class="pk-panel" role="tabpanel" hidden><div class="eyebrow">The fit</div><h3>Exhibit RX Continuum&trade;</h3><p class="muted" style="font-size:18px">Connect events across the year so processes, insights and lessons improve the entire program.</p><ul class="pk-list"><li>One plan across your show calendar</li><li>Lessons carried from show to show</li><li>Consistent standards at every event</li></ul><p class="pk-out"><b>You get:</b> A program that gets better with every show.</p><a class="btn btn-primary" href="index.html#audit">Get your Show Diagnosis</a></div></div></div>
+  <p class="muted" style="margin-top:22px">Not sure where you fit? <a href="#audit" style="color:var(--teal2);font-weight:700">Start with a Show Diagnosis &rarr;</a></p>
 </div></section>
 
 <section class="section mist" id="about"><div class="wrap">
@@ -182,6 +174,13 @@
   if(!ps||!('IntersectionObserver' in window)||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
   ps.classList.add('pre');
   new IntersectionObserver(function(e){var r=e[0];if(r.intersectionRatio>=.35)ps.classList.add('in');else if(!r.isIntersecting)ps.classList.remove('in')},{threshold:[0,.35]}).observe(ps);
+})();
+</script>
+<script>
+(function(){
+  var tabs=[].slice.call(document.querySelectorAll('.pk-tab')),panels=[].slice.call(document.querySelectorAll('.pk-panel'));
+  function show(i){tabs.forEach(function(t,j){t.setAttribute('aria-selected',j===i?'true':'false');t.tabIndex=j===i?0:-1});panels.forEach(function(p,j){p.hidden=j!==i})}
+  tabs.forEach(function(t,i){t.addEventListener('click',function(){show(i);if(innerWidth<900){var p=document.querySelector('.pk-panels');p.scrollIntoView({block:'nearest',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})}});t.addEventListener('keydown',function(e){if(e.key==='ArrowDown'||e.key==='ArrowRight'){e.preventDefault();show((i+1)%tabs.length);tabs[(i+1)%tabs.length].focus()}if(e.key==='ArrowUp'||e.key==='ArrowLeft'){e.preventDefault();var k=(i+tabs.length-1)%tabs.length;show(k);tabs[k].focus()}})});
 })();
 </script>
 </body>
