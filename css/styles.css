@@ -304,3 +304,16 @@ table.compare tr:last-child td{border-bottom:none}
   .ps p{align-self:start}
   .doors{grid-template-columns:1fr}
 }
+
+/* Hero photo with floating Post-Show Health Check sample */
+.hero-visual{position:relative;padding:0 0 70px 0}
+.hero-visual img{width:100%;height:auto;aspect-ratio:1200/1096;object-fit:cover;border-radius:22px;display:block;box-shadow:0 30px 70px rgba(0,0,0,.3)}
+.hc-card{position:absolute;left:-34px;bottom:0;width:min(340px,82%);background:#fff;color:var(--navy);border-radius:18px;padding:18px 20px;box-shadow:0 24px 60px rgba(0,0,0,.35)}
+.hc-head{display:flex;justify-content:space-between;align-items:center;gap:10px;padding-bottom:12px;margin-bottom:4px;border-bottom:1px solid var(--cloud);font-family:Montserrat,Arial,sans-serif;font-size:15px}
+.hc-card .pill{color:var(--teal2);border-color:var(--teal2)}
+.hc-row{display:flex;gap:12px;align-items:flex-start;padding:10px 0}
+.hc-row+.hc-row{border-top:1px solid var(--mist)}
+.hc-dot{flex:0 0 10px;height:10px;border-radius:3px;margin-top:6px;background:var(--c)}
+.hc-row b{display:block;font-family:Montserrat,Arial,sans-serif;font-size:13px}
+.hc-row span{font-size:14px;color:var(--slate);line-height:1.35}
+@media(max-width:900px){.hero-visual{padding-bottom:0}.hc-card{position:relative;left:auto;bottom:auto;width:auto;margin:-48px 14px 0}}
