@@ -289,6 +289,12 @@ table.compare tr:last-child td{border-bottom:none}
 .ps.pre.in h3,.ps.pre.in p{opacity:1}
 .ps.pre.in h3{transform:none}
 .ps.pre.in::before{transform:scaleX(1)}
+
+/* Animated chaos-to-order dots: squares settle into line left to right */
+#chaos-dots.pre svg rect{opacity:0}
+#chaos-dots.pre.in svg rect{animation:dots-settle .5s ease both;animation-delay:calc(var(--i,0) * 28ms)}
+@keyframes dots-settle{from{opacity:0}to{opacity:1}}
+
 .doors{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .door{background:var(--navy2);border:1px solid #285165;border-radius:18px;padding:30px;display:flex;flex-direction:column;align-items:flex-start}
 .door h3{margin:10px 0 10px}
