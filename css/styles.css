@@ -296,9 +296,18 @@ table.compare tr:last-child td{border-bottom:none}
 @keyframes dots-settle{from{opacity:0}to{opacity:1}}
 
 .doors{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.door{background:var(--navy2);border:1px solid #285165;border-radius:18px;padding:30px;display:flex;flex-direction:column;align-items:flex-start}
+.door{background:var(--navy2);border:1px solid #285165;border-top:4px solid transparent;border-radius:18px;padding:30px;display:flex;flex-direction:column;align-items:flex-start}
 .door h3{margin:10px 0 10px}
 .door p{color:#D1DCE0;margin:0 0 22px;flex:1}
+.door-tag{display:inline-block;font-family:Montserrat,Arial,sans-serif;font-weight:800;font-size:11px;letter-spacing:.14em;text-transform:uppercase;border-radius:999px;padding:6px 14px;margin-bottom:16px}
+.door.before{border-top-color:var(--teal2)}
+.door.before .door-tag{background:rgba(0,125,117,.3);color:var(--teal)}
+.door.before .eyebrow{color:var(--teal)}
+.door.after{border-top-color:var(--blue)}
+.door.after .door-tag{background:rgba(0,140,175,.3);color:#8FDCEF}
+.door.after .eyebrow{color:#8FDCEF}
+.door.after .btn-outline{border-color:var(--blue);color:#fff}
+.door.after .btn-outline:hover{background:var(--blue);color:#fff}
 @media(max-width:900px){
   .ps{grid-template-columns:1fr;gap:22px;max-width:520px;margin:auto}
   .ps::before{left:35px;right:auto;top:20px;bottom:20px;width:2px;height:auto;background:linear-gradient(180deg,#008CAF,#00A298);transform-origin:top}
