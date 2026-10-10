@@ -206,7 +206,7 @@
 </div></section>
 
 <section class="cta" id="audit"><div class="wrap cta-in">
-  <div><div class="eyebrow" style="color:var(--teal)">Free Show Diagnosis</div><h2>Bring us your next show. Leave with three ways to strengthen it.</h2><p style="color:#D1DCE0">30 minutes. No obligation.</p></div>
+  <div><div class="eyebrow" style="color:var(--teal)">Free Show Diagnosis</div><h2>Bring your next show. Leave with three priorities to strengthen it.</h2><p style="color:#D1DCE0">30 minutes. Free, no obligation.</p></div>
   <a class="btn btn-primary" href="https://calendly.com/togarjohnson/exhibit-rx-discovery-call" target="_blank" rel="noopener">Get your Show Diagnosis</a>
 </div></section>
 
@@ -293,21 +293,26 @@
           { name: 'firstname', value: form.first_name.value },
           { name: 'email', value: form.work_email.value },
           { name: 'company', value: form.company.value },
-          { name: 'next_show', value: form.next_show.value }
+          { name: 'next_show', value: form.next_show.value },
+          { name: 'exhibitrx_lead_score', value: form.checkup_score.value },
+          { name: 'exhibitrx_lead_source', value: 'Show Checkup' }
         ],
         context: { pageUri: location.href, pageName: document.title }
       })
     }).then(function(res){
-      if(!res.ok) throw new Error('submit failed');
+      if(!res.ok){ return res.text().then(function(t){ throw new Error(t.indexOf('BLOCKED_EMAIL') !== -1 ? 'blocked' : 'submit failed'); }); }
       return res.json();
     }).then(function(){
       var hash = 'a=' + (results.dataset.answers || '');
       window.location.href = 'report.html#' + hash;
-    }).catch(function(){
-      status.textContent = "That didn't go through. Please email solutions@exhibitrx.com directly and we'll send your report.";
+    }).catch(function(err){
+      status.textContent = (err && err.message === 'blocked')
+        ? "Please use your work email address. Personal addresses like Gmail or Yahoo can't receive the report."
+        : "That didn't go through. Please email solutions@exhibitrx.com directly and we'll send your report.";
     });
   });
 })();
 </script>
+<script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
