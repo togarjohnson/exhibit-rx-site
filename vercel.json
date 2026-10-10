@@ -5,6 +5,8 @@
     { "source": "/method", "destination": "/#how", "permanent": true },
     { "source": "/services", "destination": "/#solutions", "permanent": true },
     { "source": "/scorecard", "destination": "/#audit", "permanent": true },
-    { "source": "/platform", "destination": "/", "permanent": true }
+    { "source": "/platform", "destination": "/", "permanent": true },
+    { "source": "/score", "destination": "/checkup", "permanent": true },
+    { "source": "/score.html", "destination": "/checkup", "permanent": true }
   ]
 }

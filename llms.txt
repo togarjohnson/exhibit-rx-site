@@ -27,7 +27,7 @@ Five stages, run for every show:
 - **Fractional Show Management:** for organizations with more events than their internal team has capacity to manage.
 - **Commercial Show Accelerator:** for stronger alignment, preparation, meeting coordination, execution and follow-through.
 - **Lead Performance RX:** improves how event interactions are captured, qualified, routed and measured, using the client's existing systems.
-- **Exhibit RX Continuum:** connects events across the year so processes, insights and lessons improve the whole program.
+- **Continuum RX:** connects events across the year so processes, insights and lessons improve the whole program.
 
 Not sure which fits? Start with a free Show Diagnosis.
 
@@ -35,9 +35,13 @@ Not sure which fits? Start with a free Show Diagnosis.
 
 The post-show health check, offered free. A clear view of what happened, what needs action and what should happen next, while the event is still fresh.
 
-## Exhibit RX Continuum
+## Continuum RX
 
-One show should make the next one better. For organizations managing multiple events, Continuum connects the learning, processes and performance from one show to the next, so the team doesn't start from zero every time.
+One show should make the next one better. For organizations managing multiple events, Continuum RX connects the learning, processes and performance from one show to the next, so the team doesn't start from zero every time.
+
+## Show Checkup (free)
+
+A free, six-question self-assessment at https://exhibitrx.com/checkup. Scores a company's trade-show pipeline process across the Exhibit RX Method stages (Prescribe, Prepare, Perform, Prove) in about two minutes, no email required to see the score. An optional email-gated report adds a printable breakdown with one action per stage.
 
 ## About
 
@@ -49,5 +53,6 @@ Get your free Show Diagnosis or free Post-Show Health Check: solutions@exhibitrx
 
 ## Pages
 
-- Home: https://exhibit-rx-site.vercel.app/
-- About: https://exhibit-rx-site.vercel.app/about.html
+- Home: https://exhibitrx.com/
+- Show Checkup: https://exhibitrx.com/checkup
+- About: https://exhibitrx.com/about.html

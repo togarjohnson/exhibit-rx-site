@@ -1,5 +1,6 @@
 User-agent: *
 Allow: /
 Disallow: /thanks.html
+Disallow: /report.html
 
-Sitemap: https://exhibit-rx-site.vercel.app/sitemap.xml
+Sitemap: https://exhibitrx.com/sitemap.xml

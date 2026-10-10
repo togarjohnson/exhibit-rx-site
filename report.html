@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Your Show Checkup Report | Exhibit RX</title>
+<meta name="description" content="Your personalized Show Checkup report from Exhibit RX." />
+<meta name="robots" content="noindex" />
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2301283B'/%3E%3Crect x='12' y='17' width='18' height='18' rx='4' fill='%23fff' transform='rotate(-24 21 26)'/%3E%3Crect x='18' y='40' width='18' height='18' rx='4' fill='%23fff' transform='rotate(16 27 49)'/%3E%3Crect x='13' y='70' width='18' height='18' rx='4' fill='%23fff' transform='rotate(-12 22 79)'/%3E%3Crect x='42' y='15' width='18' height='18' rx='4' fill='%23008CAF' transform='rotate(8 51 24)'/%3E%3Crect x='41' y='42' width='18' height='18' rx='4' fill='%23008CAF' transform='rotate(-6 50 51)'/%3E%3Crect x='41' y='67' width='18' height='18' rx='4' fill='%23008CAF' transform='rotate(4 50 76)'/%3E%3Crect x='67' y='15' width='18' height='18' rx='4' fill='%2300A298'/%3E%3Crect x='67' y='41' width='18' height='18' rx='4' fill='%2300A298'/%3E%3Crect x='67' y='67' width='18' height='18' rx='4' fill='%2300A298'/%3E%3C/svg%3E" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600&display=swap" />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="erx-mark" viewBox="0 0 100 100">
+    <rect x="1" y="6" width="22" height="22" rx="4" fill="currentColor" transform="rotate(-24 12 17)"/>
+    <rect x="7" y="35" width="22" height="22" rx="4" fill="currentColor" transform="rotate(16 18 46)"/>
+    <rect x="2" y="71" width="22" height="22" rx="4" fill="currentColor" transform="rotate(-12 13 82)"/>
+    <rect x="37" y="4" width="22" height="22" rx="4" fill="#008CAF" transform="rotate(8 48 15)"/>
+    <rect x="36" y="37" width="22" height="22" rx="4" fill="#008CAF" transform="rotate(-6 47 48)"/>
+    <rect x="36" y="68" width="22" height="22" rx="4" fill="#008CAF" transform="rotate(4 47 79)"/>
+    <rect x="68" y="4" width="22" height="22" rx="4" fill="#00A298"/>
+    <rect x="68" y="36" width="22" height="22" rx="4" fill="#00A298"/>
+    <rect x="68" y="68" width="22" height="22" rx="4" fill="#00A298"/>
+  </symbol>
+</svg>
+<nav class="nav"><div class="wrap navin">
+  <a class="logo" href="index.html" style="color:var(--navy)"><svg width="40" height="40" aria-hidden="true"><use href="#erx-mark"/></svg><span>Exhibit <span style="color:var(--teal)">RX</span><span class="tag">Cure the Chaos</span></span></a>
+  <div class="navlinks">
+    <a href="checkup.html">Retake the Checkup</a>
+    <a href="index.html">Home</a>
+  </div>
+</div></nav>
+
+<div id="rpt-empty" class="hidden"><section class="section"><div class="wrap" style="max-width:640px;text-align:center">
+  <div class="eyebrow" style="justify-content:center">No report found</div>
+  <h1 style="font-size:32px">We couldn't find your Show Checkup answers.</h1>
+  <p class="muted">This can happen if the link was edited or opened on its own. Take the free Show Checkup again to get your score and report.</p>
+  <a class="btn btn-primary" href="checkup.html">Take the Show Checkup</a>
+</div></section></div>
+
+<div id="rpt-content" class="hidden">
+
+  <section class="rpt-page">
+    <button type="button" class="btn btn-outline no-print" id="rpt-print" style="margin-bottom:28px">Download PDF</button>
+    <div class="eyebrow" style="justify-content:center;text-align:center">Your Show Checkup Report</div>
+    <h1 style="text-align:center;font-size:34px;margin:10px 0 30px">Where your trade-show pipeline stands.</h1>
+
+    <div class="cq-dial" id="rpt-dial" style="--pct:0"><span><b id="rpt-total">0</b><small id="rpt-band">&nbsp;</small></span></div>
+    <div class="cq-band" id="rpt-band-name"></div>
+
+    <div class="bands" id="rpt-bands" style="margin-bottom:30px"></div>
+
+    <h2 style="font-size:22px;margin-bottom:14px">Fix this first</h2>
+    <div id="rpt-actions" class="rpt-actions"></div>
+    <p class="cq-share">Share this with your leadership team. It is a fast way to start the trade-show ROI conversation.</p>
+  </section>
+
+  <section class="rpt-page">
+    <h2 style="font-size:22px;margin-bottom:6px">One move for every stage.</h2>
+    <p class="muted" style="margin-top:0">Your weakest stage is the priority, but every stage has a next step.</p>
+    <div id="rpt-moves"></div>
+
+    <div class="no-print" style="margin-top:34px;text-align:center">
+      <a class="btn btn-primary" id="rpt-diagnosis" href="mailto:solutions@exhibitrx.com?subject=Show%20Diagnosis%20request">Request a Show Diagnosis</a>
+    </div>
+  </section>
+
+</div>
+
+<footer class="footer no-print"><div class="wrap">
+  <a class="logo" href="index.html" style="color:#fff"><svg width="44" height="44" aria-hidden="true"><use href="#erx-mark"/></svg><span>Exhibit <span style="color:var(--teal)">RX</span><span class="tag">Cure the Chaos</span></span></a>
+  <div class="flinks"><a href="index.html#how">How it works</a><a href="index.html#solutions">Solutions</a><a href="checkup.html">Show Checkup</a><a href="about.html">About</a><a href="index.html#faq">FAQ</a><a href="https://www.linkedin.com/in/togarjohnson">LinkedIn</a></div>
+  <p>Cure the Chaos. Prove the Value.</p>
+  <p class="small muted">The global trade-show performance partner for pharma and life sciences.</p>
+</div></footer>
+
+<script src="scripts/checkup-score.js"></script>
+<script>
+(function(){
+  var hash = location.hash.replace(/^#/, '');
+  var m = /a=([0-3]{6})/.exec(hash);
+  var answers = m ? CheckupScore.decode(m[1]) : null;
+
+  if(!answers){
+    document.getElementById('rpt-empty').classList.remove('hidden');
+    return;
+  }
+
+  var r = CheckupScore.compute(answers);
+  document.getElementById('rpt-content').classList.remove('hidden');
+
+  document.getElementById('rpt-dial').style.setProperty('--pct', r.total);
+  document.getElementById('rpt-total').textContent = r.total;
+  document.getElementById('rpt-band').textContent = r.band;
+  document.getElementById('rpt-band-name').textContent = r.band + ' (' + r.total + '/100)';
+
+  var bandsEl = document.getElementById('rpt-bands');
+  CheckupScore.STAGES.forEach(function(s){
+    var pct = r.stagePct[s.key];
+    var row = document.createElement('div');
+    row.className = 'band';
+    row.innerHTML = '<span>'+s.label+'</span><span class="bar"><span class="fill" style="width:'+pct+'%"></span></span><span>'+pct+'%</span>';
+    bandsEl.appendChild(row);
+  });
+
+  var sortedStages = CheckupScore.STAGES.slice().sort(function(a,b){ return r.stagePct[a.key] - r.stagePct[b.key]; });
+  var actionsEl = document.getElementById('rpt-actions');
+  sortedStages.slice(0,3).forEach(function(s){
+    var p = document.createElement('p');
+    p.innerHTML = '<b>'+s.label+':</b> '+CheckupScore.ADVICE[s.key];
+    actionsEl.appendChild(p);
+  });
+
+  var movesEl = document.getElementById('rpt-moves');
+  CheckupScore.STAGES.forEach(function(s){
+    var row = document.createElement('div');
+    row.className = 'rpt-move';
+    row.innerHTML = '<b>'+s.label+'</b><span>'+CheckupScore.ADVICE[s.key]+'</span>';
+    movesEl.appendChild(row);
+  });
+
+  document.getElementById('rpt-print').addEventListener('click', function(){ window.print(); });
+})();
+</script>
+</body>
+</html>
