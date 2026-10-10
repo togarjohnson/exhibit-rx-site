@@ -281,10 +281,12 @@
     status.textContent = 'Sending...';
 
     /* HubSpot form "Exhibit RX | Show Checkup" (Portal 52150425).
-       firstname/email/company/next_show are wired here because those are
-       the fields currently configured on that form. If checkup_score,
-       score_band, weakest_area or score_advice are added as fields on
-       the HubSpot form later, add matching entries below. */
+       firstname/email/company/next_show/exhibitrx_checkup_score/
+       exhibitrx_checkup_source are wired here because those are the
+       fields currently configured on that form. Note: HubSpot rejects
+       "exhibitrx_lead_score"/"exhibitrx_lead_source" as internal names
+       (restricted, likely reserved for native lead-scoring features),
+       hence the "checkup" naming instead of "lead". */
     fetch('https://api.hsforms.com/submissions/v3/integration/submit/52150425/c1b522b7-a20c-4e67-950a-8d28ca85e8ee', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -294,8 +296,8 @@
           { name: 'email', value: form.work_email.value },
           { name: 'company', value: form.company.value },
           { name: 'next_show', value: form.next_show.value },
-          { name: 'exhibitrx_lead_score', value: form.checkup_score.value },
-          { name: 'exhibitrx_lead_source', value: 'Show Checkup' }
+          { name: 'exhibitrx_checkup_score', value: form.checkup_score.value },
+          { name: 'exhibitrx_checkup_source', value: 'Show Checkup' }
         ],
         context: { pageUri: location.href, pageName: document.title }
       })
