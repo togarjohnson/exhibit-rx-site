@@ -279,42 +279,32 @@
     e.preventDefault();
     if(form.website.value){ return; } // honeypot tripped, silently drop
     status.textContent = 'Sending...';
-    var fd = new FormData(form);
 
-    fetch('https://formsubmit.co/ajax/solutions@exhibitrx.com', {
-      method: 'POST',
-      headers: { 'Accept': 'application/json' },
-      body: fd
-    }).then(function(res){ return res.json(); }).then(function(){
-      var hash = 'a=' + (results.dataset.answers || '');
-      window.location.href = 'report.html#' + hash;
-    }).catch(function(){
-      status.textContent = "That didn't go through. Please email solutions@exhibitrx.com directly and we'll send your report.";
-    });
-
-    /* To switch to HubSpot later, replace the fetch block above with:
-    fetch('https://api.hsforms.com/submissions/v3/integration/submit/PORTAL_ID/FORM_GUID', {
+    /* HubSpot form "Exhibit RX | Show Checkup" (Portal 52150425).
+       Only firstname/email/company are wired here because those are the
+       only fields currently configured on that form. If next_show,
+       checkup_score, score_band, weakest_area or score_advice are added
+       as fields on the HubSpot form later, add matching entries below. */
+    fetch('https://api.hsforms.com/submissions/v3/integration/submit/52150425/c1b522b7-a20c-4e67-950a-8d28ca85e8ee', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         fields: [
           { name: 'firstname', value: form.first_name.value },
           { name: 'email', value: form.work_email.value },
-          { name: 'company', value: form.company.value },
-          { name: 'next_show', value: form.next_show.value },
-          { name: 'checkup_score', value: form.checkup_score.value },
-          { name: 'score_band', value: form.score_band.value },
-          { name: 'weakest_area', value: form.weakest_area.value },
-          { name: 'score_advice', value: form.score_advice.value },
-          { name: 'lead_source', value: form.lead_source.value }
+          { name: 'company', value: form.company.value }
         ],
         context: { pageUri: location.href, pageName: document.title }
       })
-    }).then(function(res){ return res.json(); }).then(function(){
+    }).then(function(res){
+      if(!res.ok) throw new Error('submit failed');
+      return res.json();
+    }).then(function(){
       var hash = 'a=' + (results.dataset.answers || '');
       window.location.href = 'report.html#' + hash;
+    }).catch(function(){
+      status.textContent = "That didn't go through. Please email solutions@exhibitrx.com directly and we'll send your report.";
     });
-    PORTAL_ID and FORM_GUID are not invented here. Get them from the HubSpot form's embed code before switching this on. */
   });
 })();
 </script>
