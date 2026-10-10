@@ -144,8 +144,8 @@ h3{font-size:22px;line-height:1.2;letter-spacing:-.01em}
 .scorebig{font-size:56px;font-weight:800;color:var(--navy);font-family:Montserrat,Arial,sans-serif}
 .bands{display:grid;gap:10px}
 .band{display:grid;grid-template-columns:120px 1fr 42px;gap:10px;align-items:center;font-size:13px}
-.bar{height:9px;background:var(--cloud);border-radius:99px;overflow:hidden}
-.fill{height:100%;background:var(--teal)}
+.bar{display:block;height:9px;background:var(--cloud);border-radius:99px;overflow:hidden}
+.fill{display:block;height:100%;background:var(--teal)}
 
 .proof{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
 .proof .card{border:1px solid var(--cloud);border-radius:16px;padding:22px;background:#fff}
