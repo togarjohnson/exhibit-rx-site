@@ -123,6 +123,9 @@
     '<li><a href="#solutions">Solutions tabs slide</a> <small>(Opal)</small></li>'+
     '<li>Paper plane send <small>(Dart)</small><button type="button" class="ux-play" data-play="send">Play</button></li>'+
     '<li><a href="#deliverables">Live sample dashboard</a> <small>(Meridian)</small><button type="button" class="ux-play" data-play="dash">Replay</button></li>'+
+    '<li><a href="#how">Chaos to Order method</a> <small>(scroll slowly)</small></li>'+
+    '<li><a href="#pipeline-check">Pipeline check calculator</a></li>'+
+    '<li><a href="#faq">FAQ cards light up and open</a></li>'+
     '</ol><small>Preview only. Nothing here is on exhibitrx.com yet.</small></div>';
   body.appendChild(g);
   var sw=g.querySelector('.ux-switch');
@@ -143,4 +146,92 @@
     if(!wyg) return; wyg.scrollIntoView({block:'center',behavior:reduce?'auto':'smooth'});
     if(wyg._replay) setTimeout(wyg._replay,reduce?0:500);
   });
+})();
+
+/* ---------- Round 2 ---------- */
+(function(){
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function on(){ return document.body.classList.contains('ux-on'); }
+  function clamp(v){ return v<0?0:v>1?1:v; }
+
+  /* Chaos to Order: the logo mark and the five stages settle as you scroll through the method */
+  var how=document.getElementById('how'), ps=document.getElementById('ps');
+  if(how && ps){
+    var head=how.querySelector('.head');
+    var cols=['#FFFFFF','#008CAF','#00A298'];
+    var chaos=[[-26,-14,-34],[-10,22,18],[-30,30,-14],[14,-26,22],[6,10,-28],[-4,34,12],[30,-18,-20],[22,6,30],[34,26,-10]];
+    var svg='<svg class="ux-mark" viewBox="0 0 100 100" aria-hidden="true">';
+    for(var i=0;i<9;i++){ var c=Math.floor(i/3), r=i%3; svg+='<rect data-i="'+i+'" x="'+(4+c*33)+'" y="'+(4+r*33)+'" width="26" height="26" rx="5" fill="'+cols[c]+'"/>'; }
+    svg+='</svg>';
+    head.insertAdjacentHTML('afterbegin',svg);
+    var rects=[].slice.call(head.querySelectorAll('.ux-mark rect'));
+    var lis=[].slice.call(ps.children);
+    ps.classList.add('ux-scroll');
+    function frame(){
+      if(!on()){ return; }
+      var r=how.getBoundingClientRect(), vh=innerHeight;
+      var p=reduce?1:clamp((vh*0.9-r.top)/(vh*0.75));
+      ps.style.setProperty('--line',clamp(p*1.25-0.1));
+      lis.forEach(function(li,i){
+        var k=clamp(p*6-i*1.05), t=clamp(p*6-i*1.05-0.5);
+        li.style.setProperty('--k',k); li.style.setProperty('--t',t);
+        li.classList.toggle('ux-done',k>=1);
+      });
+      rects.forEach(function(el,i){
+        var k=clamp(p*2.2-i*0.12), m=1-k, d=chaos[i];
+        el.style.transform='translate('+(d[0]*m).toFixed(1)+'px,'+(d[1]*m).toFixed(1)+'px) rotate('+(d[2]*m).toFixed(1)+'deg)';
+        el.style.opacity=(0.35+0.65*k).toFixed(2);
+      });
+    }
+    var ticking=false;
+    addEventListener('scroll',function(){ if(!ticking){ ticking=true; requestAnimationFrame(function(){ ticking=false; frame(); }); } },{passive:true});
+    addEventListener('resize',frame); frame();
+  }
+
+  /* Pipeline check calculator */
+  var pc=document.getElementById('pc');
+  if(pc){
+    var conv=document.getElementById('pc-conv'), fast=document.getElementById('pc-fast'), deal=document.getElementById('pc-deal');
+    var big=document.getElementById('pc-big'), shown=0, anim=null;
+    function money(v){ return v>=1e6?'$'+(v/1e6).toFixed(1)+'M':'$'+Math.round(v/1e3)+'K'; }
+    function fill(el){ el.style.setProperty('--fill',((el.value-el.min)/(el.max-el.min)*100)+'%'); }
+    function calc(){
+      var c=+conv.value, f=+fast.value/100, d=+deal.value*1000;
+      var q=c*0.30, now=q*(f*0.20+(1-f)*0.05), best=q*0.20, lost=(best-now)*d;
+      document.getElementById('pc-conv-o').textContent=c;
+      document.getElementById('pc-fast-o').textContent=Math.round(f*100)+'%';
+      document.getElementById('pc-deal-o').textContent=money(d);
+      var lo=Math.round(best-now);
+      document.getElementById('pc-opps').textContent=lo===1?'1 opportunity':lo+' opportunities';
+      document.getElementById('pc-n1').textContent=Math.round(now);
+      document.getElementById('pc-n2').textContent=Math.round(best);
+      document.getElementById('pc-b1').style.width=(best?now/best*100:0)+'%';
+      document.getElementById('pc-b2').style.width='100%';
+      [conv,fast,deal].forEach(fill);
+      if(reduce||!on()){ big.textContent=money(lost); shown=lost; return; }
+      var from=shown, t0=performance.now(); cancelAnimationFrame(anim);
+      (function step(n){ var k=Math.min(1,(n-t0)/450), e=1-Math.pow(1-k,3); shown=from+(lost-from)*e; big.textContent=money(shown); if(k<1) anim=requestAnimationFrame(step); })(t0);
+    }
+    [conv,fast,deal].forEach(function(el){ el.addEventListener('input',calc); });
+    calc();
+  }
+
+  /* FAQ cards that light up from where the cursor enters, and open like an accordion */
+  var faq=document.querySelector('#faq .faq');
+  if(faq){
+    faq.classList.add('ux-acc');
+    [].slice.call(faq.querySelectorAll('.faq-item')).forEach(function(item,i){
+      var h=item.querySelector('h3'), p=item.querySelector('p'); if(!h||!p) return;
+      var id='faq-a'+i;
+      h.innerHTML='<button type="button" class="faq-q" aria-expanded="false" aria-controls="'+id+'"><span>'+h.innerHTML+'</span><span class="faq-ic" aria-hidden="true"></span></button>';
+      var wrap=document.createElement('div'); wrap.className='ux-ans'; wrap.id=id;
+      var inner=document.createElement('div'); p.parentNode.insertBefore(wrap,p); inner.appendChild(p); wrap.appendChild(inner);
+      h.style.margin='0';
+      var btn=h.querySelector('.faq-q');
+      function setOpen(o){ item.classList.toggle('ux-open',o); btn.setAttribute('aria-expanded',String(o)); }
+      btn.addEventListener('click',function(){ if(!on()) return; setOpen(!item.classList.contains('ux-open')); });
+      item.addEventListener('mouseenter',function(e){ var r=item.getBoundingClientRect(); item.style.setProperty('--gx',(e.clientX-r.left)+'px'); item.style.setProperty('--gy',(e.clientY-r.top)+'px'); });
+      if(i===0) setOpen(true);
+    });
+  }
 })();
