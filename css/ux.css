@@ -83,3 +83,64 @@
 }
 
 .ux-on .navlinks .btn{flex-shrink:0;white-space:nowrap}
+
+/* ---------- Round 2 ---------- */
+
+/* 8. Chaos to Order: the method assembles as you scroll */
+.ux-mark{display:none}
+.ux-on .ux-mark{display:block;overflow:visible;width:112px;height:112px;margin:0 auto 26px}
+.ux-mark rect{transform-box:fill-box;transform-origin:center}
+.ux-on .ps.ux-scroll li .ps-tile{transform:translate(calc(var(--x) * 2.2 * (1 - var(--k,1))),calc(var(--y) * 2.2 * (1 - var(--k,1)))) rotate(calc(var(--r) * 1.6 * (1 - var(--k,1))));opacity:calc(.45 + .55 * var(--k,1));transition:none}
+.ux-on .ps.ux-scroll li h3,.ux-on .ps.ux-scroll li p{opacity:var(--t,1);transform:translateY(calc(10px * (1 - var(--t,1))));transition:none}
+.ux-on .ps.ux-scroll::before{transform:scaleX(var(--line,1));transition:none}
+.ux-on .ps.ux-scroll li.ux-done .ps-tile{box-shadow:0 0 0 6px var(--navy),0 0 0 9px rgba(0,162,152,.35)}
+@media (max-width:900px){.ux-on .ps.ux-scroll::before{transform:scaleY(var(--line,1))}}
+
+/* 9. Pipeline check calculator */
+.pc{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:stretch}
+.pc-in,.pc-out{border-radius:var(--radius);padding:30px}
+.pc-in{background:#fff;border:1px solid var(--cloud);display:grid;gap:30px;align-content:center}
+.pc-field label{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-family:Montserrat,Arial,sans-serif;font-weight:700;font-size:15px;color:var(--navy);margin-bottom:12px}
+.pc-field output{font-size:22px;font-weight:800;color:var(--teal2);font-variant-numeric:tabular-nums}
+.pc-field input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:8px;border-radius:99px;background:linear-gradient(90deg,var(--teal2) var(--fill,50%),var(--cloud) var(--fill,50%));outline:none;cursor:pointer}
+.pc-field input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:#fff;border:3px solid var(--teal2);box-shadow:0 4px 12px rgba(1,40,59,.2);transition:transform .2s ease}
+.pc-field input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#fff;border:3px solid var(--teal2);box-shadow:0 4px 12px rgba(1,40,59,.2)}
+.pc-field input[type=range]:active::-webkit-slider-thumb{transform:scale(1.15)}
+.pc-field input[type=range]:focus-visible{outline:3px solid var(--blue);outline-offset:6px}
+.pc-field small{display:block;margin-top:8px;color:var(--slate);font-size:14px}
+.pc-out{background:var(--navy);color:#fff;display:flex;flex-direction:column;gap:16px;position:relative;overflow:hidden}
+.pc-out .eyebrow{color:var(--teal)}
+.pc-big{font-family:Montserrat,Arial,sans-serif;font-weight:800;font-size:clamp(44px,6vw,64px);line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.pc-sub{font-size:18px;color:#D1DCE0;margin:0}
+.pc-sub b{color:#fff}
+.pc-bars{display:grid;gap:10px;margin-top:4px}
+.pc-bar{display:grid;grid-template-columns:150px 1fr 44px;gap:12px;align-items:center;font-size:14px;color:#D1DCE0}
+.pc-bar span:last-child{text-align:right;color:#fff;font-weight:700;font-variant-numeric:tabular-nums}
+.pc-track{height:12px;border-radius:99px;background:var(--navy2);overflow:hidden}
+.pc-track i{display:block;height:100%;border-radius:99px;background:var(--teal);transition:width .45s cubic-bezier(.2,.8,.2,1)}
+.pc-track.now i{background:#7FD3E6}
+.pc-note{font-size:13px;color:#9DB3BE;margin:auto 0 0}
+.pc-out .btn{align-self:flex-start}
+@media (max-width:900px){.pc{grid-template-columns:1fr}.pc-bar{grid-template-columns:110px 1fr 40px}}
+
+/* 10. FAQ cards that light up and open */
+.ux-on .faq.ux-acc .faq-item{position:relative;overflow:hidden;isolation:isolate;padding:0;transition:border-color .35s ease,box-shadow .35s ease}
+.ux-on .faq.ux-acc .faq-item::before{content:"";position:absolute;inset:0;z-index:-1;background:#E6F5F3;clip-path:circle(0 at var(--gx,0) var(--gy,50%));transition:clip-path .55s cubic-bezier(.3,.7,.2,1)}
+.ux-on .faq.ux-acc .faq-item:hover,.ux-on .faq.ux-acc .faq-item.ux-open,.ux-on .faq.ux-acc .faq-item:focus-within{border-color:var(--teal2);box-shadow:0 10px 28px rgba(0,125,117,.12)}
+.ux-on .faq.ux-acc .faq-item:hover::before,.ux-on .faq.ux-acc .faq-item.ux-open::before{clip-path:circle(150% at var(--gx,0) var(--gy,50%))}
+.faq-q{all:unset;box-sizing:border-box;display:flex;width:100%;align-items:center;justify-content:space-between;gap:16px;cursor:pointer;font-family:Montserrat,Arial,sans-serif;font-weight:800;font-size:18px;color:var(--navy)}
+.ux-on .faq.ux-acc .faq-q{padding:22px 26px}
+.faq-q:focus-visible{outline:3px solid var(--blue);outline-offset:-3px;border-radius:16px}
+.faq-ic{flex:0 0 30px;height:30px;border-radius:50%;background:var(--mist);position:relative;transition:background .3s ease,transform .4s cubic-bezier(.3,1.4,.5,1)}
+.faq-ic::before,.faq-ic::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:2px;margin:-1px 0 0 -6px;background:var(--teal2);border-radius:2px}
+.faq-ic::after{transform:rotate(90deg);transition:transform .3s ease}
+.ux-open .faq-ic{background:var(--teal2);transform:rotate(180deg)}
+.ux-open .faq-ic::before,.ux-open .faq-ic::after{background:#fff}
+.ux-open .faq-ic::after{transform:rotate(0)}
+.ux-off .faq-ic{display:none}
+.ux-ans{display:grid;grid-template-rows:1fr}
+.ux-ans>div{overflow:hidden;min-height:0}
+.ux-on .faq.ux-acc .ux-ans{grid-template-rows:0fr;transition:grid-template-rows .45s cubic-bezier(.3,.7,.2,1)}
+.ux-on .faq.ux-acc .faq-item.ux-open .ux-ans{grid-template-rows:1fr}
+.ux-on .faq.ux-acc .ux-ans p{padding:0 26px 22px}
+.ux-off .faq-q{cursor:default;margin-bottom:8px}
