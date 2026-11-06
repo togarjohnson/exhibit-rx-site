@@ -89,10 +89,27 @@
   </ol>
 </div></section>
 
-<section class="section mist" id="checkup-promo"><div class="wrap" style="text-align:center">
-  <div class="head center" style="margin-bottom:28px"><h2>Is your next show set up to produce pipeline?</h2><p>Take the free Show Checkup. Six questions, two minutes, and an instant score across Prescribe, Prepare, Perform and Prove.</p></div>
-  <a class="btn btn-primary" href="checkup.html">Take the free Show Checkup &rarr;</a>
-  <p class="muted small" style="margin-top:14px">No email needed to see your score.</p>
+<section class="section mist" id="pipeline-check"><div class="wrap">
+  <div class="head"><div class="eyebrow">Pipeline check</div><h2>How much pipeline walks out of <span style="color:var(--teal2)">your booth?</span></h2><p>Move the sliders to match your last show. It's a rough estimate, built on the assumptions listed under the result.</p></div>
+  <div class="pc" id="pc">
+    <div class="pc-in">
+      <div class="pc-field"><label for="pc-conv">Booth conversations per show <output id="pc-conv-o" for="pc-conv">180</output></label><input type="range" id="pc-conv" min="50" max="500" step="10" value="180" /></div>
+      <div class="pc-field"><label for="pc-fast">Followed up within 48 hours <output id="pc-fast-o" for="pc-fast">40%</output></label><input type="range" id="pc-fast" min="0" max="100" step="5" value="40" /><small>Be honest. Most teams guess high.</small></div>
+      <div class="pc-field"><label for="pc-deal">Average first-year deal value <output id="pc-deal-o" for="pc-deal">$50K</output></label><input type="range" id="pc-deal" min="10" max="250" step="5" value="50" /></div>
+    </div>
+    <div class="pc-out" aria-live="polite">
+      <div class="eyebrow">Left on the floor, per show</div>
+      <div class="pc-big" id="pc-big">$243K</div>
+      <p class="pc-sub">That's about <b id="pc-opps">5 opportunities</b> your team met, qualified, and then lost to slow follow-up.</p>
+      <div class="pc-bars">
+        <div class="pc-bar"><span>Opportunities today</span><span class="pc-track now"><i id="pc-b1" style="width:55%"></i></span><span id="pc-n1">6</span></div>
+        <div class="pc-bar"><span>With 48-hour follow-up</span><span class="pc-track"><i id="pc-b2" style="width:100%"></i></span><span id="pc-n2">11</span></div>
+      </div>
+      <a class="btn btn-primary" href="https://calendly.com/togarjohnson/exhibit-rx-discovery-call" target="_blank" rel="noopener">Get your Show Diagnosis</a>
+      <p class="pc-note">Illustrative estimate, not a forecast. Assumes 30% of booth conversations are qualified, and that qualified leads followed up within 48 hours become opportunities 20% of the time versus 5% when follow-up is late.</p>
+    </div>
+  </div>
+  <p class="muted" style="margin-top:22px">Want a full score across all four stages? <a href="checkup.html" style="color:var(--teal2);font-weight:700">Take the 2-minute Show Checkup &rarr;</a> No email needed.</p>
 </div></section>
 
 <section class="section" id="solutions"><div class="wrap">
@@ -167,29 +184,7 @@
   </div>
 </div></section>
 
-<section class="section mist" id="pipeline-check"><div class="wrap">
-  <div class="head"><div class="eyebrow">Pipeline check</div><h2>How much pipeline walks out of <span style="color:var(--teal2)">your booth?</span></h2><p>Move the sliders to match your last show. It's a rough estimate, built on the assumptions listed under the result.</p></div>
-  <div class="pc" id="pc">
-    <div class="pc-in">
-      <div class="pc-field"><label for="pc-conv">Booth conversations per show <output id="pc-conv-o" for="pc-conv">180</output></label><input type="range" id="pc-conv" min="50" max="500" step="10" value="180" /></div>
-      <div class="pc-field"><label for="pc-fast">Followed up within 48 hours <output id="pc-fast-o" for="pc-fast">40%</output></label><input type="range" id="pc-fast" min="0" max="100" step="5" value="40" /><small>Be honest. Most teams guess high.</small></div>
-      <div class="pc-field"><label for="pc-deal">Average first-year deal value <output id="pc-deal-o" for="pc-deal">$50K</output></label><input type="range" id="pc-deal" min="10" max="250" step="5" value="50" /></div>
-    </div>
-    <div class="pc-out" aria-live="polite">
-      <div class="eyebrow">Left on the floor, per show</div>
-      <div class="pc-big" id="pc-big">$243K</div>
-      <p class="pc-sub">That's about <b id="pc-opps">5 opportunities</b> your team met, qualified, and then lost to slow follow-up.</p>
-      <div class="pc-bars">
-        <div class="pc-bar"><span>Opportunities today</span><span class="pc-track now"><i id="pc-b1" style="width:55%"></i></span><span id="pc-n1">6</span></div>
-        <div class="pc-bar"><span>With 48-hour follow-up</span><span class="pc-track"><i id="pc-b2" style="width:100%"></i></span><span id="pc-n2">11</span></div>
-      </div>
-      <a class="btn btn-primary" href="https://calendly.com/togarjohnson/exhibit-rx-discovery-call" target="_blank" rel="noopener">Find your real number</a>
-      <p class="pc-note">Illustrative estimate, not a forecast. Assumes 30% of booth conversations are qualified, and that qualified leads followed up within 48 hours become opportunities 20% of the time versus 5% when follow-up is late.</p>
-    </div>
-  </div>
-</div></section>
-
-<section class="section" id="about"><div class="wrap">
+<section class="section mist" id="about"><div class="wrap">
   <div style="display:flex;flex-wrap:wrap;gap:36px;align-items:center">
     <div style="flex:0 1 220px"><img src="images/togar-founder.jpg" alt="Togar G. Johnson, founder of Exhibit RX" width="720" height="1080" loading="lazy" style="width:100%;height:auto;display:block;border-radius:var(--radius);box-shadow:var(--shadow)" /></div>
     <div style="flex:1 1 320px">
@@ -200,7 +195,7 @@
   </div>
 </div></section>
 
-<section class="section mist" id="faq"><div class="wrap">
+<section class="section" id="faq"><div class="wrap">
   <div class="head"><div class="eyebrow">FAQ</div><h2>Questions life-science marketing teams ask us</h2></div>
   <div class="faq">
     <div class="faq-item"><h3>What is Exhibit RX?</h3><p>Exhibit RX is the trade-show performance partner for pharma and life-science companies. We connect strategy, preparation, execution and measurement so your trade shows run as coordinated commercial programs, not isolated events.</p></div>
