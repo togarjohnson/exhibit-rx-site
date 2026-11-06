@@ -11,7 +11,7 @@
 .ux-on .hero .btn-primary:hover,.ux-on .cta .btn-primary:hover{color:var(--navy);background:var(--teal2)}
 @keyframes ux-spin{to{transform:translateX(-50%) rotate(360deg)}}
 
-/* 2. Magnetic call to action (Nudge style) */
+/* 2. Arrow nudge on main calls to action */
 .ux-on .ux-magnet{transition:transform .35s cubic-bezier(.2,.8,.2,1.2),color .35s ease}
 .ux-on .ux-magnet .ux-arrow{display:inline-block;margin-left:8px;transition:transform .35s cubic-bezier(.2,.8,.2,1.4)}
 .ux-on .ux-magnet:hover .ux-arrow{transform:translateX(5px)}
@@ -25,9 +25,7 @@
 /* 4. Electric underline that follows the cursor (Surge style) */
 .ux-on .navlinks{position:relative}
 .ux-on .navlinks a:not(.btn){border-bottom-color:transparent!important}
-.ux-bar{position:absolute;bottom:-2px;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--blue),var(--teal));pointer-events:none;opacity:0;transition:left .38s cubic-bezier(.3,1.5,.5,1),width .38s cubic-bezier(.3,1.5,.5,1),opacity .2s ease}
-.ux-bar::after{content:"";position:absolute;right:-3px;top:-3px;width:9px;height:9px;border-radius:50%;background:var(--teal);box-shadow:0 0 10px 3px rgba(0,162,152,.7);opacity:0;transition:opacity .15s ease}
-.ux-bar.ux-zap::after{opacity:1}
+.ux-bar{position:absolute;bottom:-2px;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--blue),var(--teal));pointer-events:none;opacity:0;transition:left .35s cubic-bezier(.3,.8,.3,1),width .35s cubic-bezier(.3,.8,.3,1),opacity .2s ease}
 .ux-on .ux-bar.ux-show{opacity:1}
 
 /* 5. Stretchy highlight on the Solutions picker (Opal style) */
