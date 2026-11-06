@@ -14,14 +14,7 @@
     b.classList.add('ux-magnet');
     var arrow=document.createElement('span'); arrow.className='ux-arrow'; arrow.setAttribute('aria-hidden','true'); arrow.textContent='→';
     b.appendChild(arrow);
-    if(reduce) return;
-    b.addEventListener('mousemove',function(e){
-      if(!on) return;
-      var r=b.getBoundingClientRect();
-      var x=(e.clientX-r.left-r.width/2)/(r.width/2), y=(e.clientY-r.top-r.height/2)/(r.height/2);
-      b.style.transform='translate('+(x*7).toFixed(1)+'px,'+(y*5).toFixed(1)+'px)';
-    });
-    b.addEventListener('mouseleave',function(){ b.style.transform=''; });
+
   });
 
   /* Glass nav that floats once you scroll past the top (Opal style) */
@@ -38,7 +31,6 @@
     function moveTo(a,zap){
       if(!a){ bar.classList.remove('ux-show'); return; }
       bar.style.left=a.offsetLeft+'px'; bar.style.width=a.offsetWidth+'px'; bar.classList.add('ux-show');
-      if(zap&&!reduce){ bar.classList.add('ux-zap'); clearTimeout(bar._t); bar._t=setTimeout(function(){bar.classList.remove('ux-zap')},260); }
     }
     items.forEach(function(a){ a.addEventListener('mouseenter',function(){ moveTo(a,true); }); });
     links.addEventListener('mouseleave',function(){ moveTo(resting,false); });
@@ -117,9 +109,9 @@
     '<div class="ux-row">Motion effects<button type="button" class="ux-switch" role="switch" aria-checked="'+on+'" aria-label="Motion effects"></button></div>'+
     '<p>Flip the switch to compare before and after.</p>'+
     '<ol>'+
-    '<li><a href="#home-hero">Liquid fill and magnetic buttons</a> <small>(Swell, Nudge)</small></li>'+
+    '<li><a href="#home-hero">Liquid fill buttons</a> <small>(Swell)</small></li>'+
     '<li>Scroll down: the menu floats as glass <small>(Opal)</small></li>'+
-    '<li>Hover the menu: the underline follows <small>(Surge)</small></li>'+
+    '<li>Hover the menu: the underline slides <small>(Surge, calmer)</small></li>'+
     '<li><a href="#solutions">Solutions tabs slide</a> <small>(Opal)</small></li>'+
     '<li>Paper plane send <small>(Dart)</small><button type="button" class="ux-play" data-play="send">Play</button></li>'+
     '<li><a href="#deliverables">Live sample dashboard</a> <small>(Meridian)</small><button type="button" class="ux-play" data-play="dash">Replay</button></li>'+
