@@ -1,0 +1,85 @@
+/* Exhibit RX UX preview: motion layer. Everything is scoped to body.ux-on so it can be switched off. */
+
+/* 1. Liquid fill buttons (Swell style) */
+.ux-on .btn-primary,.ux-on .btn-dark{position:relative;overflow:hidden;isolation:isolate;transition:color .35s ease,transform .25s ease}
+.ux-on .btn-primary:hover,.ux-on .btn-dark:hover{background:var(--teal2)}
+.ux-on .btn-dark:hover{background:var(--navy)}
+.ux-on .btn-primary::before,.ux-on .btn-dark::before{content:"";position:absolute;left:50%;top:140%;width:260%;aspect-ratio:1;transform:translateX(-50%) rotate(0deg);border-radius:47%;background:var(--ux-fill,var(--navy));z-index:-1;transition:top .7s cubic-bezier(.2,.7,.2,1);animation:ux-spin 7s linear infinite}
+.ux-on .btn-dark{--ux-fill:var(--teal2)}
+.ux-on .hero .btn-primary,.ux-on .cta .btn-primary{--ux-fill:var(--teal)}
+.ux-on .btn-primary:hover::before,.ux-on .btn-dark:hover::before,.ux-on .btn-primary:focus-visible::before{top:-190%}
+.ux-on .hero .btn-primary:hover,.ux-on .cta .btn-primary:hover{color:var(--navy);background:var(--teal2)}
+@keyframes ux-spin{to{transform:translateX(-50%) rotate(360deg)}}
+
+/* 2. Magnetic call to action (Nudge style) */
+.ux-on .ux-magnet{transition:transform .35s cubic-bezier(.2,.8,.2,1.2),color .35s ease}
+.ux-on .ux-magnet .ux-arrow{display:inline-block;margin-left:8px;transition:transform .35s cubic-bezier(.2,.8,.2,1.4)}
+.ux-on .ux-magnet:hover .ux-arrow{transform:translateX(5px)}
+.ux-arrow{display:none}
+.ux-on .ux-arrow{display:inline-block}
+
+/* 3. Glass nav that floats on scroll (Opal style) */
+.ux-on .nav{transition:margin .45s ease,border-radius .45s ease,box-shadow .45s ease,background .45s ease,top .45s ease}
+.ux-on .nav.ux-float{top:12px;margin:0 16px;border-radius:999px;background:rgba(255,255,255,.72);border:1px solid rgba(227,232,235,.9);box-shadow:0 14px 40px rgba(1,40,59,.14)}
+
+/* 4. Electric underline that follows the cursor (Surge style) */
+.ux-on .navlinks{position:relative}
+.ux-on .navlinks a:not(.btn){border-bottom-color:transparent!important}
+.ux-bar{position:absolute;bottom:-2px;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--blue),var(--teal));pointer-events:none;opacity:0;transition:left .38s cubic-bezier(.3,1.5,.5,1),width .38s cubic-bezier(.3,1.5,.5,1),opacity .2s ease}
+.ux-bar::after{content:"";position:absolute;right:-3px;top:-3px;width:9px;height:9px;border-radius:50%;background:var(--teal);box-shadow:0 0 10px 3px rgba(0,162,152,.7);opacity:0;transition:opacity .15s ease}
+.ux-bar.ux-zap::after{opacity:1}
+.ux-on .ux-bar.ux-show{opacity:1}
+
+/* 5. Stretchy highlight on the Solutions picker (Opal style) */
+.ux-on .pk-tabs{position:relative}
+.ux-on .pk-tab{position:relative;z-index:1;transition:color .3s ease,border-color .3s ease,transform .2s ease}
+.ux-on .pk-tab[aria-selected="true"]{background:transparent;border-color:transparent}
+.ux-hl{position:absolute;left:0;right:0;border-radius:14px;background:var(--navy);box-shadow:0 10px 26px rgba(1,40,59,.22);z-index:0;pointer-events:none}
+.ux-hl.ux-ready{transition:top .45s cubic-bezier(.3,1.3,.5,1),height .45s cubic-bezier(.3,1.3,.5,1)}
+.ux-off .ux-hl,.ux-off .ux-bar{display:none}
+
+/* 6. Paper plane send (Dart style) */
+.ux-on .ux-send{position:relative;overflow:hidden}
+.ux-send .ux-label{display:inline-block;transition:transform .45s cubic-bezier(.5,0,.5,1),opacity .3s ease}
+.ux-send .ux-plane{position:absolute;left:50%;top:50%;width:26px;height:26px;margin:-13px 0 0 -13px;opacity:0;transform:scale(.4) rotate(-20deg);pointer-events:none}
+.ux-on .ux-send.ux-fly .ux-label{transform:translateY(-140%);opacity:0}
+.ux-on .ux-send.ux-fly .ux-plane{animation:ux-plane 1.4s cubic-bezier(.5,0,.4,1) forwards}
+.ux-on .ux-send.ux-fly::after{content:"Sent \2713";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;animation:ux-sent .4s ease 1.15s forwards}
+@keyframes ux-plane{0%{opacity:0;transform:scale(.4) rotate(-20deg)}15%{opacity:1;transform:scale(1) rotate(0)}35%{transform:translate(-14px,6px) rotate(-8deg)}100%{opacity:0;transform:translate(220px,-70px) rotate(-18deg) scale(.7)}}
+@keyframes ux-sent{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* 7. Live sample dashboard (Meridian style) */
+.ux-on .wyg-bars i{transition:width 1.1s cubic-bezier(.2,.8,.2,1)}
+.ux-on .wyg-table tbody tr{transition:opacity .5s ease,transform .5s ease}
+.ux-on .wyg-pre .wyg-table tbody tr{opacity:0;transform:translateX(-14px)}
+.ux-on .wyg-table em{display:inline-block;transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+.ux-on .wyg-pre .wyg-table em{transform:scale(0)}
+.ux-on .wyg-kpis div{transition:transform .5s ease,opacity .5s ease}
+.ux-on .wyg-pre .wyg-kpis div{opacity:0;transform:translateY(10px)}
+.ux-on .wyg-card{transition:transform .3s ease,box-shadow .3s ease}
+.ux-on .wyg-card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(1,40,59,.14)}
+
+/* Preview guide panel */
+.ux-guide{position:fixed;right:16px;bottom:16px;z-index:50;width:300px;max-width:calc(100vw - 32px);background:var(--navy);color:#fff;border-radius:18px;box-shadow:0 20px 50px rgba(1,40,59,.35);font-family:"Source Sans 3",Arial,sans-serif;font-size:14px}
+.ux-guide summary{list-style:none;cursor:pointer;padding:14px 16px;font-family:Montserrat,Arial,sans-serif;font-weight:800;font-size:13px;letter-spacing:.04em;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.ux-guide summary::-webkit-details-marker{display:none}
+.ux-guide summary span{color:var(--teal)}
+.ux-guide .ux-body{padding:0 16px 16px}
+.ux-guide p{margin:0 0 10px;color:#C9D6DC}
+.ux-guide ol{margin:0 0 12px;padding-left:20px;display:grid;gap:6px}
+.ux-guide a{color:#fff;font-weight:600}
+.ux-guide small{color:#9DB3BE}
+.ux-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;margin-bottom:12px;background:var(--navy2);border-radius:12px;font-family:Montserrat,Arial,sans-serif;font-weight:700;font-size:13px}
+.ux-switch{position:relative;width:46px;height:26px;border-radius:99px;border:0;background:#3B5566;cursor:pointer;transition:background .25s ease;flex:0 0 auto}
+.ux-switch::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform .25s ease}
+.ux-switch[aria-checked="true"]{background:var(--teal2)}
+.ux-switch[aria-checked="true"]::after{transform:translateX(20px)}
+.ux-switch:focus-visible,.ux-play:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+.ux-play{font:inherit;font-weight:700;color:var(--navy);background:var(--teal);border:0;border-radius:99px;padding:3px 10px;margin-left:6px;cursor:pointer}
+
+@media (prefers-reduced-motion: reduce){
+  .ux-on .btn-primary::before,.ux-on .btn-dark::before{animation:none;transition:none}
+  .ux-on *,.ux-bar,.ux-hl{transition-duration:.01ms!important;animation-duration:.01ms!important}
+}
+
+.ux-on .navlinks .btn{flex-shrink:0;white-space:nowrap}
