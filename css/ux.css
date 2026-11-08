@@ -1,15 +1,22 @@
 /* Exhibit RX UX preview: motion layer. Everything is scoped to body.ux-on so it can be switched off. */
 
-/* 1. Liquid fill buttons (Swell style) */
-.ux-on .btn-primary,.ux-on .btn-dark{position:relative;overflow:hidden;isolation:isolate;transition:color .35s ease,transform .25s ease}
+/* 1. Meter fill buttons: hover fills the button left to right like a gauge, click gives a springy press */
+.ux-on .btn-primary,.ux-on .btn-dark{position:relative;overflow:hidden;isolation:isolate;transition:color .25s ease .15s,transform .35s cubic-bezier(.2,.8,.2,1.4)}
 .ux-on .btn-primary:hover,.ux-on .btn-dark:hover{background:var(--teal2)}
 .ux-on .btn-dark:hover{background:var(--navy)}
-.ux-on .btn-primary::before,.ux-on .btn-dark::before{content:"";position:absolute;left:50%;top:140%;width:260%;aspect-ratio:1;transform:translateX(-50%) rotate(0deg);border-radius:47%;background:var(--ux-fill,var(--navy));z-index:-1;transition:top .7s cubic-bezier(.2,.7,.2,1);animation:ux-spin 7s linear infinite}
+.ux-on .btn-primary::before,.ux-on .btn-dark::before{content:"";position:absolute;inset:0;background:var(--ux-fill,var(--navy));z-index:-1;transform:scaleX(0);transform-origin:left center;transition:transform .55s cubic-bezier(.65,0,.35,1)}
 .ux-on .btn-dark{--ux-fill:var(--teal2)}
 .ux-on .hero .btn-primary,.ux-on .cta .btn-primary{--ux-fill:var(--teal)}
-.ux-on .btn-primary:hover::before,.ux-on .btn-dark:hover::before,.ux-on .btn-primary:focus-visible::before{top:-190%}
+.ux-on .btn-primary:hover::before,.ux-on .btn-dark:hover::before,.ux-on .btn-primary:focus-visible::before,.ux-on .btn-dark:focus-visible::before{transform:scaleX(1)}
 .ux-on .hero .btn-primary:hover,.ux-on .cta .btn-primary:hover{color:var(--navy);background:var(--teal2)}
-@keyframes ux-spin{to{transform:translateX(-50%) rotate(360deg)}}
+/* keep the nav button text white on hover (the plain nav link hover was turning it green on green) */
+.ux-on .navlinks .btn-dark{padding:9px 18px}
+.ux-on .navlinks .btn-dark,.ux-on .navlinks .btn-dark:hover{color:#fff;border-color:transparent}
+/* the click: quick press down, springy release, and a ring that pops outward */
+.ux-on .btn-primary:active,.ux-on .btn-dark:active{transform:scale(.95)!important;transition-duration:.08s}
+.ux-on .btn-primary::after,.ux-on .btn-dark::after{content:"";position:absolute;left:var(--ux-x,50%);top:var(--ux-y,50%);width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:rgba(255,255,255,.55);opacity:0;pointer-events:none;z-index:-1}
+.ux-on .ux-press::after{animation:ux-ping .5s ease-out}
+@keyframes ux-ping{0%{opacity:.9;transform:scale(0)}100%{opacity:0;transform:scale(18)}}
 
 /* 2. Arrow nudge on main calls to action */
 .ux-on .ux-magnet{transition:transform .35s cubic-bezier(.2,.8,.2,1.2),color .35s ease}
@@ -76,7 +83,8 @@
 .ux-play{font:inherit;font-weight:700;color:var(--navy);background:var(--teal);border:0;border-radius:99px;padding:3px 10px;margin-left:6px;cursor:pointer}
 
 @media (prefers-reduced-motion: reduce){
-  .ux-on .btn-primary::before,.ux-on .btn-dark::before{animation:none;transition:none}
+  .ux-on .btn-primary::before,.ux-on .btn-dark::before{transition:none}
+  .ux-on .ux-press::after{animation:none}
   .ux-on *,.ux-bar,.ux-hl{transition-duration:.01ms!important;animation-duration:.01ms!important}
 }
 
