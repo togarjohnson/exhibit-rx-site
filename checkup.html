@@ -17,6 +17,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600&display=swap" />
 <link rel="stylesheet" href="css/styles.css" />
+<link rel="stylesheet" href="css/ux.css" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -154,7 +155,7 @@
       </div>
     </div>
 
-    <button type="button" class="btn btn-primary" id="cq-see-score" disabled style="margin-top:10px">See your score</button>
+    <button type="button" class="btn btn-primary" id="cq-see-score" disabled>See your score</button>
   </div>
 
   <div class="results" id="cq-results">
@@ -217,6 +218,7 @@
   <p class="small muted">The global trade-show performance partner for pharma and life sciences.</p>
 </div></footer>
 
+<script src="scripts/ux.js"></script>
 <script src="scripts/checkup-score.js"></script>
 <script>
 (function(){
@@ -243,10 +245,28 @@
     if(answers.indexOf(null) !== -1) return;
     var r = CheckupScore.compute(answers);
 
-    document.getElementById('cq-dial').style.setProperty('--pct', r.total);
-    document.getElementById('cq-total').textContent = r.total;
-    document.getElementById('cq-band').textContent = r.band;
+    /* With motion on, the score counts up, the dial sweeps and the stage bars fill one by one */
+    var animate = document.body.classList.contains('ux-on') && !matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var dial = document.getElementById('cq-dial'), totalEl = document.getElementById('cq-total'), bandSmall = document.getElementById('cq-band');
     document.getElementById('cq-band-name').textContent = r.band + ' (' + r.total + '/100)';
+    if(animate){
+      dial.style.setProperty('--pct', 0); totalEl.textContent = '0'; bandSmall.innerHTML = '&nbsp;';
+      results.classList.remove('cq-anim'); void results.offsetWidth; results.classList.add('cq-anim');
+      var t0 = null;
+      setTimeout(function(){
+        requestAnimationFrame(function step(now){
+          if(t0 === null) t0 = now;
+          var k = Math.min(1, (now - t0) / 1400), e = 1 - Math.pow(1 - k, 3), v = Math.round(r.total * e);
+          dial.style.setProperty('--pct', v); totalEl.textContent = v;
+          if(k < 1) requestAnimationFrame(step); else bandSmall.textContent = r.band;
+        });
+      }, 350);
+    } else {
+      results.classList.remove('cq-anim');
+      dial.style.setProperty('--pct', r.total);
+      totalEl.textContent = r.total;
+      bandSmall.textContent = r.band;
+    }
 
     var bandsEl = document.getElementById('cq-bands');
     bandsEl.innerHTML = '';
@@ -254,9 +274,15 @@
       var pct = r.stagePct[s.key];
       var row = document.createElement('div');
       row.className = 'band';
-      row.innerHTML = '<span>'+s.label+'</span><span class="bar"><span class="fill" style="width:'+pct+'%"></span></span><span>'+pct+'%</span>';
+      row.innerHTML = '<span>'+s.label+'</span><span class="bar"><span class="fill" style="width:'+(animate ? 0 : pct)+'%"></span></span><span>'+pct+'%</span>';
       bandsEl.appendChild(row);
     });
+    if(animate){
+      [].slice.call(bandsEl.querySelectorAll('.fill')).forEach(function(f, i){
+        var pct = CheckupScore.STAGES[i] && r.stagePct[CheckupScore.STAGES[i].key];
+        setTimeout(function(){ f.style.width = pct + '%'; }, 900 + i * 180);
+      });
+    }
 
     var weakestLabel = CheckupScore.STAGES.filter(function(s){ return s.key === r.weakest })[0].label;
     document.getElementById('cq-fix').innerHTML = '<h3>Fix this first: '+weakestLabel+'</h3><p class="muted" style="margin:0">'+r.advice+'</p>';
