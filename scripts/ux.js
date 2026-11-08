@@ -17,6 +17,18 @@
 
   });
 
+  /* Click ping on filled buttons */
+  [].slice.call(document.querySelectorAll('.btn-primary, .btn-dark')).forEach(function(b){
+    b.addEventListener('pointerdown',function(e){
+      if(!on || reduce) return;
+      var r=b.getBoundingClientRect();
+      b.style.setProperty('--ux-x',(e.clientX-r.left)+'px');
+      b.style.setProperty('--ux-y',(e.clientY-r.top)+'px');
+      b.classList.remove('ux-press'); void b.offsetWidth; b.classList.add('ux-press');
+    });
+    b.addEventListener('animationend',function(){ b.classList.remove('ux-press'); });
+  });
+
   /* Glass nav that floats once you scroll past the top (Opal style) */
   var nav=document.querySelector('.nav');
   function onScroll(){ if(nav) nav.classList.toggle('ux-float', on && scrollY>120); }
@@ -109,7 +121,7 @@
     '<div class="ux-row">Motion effects<button type="button" class="ux-switch" role="switch" aria-checked="'+on+'" aria-label="Motion effects"></button></div>'+
     '<p>Flip the switch to compare before and after.</p>'+
     '<ol>'+
-    '<li><a href="#home-hero">Liquid fill buttons</a> <small>(Swell)</small></li>'+
+    '<li><a href="#home-hero">Meter fill buttons</a> <small>(hover, then click)</small></li>'+
     '<li>Scroll down: the menu floats as glass <small>(Opal)</small></li>'+
     '<li>Hover the menu: the underline slides <small>(Surge, calmer)</small></li>'+
     '<li><a href="#solutions">Solutions tabs slide</a> <small>(Opal)</small></li>'+
