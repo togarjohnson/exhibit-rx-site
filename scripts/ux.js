@@ -39,7 +39,8 @@
   if(links){
     var bar=document.createElement('span'); bar.className='ux-bar'; bar.setAttribute('aria-hidden','true'); links.appendChild(bar);
     var items=[].slice.call(links.querySelectorAll('a:not(.btn)'));
-    var resting=null;
+    var resting=links.querySelector('a.active:not(.btn)');
+    if(resting) setTimeout(function(){ moveTo(resting,false); },120);
     function moveTo(a,zap){
       if(!a){ bar.classList.remove('ux-show'); return; }
       bar.style.left=a.offsetLeft+'px'; bar.style.width=a.offsetWidth+'px'; bar.classList.add('ux-show');
@@ -116,11 +117,19 @@
   }
 
   /* Preview guide panel */
+  var isCheckup=!!document.getElementById('cq-quiz');
   var g=document.createElement('details'); g.className='ux-guide'; g.open=innerWidth>700;
   g.innerHTML='<summary>UX PREVIEW <span>not live</span></summary><div class="ux-body">'+
     '<div class="ux-row">Motion effects<button type="button" class="ux-switch" role="switch" aria-checked="'+on+'" aria-label="Motion effects"></button></div>'+
     '<p>Flip the switch to compare before and after.</p>'+
-    '<ol>'+
+    '<ol>'+(isCheckup?
+    '<li><a href="#cq-quiz">One question at a time</a> <small>(answers move you forward)</small></li>'+
+    '<li>Stage progress meter <small>(Prescribe to Prove)</small></li>'+
+    '<li>Tap an answer: it fills and checks</li>'+
+    '<li>Score reveal <small>(count up, dial, stage bars)</small></li>'+
+    '<li>Meter fill buttons <small>(hover, then click)</small></li>'+
+    '<li><a href="#faq">FAQ cards light up and open</a></li>'
+    :
     '<li><a href="#home-hero">Meter fill buttons</a> <small>(hover, then click)</small></li>'+
     '<li>Scroll down: the menu floats as glass <small>(Opal)</small></li>'+
     '<li>Hover the menu: the underline slides <small>(Surge, calmer)</small></li>'+
@@ -129,7 +138,7 @@
     '<li><a href="#deliverables">Live sample dashboard</a> <small>(Meridian)</small><button type="button" class="ux-play" data-play="dash">Replay</button></li>'+
     '<li><a href="#how">Chaos to Order method</a> <small>(scroll slowly)</small></li>'+
     '<li><a href="#pipeline-check">Pipeline check calculator</a></li>'+
-    '<li><a href="#faq">FAQ cards light up and open</a></li>'+
+    '<li><a href="#faq">FAQ cards light up and open</a></li>')+
     '</ol><small>Preview only. Nothing here is on exhibitrx.com yet.</small></div>';
   body.appendChild(g);
   var sw=g.querySelector('.ux-switch');
@@ -139,14 +148,14 @@
     magnets.forEach(function(b){ b.style.transform=''; });
     if(wyg && wyg._finish) wyg._finish();
   });
-  g.querySelector('[data-play="send"]').addEventListener('click',function(){
+  if(g.querySelector('[data-play="send"]')) g.querySelector('[data-play="send"]').addEventListener('click',function(){
     var strip=document.querySelector('[data-toggle="rescue-form-box"]'), box=document.getElementById('rescue-form-box');
     if(box && box.hidden && strip) strip.click();
     var btn=box && box.querySelector('.ux-send'); if(!btn) return;
     btn.scrollIntoView({block:'center',behavior:reduce?'auto':'smooth'});
     setTimeout(function(){ if(on) fly(btn); },reduce?0:600);
   });
-  g.querySelector('[data-play="dash"]').addEventListener('click',function(){
+  if(g.querySelector('[data-play="dash"]')) g.querySelector('[data-play="dash"]').addEventListener('click',function(){
     if(!wyg) return; wyg.scrollIntoView({block:'center',behavior:reduce?'auto':'smooth'});
     if(wyg._replay) setTimeout(wyg._replay,reduce?0:500);
   });
@@ -238,4 +247,74 @@
       if(i===0) setOpen(true);
     });
   }
+})();
+
+/* ---------- Round 3: Show Checkup ---------- */
+(function(){
+  var quiz=document.getElementById('cq-quiz'); if(!quiz) return;
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function on(){ return document.body.classList.contains('ux-on'); }
+  var qs=[].slice.call(quiz.querySelectorAll('.q'));
+  var seeBtn=document.getElementById('cq-see-score');
+  var STAGES=[['Prescribe',[0]],['Prepare',[1,2]],['Perform',[3]],['Prove',[4,5]]];
+  var cur=0, viaKey=false, timer=null;
+  quiz.classList.add('cq-step');
+
+  /* Progress meter built on the four stages */
+  var prog=document.createElement('div'); prog.className='cq-prog';
+  prog.innerHTML='<div class="cq-prog-top"><span class="cq-count" aria-live="polite"></span><span>About 2 minutes</span></div>'+
+    '<div class="cq-meter" aria-hidden="true">'+STAGES.map(function(s){ return '<div class="cq-seg" style="flex:'+s[1].length+'"><span class="cq-track"><i></i></span><span class="cq-lab">'+s[0]+'</span></div>'; }).join('')+'</div>';
+  quiz.insertBefore(prog,quiz.firstChild);
+  var countEl=prog.querySelector('.cq-count'), segs=[].slice.call(prog.querySelectorAll('.cq-seg'));
+
+  /* Back / Next row; See your score takes Next's place on the last question */
+  var nav=document.createElement('div'); nav.className='cq-nav';
+  nav.innerHTML='<button type="button" class="cq-back"><span aria-hidden="true">&larr;</span> Back</button><button type="button" class="btn btn-primary cq-next" disabled>Next <span aria-hidden="true">&rarr;</span></button>';
+  seeBtn.parentNode.insertBefore(nav,seeBtn); nav.appendChild(seeBtn);
+  var back=nav.querySelector('.cq-back'), next=nav.querySelector('.cq-next');
+
+  qs.forEach(function(q){ var l=q.querySelector(':scope > label'); if(l) l.setAttribute('tabindex','-1'); });
+  function answered(i){ return !!qs[i].querySelector('input:checked'); }
+
+  function render(dir){
+    qs.forEach(function(q,i){ q.classList.toggle('cq-cur',i===cur); if(dir) q.classList.remove('cq-fwd','cq-bwd'); });
+    if(dir && !reduce){ void qs[cur].offsetWidth; qs[cur].classList.add(dir>0?'cq-fwd':'cq-bwd'); }
+    countEl.textContent='Question '+(cur+1)+' of '+qs.length;
+    STAGES.forEach(function(s,si){
+      var done=s[1].filter(answered).length;
+      segs[si].querySelector('i').style.width=(done/s[1].length*100)+'%';
+      segs[si].classList.toggle('cq-on',s[1].indexOf(cur)!==-1);
+      segs[si].classList.toggle('cq-done',done===s[1].length);
+    });
+    var last=cur===qs.length-1;
+    back.classList.toggle('cq-hide',cur===0);
+    next.hidden=last; next.disabled=!answered(cur);
+    quiz.classList.toggle('cq-last',last);
+  }
+
+  function go(i){
+    var d=i>cur?1:-1;
+    cur=Math.max(0,Math.min(qs.length-1,i)); render(d);
+    var top=quiz.getBoundingClientRect().top;
+    if(top<70) scrollBy({top:top-90,behavior:reduce?'auto':'smooth'});
+    var l=qs[cur].querySelector(':scope > label'); if(l) l.focus({preventScroll:true});
+  }
+
+  quiz.addEventListener('keydown',function(){ viaKey=true; });
+  quiz.addEventListener('pointerdown',function(){ viaKey=false; });
+  quiz.addEventListener('change',function(e){
+    var q=e.target.closest('.q'), i=qs.indexOf(q); if(i<0) return;
+    render();
+    if(!on()) return;
+    var opt=e.target.closest('.cq-opt');
+    if(opt && !reduce){ opt.classList.remove('cq-pop'); void opt.offsetWidth; opt.classList.add('cq-pop'); }
+    if(viaKey || i!==cur) return;
+    clearTimeout(timer);
+    if(cur<qs.length-1) timer=setTimeout(function(){ go(cur+1); },reduce?0:420);
+    else { seeBtn.classList.remove('cq-ready'); void seeBtn.offsetWidth; seeBtn.classList.add('cq-ready'); }
+  });
+  next.addEventListener('click',function(){ if(answered(cur)) go(cur+1); });
+  back.addEventListener('click',function(){ clearTimeout(timer); go(cur-1); });
+
+  render();
 })();
