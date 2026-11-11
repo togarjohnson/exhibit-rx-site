@@ -376,14 +376,15 @@
   /* 4 and 5. Recommendation cards rise in, top bar draws, key phrases get a marker sweep */
   var cards=[].slice.call(recs.querySelectorAll('.rec')), clear;
   fx.recs={ el:recs,
-    reset:function(){ if(!on()) return; clearTimeout(clear); recs.classList.add('ux-pre'); },
+    reset:function(){ if(!on()) return; clearTimeout(clear); clearTimeout(recs._pl); recs.classList.remove('ux-played'); recs.classList.add('ux-pre'); },
     play:function(){
       if(!on()) return;
       cards.forEach(function(c,i){ c.style.transitionDelay=(i*0.14)+'s'; });
       recs.classList.remove('ux-pre');
       clear=setTimeout(function(){ cards.forEach(function(c){ c.style.transitionDelay=''; }); },1400);
+      recs._pl=setTimeout(function(){ recs.classList.add('ux-played'); },2300);
     },
-    finish:function(){ recs.classList.remove('ux-pre'); cards.forEach(function(c){ c.style.transitionDelay=''; }); } };
+    finish:function(){ recs.classList.remove('ux-pre'); recs.classList.add('ux-played'); cards.forEach(function(c){ c.style.transitionDelay=''; }); } };
   watch(recs,fx.recs,.25);
 
   /* 8. Arrow nudge on the closing call to action */
