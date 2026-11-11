@@ -243,9 +243,16 @@
 .ux-on .recs.ux-pre .rec{opacity:0;transform:translateY(28px);transition:none}
 .ux-on .recs.ux-pre .rec::before{transform:scaleX(0);transition:none}
 /* 5. Marker sweep on key phrases */
-.ux-on .rec-hl{background-image:linear-gradient(transparent 58%,rgba(0,162,152,.28) 58%);background-repeat:no-repeat;background-size:100% 100%;transition:background-size 1s cubic-bezier(.65,0,.35,1) .8s}
+/* layer 1: the marker glow; layer 2: a solid underline that draws under the phrase when you hover the card */
+.ux-on .rec-hl{background-image:linear-gradient(transparent 58%,rgba(0,162,152,.28) 58%),linear-gradient(var(--teal2),var(--teal2));background-repeat:no-repeat;background-position:0 0,0 100%;background-size:100% 100%,0% 3px;padding-bottom:2px;transition:background-size 1s cubic-bezier(.65,0,.35,1) .8s}
 .ux-on .rec:nth-child(2) .rec-hl{transition-delay:.95s}.ux-on .rec:nth-child(3) .rec-hl{transition-delay:1.1s}
-.ux-on .recs.ux-pre .rec-hl{background-size:0% 100%;transition:none}
+.ux-on .recs.ux-pre .rec-hl{background-size:0% 100%,0% 3px;transition:none}
+.ux-on .recs .rec:hover .rec-hl{background-size:100% 100%,100% 3px;transition:background-size .7s cubic-bezier(.65,0,.35,1) 0s}
+.ux-on .recs.ux-played .rec-hl{transition:background-size .5s cubic-bezier(.65,0,.35,1) 0s}
+/* phones and tablets have no hover, so the underline draws on its own after the glow */
+@media (hover:none){
+  .ux-on .rec-hl{background-size:100% 100%,100% 3px;transition:background-size 1s cubic-bezier(.65,0,.35,1) .8s}
+}
 /* 6. Spotlight the card you hover */
 @media (hover:hover) and (min-width:900px){
   .ux-on .recs:hover .rec{opacity:.5;transform:scale(.98)}
@@ -256,5 +263,5 @@
   .ux-on .ux-pre .ux-w{opacity:1}
   .ux-on img.ux-portrait.ux-pre{clip-path:none;transform:none}
   .ux-on .recs.ux-pre .rec::before{transform:none}
-  .ux-on .recs.ux-pre .rec-hl{background-size:100% 100%}
+  .ux-on .recs.ux-pre .rec-hl{background-size:100% 100%,0% 3px}
 }
