@@ -223,3 +223,38 @@
   .cq-seg{flex:1 1 0!important}
   .cq-lab{font-size:9.5px;letter-spacing:.06em;text-overflow:clip}
 }
+
+/* ---------- About page ---------- */
+/* 1. Stats count up */
+.ux-on .fstats dt{font-variant-numeric:tabular-nums}
+.ux-on .fstats div{transition:opacity .6s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.ux-on .fstats div:nth-child(2){transition-delay:.08s}.ux-on .fstats div:nth-child(3){transition-delay:.16s}.ux-on .fstats div:nth-child(4){transition-delay:.24s}
+.ux-on .fstats.ux-pre div{opacity:0;transform:translateY(14px)}
+/* 2. Quote inks in */
+.ux-on .ux-w{transition:opacity .45s ease,color .45s ease}
+.ux-on .ux-pre .ux-w{opacity:.12;transition:none}
+/* 3. Portrait wipe */
+.ux-on img.ux-portrait{clip-path:inset(0 0 0 0 round 18px);transition:clip-path 1.1s cubic-bezier(.65,0,.35,1),transform 1.5s cubic-bezier(.2,.8,.2,1)}
+.ux-on img.ux-portrait.ux-pre{clip-path:inset(100% 0 0 0 round 18px);transform:scale(1.06);transition:none}
+.ux-on img.ux-portrait.ux-done{clip-path:none}
+/* 4. Cards rise in, gradient bar draws */
+.ux-on .rec{position:relative;border-top-color:transparent;transition:opacity .6s ease,transform .7s cubic-bezier(.2,.8,.2,1),box-shadow .35s ease}
+.ux-on .rec::before{content:"";position:absolute;left:16px;right:16px;top:-4px;height:4px;border-radius:4px;background:linear-gradient(90deg,var(--blue),var(--teal));transform-origin:left center;transition:transform .9s cubic-bezier(.65,0,.35,1) .3s}
+.ux-on .recs.ux-pre .rec{opacity:0;transform:translateY(28px);transition:none}
+.ux-on .recs.ux-pre .rec::before{transform:scaleX(0);transition:none}
+/* 5. Marker sweep on key phrases */
+.ux-on .rec-hl{background-image:linear-gradient(transparent 58%,rgba(0,162,152,.28) 58%);background-repeat:no-repeat;background-size:100% 100%;transition:background-size 1s cubic-bezier(.65,0,.35,1) .8s}
+.ux-on .rec:nth-child(2) .rec-hl{transition-delay:.95s}.ux-on .rec:nth-child(3) .rec-hl{transition-delay:1.1s}
+.ux-on .recs.ux-pre .rec-hl{background-size:0% 100%;transition:none}
+/* 6. Spotlight the card you hover */
+@media (hover:hover) and (min-width:900px){
+  .ux-on .recs:hover .rec{opacity:.5;transform:scale(.98)}
+  .ux-on .recs .rec:hover{opacity:1;transform:translateY(-6px);box-shadow:0 26px 60px rgba(1,40,59,.18)}
+}
+@media (prefers-reduced-motion: reduce){
+  .ux-on .fstats.ux-pre div,.ux-on .recs.ux-pre .rec{opacity:1;transform:none}
+  .ux-on .ux-pre .ux-w{opacity:1}
+  .ux-on img.ux-portrait.ux-pre{clip-path:none;transform:none}
+  .ux-on .recs.ux-pre .rec::before{transform:none}
+  .ux-on .recs.ux-pre .rec-hl{background-size:100% 100%}
+}
