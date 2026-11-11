@@ -118,11 +118,12 @@
 
   /* Preview guide panel */
   var isCheckup=!!document.getElementById('cq-quiz');
+  var isAbout=!!document.querySelector('.recs');
   var g=document.createElement('details'); g.className='ux-guide'; g.open=innerWidth>700;
   g.innerHTML='<summary>UX PREVIEW <span>not live</span></summary><div class="ux-body">'+
     '<div class="ux-row">Motion effects<button type="button" class="ux-switch" role="switch" aria-checked="'+on+'" aria-label="Motion effects"></button></div>'+
     '<p>Flip the switch to compare before and after.</p>'+
-    '<ol>'+(isCheckup?
+    '<ol>'+(isAbout?'<li><a href="#founder">Founder stats count up</a><button type="button" class="ux-play" data-play="about-stats">Replay</button></li>'+'<li>Founder quote inks in word by word<button type="button" class="ux-play" data-play="about-quote">Replay</button></li>'+'<li>Portrait wipes in<button type="button" class="ux-play" data-play="about-portrait">Replay</button></li>'+'<li><a href="#recommendations">Recommendation cards rise in</a> <small>(top bar draws)</small><button type="button" class="ux-play" data-play="about-recs">Replay</button></li>'+'<li>Key phrases get a marker sweep <small>(plays with the cards)</small></li>'+'<li>Hover a recommendation: spotlight <small>(desktop)</small></li>'+'<li>Scroll down: the menu floats as glass, underline slides</li>'+'<li><a href="#audit">Meter fill buttons and arrow nudge</a> <small>(hover, then click)</small></li>':isCheckup?
     '<li><a href="#cq-quiz">One question at a time</a> <small>(answers move you forward)</small></li>'+
     '<li>Stage progress meter <small>(Prescribe to Prove)</small></li>'+
     '<li>Tap an answer: it fills and checks</li>'+
@@ -317,4 +318,92 @@
   back.addEventListener('click',function(){ clearTimeout(timer); go(cur-1); });
 
   render();
+})();
+
+/* ---------- About page ---------- */
+(function(){
+  var recs=document.querySelector('.recs'); if(!recs) return;
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hasIO='IntersectionObserver' in window;
+  function on(){ return document.body.classList.contains('ux-on'); }
+  function watch(el,fx,th){
+    if(!el||!hasIO||reduce) return;
+    fx.reset();
+    new IntersectionObserver(function(en){ if(en[0].isIntersecting) fx.play(); else if(en[0].boundingClientRect.top>0) fx.reset(); },{threshold:th||.35}).observe(el);
+  }
+  function tween(ms,step){ var t0=performance.now(); (function f(now){ var k=Math.min(1,(now-t0)/ms); step(1-Math.pow(1-k,3)); if(k<1) requestAnimationFrame(f); })(t0); }
+  var fx={};
+
+  /* 1. Founder stats count up */
+  var stats=document.querySelector('.fstats');
+  if(stats){
+    var dts=[].slice.call(stats.querySelectorAll('dt')).map(function(d){ var m=d.textContent.match(/[\d,]+/); return {el:d,txt:d.textContent,num:m?parseInt(m[0].replace(/,/g,''),10):0,raw:m?m[0]:''}; });
+    var fmt=function(n,raw){ return raw.indexOf(',')>-1?n.toLocaleString('en-US'):String(n); };
+    fx.stats={
+      el:stats,
+      reset:function(){ if(!on()) return; stats.classList.add('ux-pre'); dts.forEach(function(d){ if(d.raw) d.el.textContent=d.txt.replace(d.raw,'0'); }); },
+      play:function(){ if(!on()) return; stats.classList.remove('ux-pre'); tween(1600,function(e){ dts.forEach(function(d){ if(d.raw) d.el.textContent=d.txt.replace(d.raw,fmt(Math.round(d.num*e),d.raw)); }); }); },
+      finish:function(){ stats.classList.remove('ux-pre'); dts.forEach(function(d){ d.el.textContent=d.txt; }); }
+    };
+    watch(stats,fx.stats,.4);
+  }
+
+  /* 2. Founder quote inks in word by word */
+  var card=document.querySelector('#founder .showcard'), quote=card&&card.querySelector('p');
+  if(quote){
+    var words=quote.textContent.split(/(\s+)/);
+    quote.innerHTML=words.map(function(w){ return /^\s+$/.test(w)?w:'<span class="ux-w">'+w.replace(/&/g,'&amp;').replace(/</g,'&lt;')+'</span>'; }).join('');
+    [].slice.call(quote.querySelectorAll('.ux-w')).forEach(function(w,i){ w.style.transitionDelay=(i*0.035)+'s'; });
+    fx.quote={ el:quote,
+      reset:function(){ if(on()) quote.classList.add('ux-pre'); },
+      play:function(){ if(on()) quote.classList.remove('ux-pre'); },
+      finish:function(){ quote.classList.remove('ux-pre'); } };
+    watch(quote,fx.quote,.5);
+  }
+
+  /* 3. Portrait wipes in */
+  var img=document.querySelector('#founder img');
+  if(img){
+    img.classList.add('ux-portrait');
+    img.addEventListener('transitionend',function(e){ if(e.propertyName==='clip-path'&&!img.classList.contains('ux-pre')) img.classList.add('ux-done'); });
+    fx.portrait={ el:img,
+      reset:function(){ if(!on()) return; img.classList.remove('ux-done'); img.classList.add('ux-pre'); },
+      play:function(){ if(on()) img.classList.remove('ux-pre'); },
+      finish:function(){ img.classList.remove('ux-pre'); img.classList.add('ux-done'); } };
+    watch(img,fx.portrait,.25);
+  }
+
+  /* 4 and 5. Recommendation cards rise in, top bar draws, key phrases get a marker sweep */
+  var cards=[].slice.call(recs.querySelectorAll('.rec')), clear;
+  fx.recs={ el:recs,
+    reset:function(){ if(!on()) return; clearTimeout(clear); recs.classList.add('ux-pre'); },
+    play:function(){
+      if(!on()) return;
+      cards.forEach(function(c,i){ c.style.transitionDelay=(i*0.14)+'s'; });
+      recs.classList.remove('ux-pre');
+      clear=setTimeout(function(){ cards.forEach(function(c){ c.style.transitionDelay=''; }); },1400);
+    },
+    finish:function(){ recs.classList.remove('ux-pre'); cards.forEach(function(c){ c.style.transitionDelay=''; }); } };
+  watch(recs,fx.recs,.25);
+
+  /* 8. Arrow nudge on the closing call to action */
+  var cta=document.querySelector('.cta .btn-primary');
+  if(cta && !cta.querySelector('.ux-arrow')){
+    cta.classList.add('ux-magnet');
+    var ar=document.createElement('span'); ar.className='ux-arrow'; ar.setAttribute('aria-hidden','true'); ar.textContent='→'; cta.appendChild(ar);
+  }
+
+  /* Guide panel: replay buttons and the on/off switch */
+  var guide=document.querySelector('.ux-guide');
+  if(guide){
+    [].slice.call(guide.querySelectorAll('[data-play^="about-"]')).forEach(function(b){
+      b.addEventListener('click',function(){
+        var f=fx[b.getAttribute('data-play').slice(6)]; if(!f||!on()) return;
+        f.el.scrollIntoView({block:'center',behavior:reduce?'auto':'smooth'});
+        setTimeout(function(){ f.reset(); setTimeout(f.play,80); },reduce?0:550);
+      });
+    });
+    var sw=guide.querySelector('.ux-switch');
+    if(sw) sw.addEventListener('click',function(){ if(!on()) Object.keys(fx).forEach(function(k){ fx[k].finish(); }); });
+  }
 })();
