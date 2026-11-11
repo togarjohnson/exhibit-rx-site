@@ -74,18 +74,47 @@
 </div></section>
 
 <section class="section"><div class="wrap">
-  <div class="head"><div class="eyebrow">In the field</div><h2>From the show floor to large-scale public events.</h2><p>Real, qualified conversations on the show floor, the outcome every stage of the Exhibit RX Method is designed to drive toward.</p></div>
-  <div class="carousel" aria-roledescription="carousel" aria-label="Photos from trade shows and events Togar has run">
-    <div class="carousel-track" tabindex="0">
-      <figure class="slide"><img src="images/dover-air-show.jpg" alt="Crowds, vendor tents and aircraft at the Thunder Over Dover air show" loading="lazy" /><figcaption>Thunder Over Dover 2022, Dover Air Force Base, where Togar led marketing and sponsorships. Photo: U.S. Air Force.</figcaption></figure>
-      <figure class="slide"><img src="images/togar-podium-2.jpg" alt="Togar Johnson addressing an audience from a podium" loading="lazy" /><figcaption>Speaking to the room, not just the booth.</figcaption></figure>
-      <figure class="slide"><img src="images/expo-floor-wide.jpg" alt="Wide view of a busy life-science trade show exhibit hall" loading="lazy" /><figcaption>The scale the Exhibit RX Method is built to operate at.</figcaption></figure>
-      <figure class="slide"><img src="images/dover-concert-crowd.jpg" alt="Crowd at a 4,000-person concert at Dover Air Force Base" loading="lazy" /><figcaption>A concert at Dover AFB hosted by Togar, with more than 4,000 attendees.</figcaption></figure>
-    </div>
-    <button class="carousel-btn prev" type="button" aria-label="Previous photo">&#8249;</button>
-    <button class="carousel-btn next" type="button" aria-label="Next photo">&#8250;</button>
-    <div class="carousel-dots" role="tablist"></div>
+  <style>
+    .recs{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-top:8px}
+    .rec{display:flex;flex-direction:column;background:#fff;border:1px solid var(--cloud);border-top:4px solid var(--teal2);border-radius:var(--radius);padding:28px 26px;box-shadow:var(--shadow);margin:0}
+    .rec .rec-tag{font-family:Montserrat,Arial,sans-serif;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:var(--teal2);margin:0 0 14px}
+    .rec blockquote{margin:0 0 22px;font-size:16px;line-height:1.6;color:var(--navy);flex:1}
+    .rec blockquote p{margin:0 0 12px}.rec blockquote p:last-child{margin:0}
+    .rec figcaption{display:flex;gap:12px;align-items:center;border-top:1px solid var(--cloud);padding-top:16px}
+    .rec .rec-init{flex:0 0 44px;width:44px;height:44px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-family:Montserrat,Arial,sans-serif;font-weight:800;font-size:14px}
+    .rec .rec-name{font-weight:800;color:var(--navy);display:block}
+    .rec .rec-role{font-size:14px;color:var(--slate);display:block;line-height:1.4}
+    .recs-more{margin-top:26px}
+    .recs-more a{color:var(--teal2);font-weight:700}
+  </style>
+  <div class="head"><div class="eyebrow">Recommendations</div><h2>What people say about working the show floor with Togar.</h2><p>In their own words, from recommendations on Togar's LinkedIn profile.</p></div>
+  <div class="recs">
+    <figure class="rec">
+      <p class="rec-tag">World Vaccine Congress, Washington, DC</p>
+      <blockquote>
+        <p>"At the World Vaccine Congress in Washington, DC March 2026, Togar played an instrumental role in attracting vaccine developers at various stages of development to SPI Pharma's booth and generating interest in our technologies."</p>
+        <p>"Togar actively sought my input, asked thoughtful questions, and worked to understand the science behind the adjuvants so he could communicate their value effectively to the right audiences."</p>
+      </blockquote>
+      <figcaption><span class="rec-init" aria-hidden="true">JK</span><span><span class="rec-name">Juhienah Khalaf</span><span class="rec-role">Director of Adjuvant Portfolio, Inimmune Corporation. Exhibit partner.</span></span></figcaption>
+    </figure>
+    <figure class="rec">
+      <p class="rec-tag">Event planning and execution</p>
+      <blockquote>
+        <p>"He is particularly strong in event planning, where he brings ideas to life and manages the details of experiences with care and creativity."</p>
+        <p>"I recommend him without hesitation to any team that values strong interpersonal skills, creativity, event coordination, and a genuinely uplifting presence."</p>
+      </blockquote>
+      <figcaption><span class="rec-init" aria-hidden="true">AC</span><span><span class="rec-name">Amanda Coulter</span><span class="rec-role">Managed Togar directly at SPI Pharma.</span></span></figcaption>
+    </figure>
+    <figure class="rec">
+      <p class="rec-tag">Customer focus across teams</p>
+      <blockquote>
+        <p>"Togar consistently demonstrated a unique ability to combine strategic marketing expertise with a genuine commitment to customer satisfaction."</p>
+        <p>"He was always willing to collaborate across departments, and together we often developed creative solutions to better serve our customers and address their evolving needs."</p>
+      </blockquote>
+      <figcaption><span class="rec-init" aria-hidden="true">BM</span><span><span class="rec-name">Brittany MacKinnon</span><span class="rec-role">Operations and Client Relations. Worked with Togar for five years at SPI Pharma.</span></span></figcaption>
+    </figure>
   </div>
+  <p class="recs-more"><a href="https://www.linkedin.com/in/togarjohnson/details/recommendations/" target="_blank" rel="noopener">Read the full recommendations on LinkedIn &rarr;</a></p>
 </div></section>
 
 <section class="section mist"><div class="wrap">
@@ -103,20 +132,6 @@
   <p>Cure the Chaos. Prove the Value.</p>
   <p class="small muted">The global trade-show performance partner for pharma and life sciences.</p>
 </div></footer>
-<script>
-document.querySelectorAll('.carousel').forEach(function(c){
-  var t=c.querySelector('.carousel-track'),s=[].slice.call(t.children),d=c.querySelector('.carousel-dots');
-  s.forEach(function(_,i){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Go to photo '+(i+1));b.onclick=function(){go(i)};d.appendChild(b)});
-  function cur(){var x=t.scrollLeft,best=0;s.forEach(function(el,i){if(Math.abs(el.offsetLeft-t.offsetLeft-x)<Math.abs(s[best].offsetLeft-t.offsetLeft-x))best=i});return best}
-  function go(i){i=(i+s.length)%s.length;t.scrollTo({left:s[i].offsetLeft-t.offsetLeft,behavior:'smooth'})}
-  function mark(){var i=cur();[].forEach.call(d.children,function(b,j){b.classList.toggle('on',j===i)})}
-  c.querySelector('.prev').onclick=function(){go(cur()-1)};
-  c.querySelector('.next').onclick=function(){go(cur()+1)};
-  t.addEventListener('scroll',function(){clearTimeout(t._m);t._m=setTimeout(mark,80)});
-  t.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){e.preventDefault();go(cur()+1)}if(e.key==='ArrowLeft'){e.preventDefault();go(cur()-1)}});
-  mark();
-});
-</script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
