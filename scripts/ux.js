@@ -337,7 +337,7 @@
   /* 1. Founder stats count up */
   var stats=document.querySelector('.fstats');
   if(stats){
-    var dts=[].slice.call(stats.querySelectorAll('dt')).map(function(d){ var m=d.textContent.match(/[\d,]+/); return {el:d,txt:d.textContent,num:m?parseInt(m[0].replace(/,/g,''),10):0,raw:m?m[0]:''}; });
+    var dts=[].slice.call(stats.querySelectorAll('dt')).map(function(d){ d.setAttribute('aria-label',d.textContent); var m=d.textContent.match(/[\d,]+/); return {el:d,txt:d.textContent,num:m?parseInt(m[0].replace(/,/g,''),10):0,raw:m?m[0]:''}; });
     var fmt=function(n,raw){ return raw.indexOf(',')>-1?n.toLocaleString('en-US'):String(n); };
     fx.stats={
       el:stats,

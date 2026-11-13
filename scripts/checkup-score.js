@@ -4,13 +4,15 @@ window.CheckupScore = (function(){
     {key:'prescribe', label:'Prescribe', qs:[0]},
     {key:'prepare',   label:'Prepare',   qs:[1,2]},
     {key:'perform',   label:'Perform',   qs:[3]},
-    {key:'prove',     label:'Prove',     qs:[4,5]}
+    {key:'prove',     label:'Prove',     qs:[4,5]},
+    {key:'progress',  label:'Progress',  qs:[6]}
   ];
   var ADVICE = {
     prescribe:"Set the split before you book a single meeting. Decide what share of the calendar belongs to new business, and measure it.",
     prepare:"Book target accounts before doors open, and put your technical people where new business will walk up.",
     perform:"Ask every visitor the same few questions and give each lead a priority on the spot.",
-    prove:"Give every priority lead a named owner within 48 hours, and report pipeline by show at 30, 60 and 90 days."
+    prove:"Give every priority lead a named owner within 48 hours, and report pipeline by show at 30, 60 and 90 days.",
+    progress:"Hold a short debrief after every show, write down what to change, and build it into the plan for the next one."
   };
 
   function bandFor(total){
@@ -19,12 +21,18 @@ window.CheckupScore = (function(){
     return 'Performing';
   }
 
+  /* Stages whose questions were all answered. Older six-answer report links
+     predate the Progress question, so they score on the first four stages. */
+  function stagesFor(answers){
+    return STAGES.filter(function(s){ return s.qs.every(function(i){ return typeof answers[i] === 'number' }) });
+  }
+
   function compute(answers){
     var sum = answers.reduce(function(a,b){ return a + b }, 0);
-    var total = Math.round(sum / 18 * 100);
+    var total = Math.round(sum / (answers.length * 3) * 100);
     var band = bandFor(total);
     var stagePct = {}, weakest = null, weakestPct = 101;
-    STAGES.forEach(function(s){
+    stagesFor(answers).forEach(function(s){
       var pts = s.qs.reduce(function(a,i){ return a + answers[i] }, 0);
       var pct = Math.round(pts / (s.qs.length * 3) * 100);
       stagePct[s.key] = pct;
@@ -36,9 +44,9 @@ window.CheckupScore = (function(){
   function encode(answers){ return answers.join(''); }
 
   function decode(str){
-    if(!str || !/^[0-3]{6}$/.test(str)) return null;
+    if(!str || !/^[0-3]{6,7}$/.test(str)) return null;
     return str.split('').map(Number);
   }
 
-  return { STAGES: STAGES, ADVICE: ADVICE, compute: compute, encode: encode, decode: decode };
+  return { STAGES: STAGES, ADVICE: ADVICE, compute: compute, encode: encode, decode: decode, stagesFor: stagesFor };
 })();
