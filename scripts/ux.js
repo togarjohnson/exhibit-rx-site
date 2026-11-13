@@ -135,7 +135,6 @@
     '<li>Scroll down: the menu floats as glass <small>(Opal)</small></li>'+
     '<li>Hover the menu: the underline slides <small>(Surge, calmer)</small></li>'+
     '<li><a href="#solutions">Solutions tabs slide</a> <small>(Opal)</small></li>'+
-    '<li>Paper plane send <small>(Dart)</small><button type="button" class="ux-play" data-play="send">Play</button></li>'+
     '<li><a href="#deliverables">Live sample dashboard</a> <small>(Meridian)</small><button type="button" class="ux-play" data-play="dash">Replay</button></li>'+
     '<li><a href="#how">Chaos to Order method</a> <small>(scroll slowly)</small></li>'+
     '<li><a href="#pipeline-check">Pipeline check calculator</a></li>'+
