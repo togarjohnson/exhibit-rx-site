@@ -514,3 +514,6 @@ button.rescue-strip{width:100%;font:inherit;text-align:left;cursor:pointer;margi
 .steps4 span{color:var(--slate);font-size:15px}
 @media(max-width:900px){.steps4{grid-template-columns:1fr 1fr}}
 @media(max-width:520px){.steps4{grid-template-columns:1fr}}
+/* Keep-list centered under the chaos animation */
+.keep-list.keep-center{margin:32px auto 0;text-align:center;max-width:none}
+.keep-list.keep-center span:last-child{display:block;font-size:.72em;margin-top:8px}
