@@ -72,16 +72,16 @@
 
 <footer class="footer no-print"><div class="wrap">
   <a class="logo" href="index.html" style="color:#fff"><svg width="44" height="44" aria-hidden="true"><use href="#erx-mark"/></svg><span>Exhibit <span style="color:var(--teal)">RX</span><span class="tag">Cure the Chaos</span></span></a>
-  <div class="flinks"><a href="index.html#how">How it works</a><a href="index.html#solutions">Solutions</a><a href="checkup.html">Show Checkup</a><a href="about.html">About</a><a href="index.html#faq">FAQ</a><a href="privacy.html">Privacy</a><a href="https://www.linkedin.com/in/togarjohnson">LinkedIn</a></div>
-  <p>Cure the Chaos. Prove the Value.</p>
-  <p class="small muted">The global trade-show performance partner for pharma and life sciences.</p>
+  <div class="flinks"><a href="index.html#solutions">Services</a><a href="index.html#how">How we work</a><a href="checkup.html">Show Checkup</a><a href="about.html">About</a><a href="index.html#faq">FAQ</a><a href="privacy.html">Privacy</a><a href="https://www.linkedin.com/in/togarjohnson">LinkedIn</a></div>
+  <p>Cure the Chaos. Turn Complexity Into Opportunity.</p>
+  <p class="small muted">Trade show management for pharma and life sciences, from planning to performance.</p>
 </div></footer>
 
 <script src="scripts/checkup-score.js"></script>
 <script>
 (function(){
   var hash = location.hash.replace(/^#/, '');
-  var m = /a=([0-3]{6})/.exec(hash);
+  var m = /a=([0-3]{6,7})/.exec(hash);
   var answers = m ? CheckupScore.decode(m[1]) : null;
 
   if(!answers){
@@ -97,8 +97,9 @@
   document.getElementById('rpt-band').textContent = r.band;
   document.getElementById('rpt-band-name').textContent = r.band + ' (' + r.total + '/100)';
 
+  var stages = CheckupScore.stagesFor(answers);
   var bandsEl = document.getElementById('rpt-bands');
-  CheckupScore.STAGES.forEach(function(s){
+  stages.forEach(function(s){
     var pct = r.stagePct[s.key];
     var row = document.createElement('div');
     row.className = 'band';
@@ -106,7 +107,7 @@
     bandsEl.appendChild(row);
   });
 
-  var sortedStages = CheckupScore.STAGES.slice().sort(function(a,b){ return r.stagePct[a.key] - r.stagePct[b.key]; });
+  var sortedStages = stages.slice().sort(function(a,b){ return r.stagePct[a.key] - r.stagePct[b.key]; });
   var actionsEl = document.getElementById('rpt-actions');
   sortedStages.slice(0,3).forEach(function(s){
     var p = document.createElement('p');
@@ -115,7 +116,7 @@
   });
 
   var movesEl = document.getElementById('rpt-moves');
-  CheckupScore.STAGES.forEach(function(s){
+  stages.forEach(function(s){
     var row = document.createElement('div');
     row.className = 'rpt-move';
     row.innerHTML = '<b>'+s.label+'</b><span>'+CheckupScore.ADVICE[s.key]+'</span>';
