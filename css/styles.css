@@ -523,3 +523,4 @@ h1,h2,h3,.eyebrow,.btn,.hero-fit{text-wrap:balance}
 p,li,blockquote{text-wrap:pretty}
 .ln{display:block}
 @media (min-width:600px){.btn{white-space:nowrap}}
+@media (min-width:901px){.whygrid.why4{grid-template-columns:repeat(4,1fr)}}
