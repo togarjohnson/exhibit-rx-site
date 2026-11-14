@@ -517,3 +517,9 @@ button.rescue-strip{width:100%;font:inherit;text-align:left;cursor:pointer;margi
 /* Keep-list centered under the chaos animation */
 .keep-list.keep-center{margin:32px auto 0;text-align:center;max-width:none}
 .keep-list.keep-center span:last-child{display:block;font-size:.72em;margin-top:8px}
+
+/* Clean line breaks: no single words stranded on their own line */
+h1,h2,h3,.eyebrow,.btn,.hero-fit{text-wrap:balance}
+p,li,blockquote{text-wrap:pretty}
+.ln{display:block}
+@media (min-width:600px){.btn{white-space:nowrap}}
