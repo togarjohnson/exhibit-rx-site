@@ -524,4 +524,4 @@ p,li,blockquote{text-wrap:pretty}
 .ln{display:block}
 @media (min-width:600px){.btn{white-space:nowrap}}
 @media (min-width:901px){.whygrid.why4{grid-template-columns:repeat(4,1fr)}}
-.cta-in .btn,.btn{flex-shrink:0}
+@media (min-width:600px){.btn{flex-shrink:0}}
