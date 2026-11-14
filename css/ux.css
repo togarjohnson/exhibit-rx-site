@@ -1,0 +1,267 @@
+/* Exhibit RX UX preview: motion layer. Everything is scoped to body.ux-on so it can be switched off. */
+
+/* 1. Meter fill buttons: hover fills the button left to right like a gauge, click gives a springy press */
+.ux-on .btn-primary,.ux-on .btn-dark{position:relative;overflow:hidden;isolation:isolate;transition:color .25s ease .15s,transform .35s cubic-bezier(.2,.8,.2,1.4)}
+.ux-on .btn-primary:hover,.ux-on .btn-dark:hover{background:var(--teal2)}
+.ux-on .btn-dark:hover{background:var(--navy)}
+.ux-on .btn-primary::before,.ux-on .btn-dark::before{content:"";position:absolute;inset:0;background:var(--ux-fill,var(--navy));z-index:-1;transform:scaleX(0);transform-origin:left center;transition:transform .55s cubic-bezier(.65,0,.35,1)}
+.ux-on .btn-dark{--ux-fill:var(--teal2)}
+.ux-on .hero .btn-primary,.ux-on .cta .btn-primary{--ux-fill:var(--teal)}
+.ux-on .btn-primary:hover::before,.ux-on .btn-dark:hover::before,.ux-on .btn-primary:focus-visible::before,.ux-on .btn-dark:focus-visible::before{transform:scaleX(1)}
+.ux-on .hero .btn-primary:hover,.ux-on .cta .btn-primary:hover{color:var(--navy);background:var(--teal2)}
+/* keep the nav button text white on hover (the plain nav link hover was turning it green on green) */
+.ux-on .navlinks .btn-dark{padding:9px 18px}
+.ux-on .navlinks .btn-dark,.ux-on .navlinks .btn-dark:hover{color:#fff;border-color:transparent}
+/* the click: quick press down, springy release, and a ring that pops outward */
+.ux-on .btn-primary:active,.ux-on .btn-dark:active{transform:scale(.95)!important;transition-duration:.08s}
+.ux-on .btn-primary::after,.ux-on .btn-dark::after{content:"";position:absolute;left:var(--ux-x,50%);top:var(--ux-y,50%);width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:rgba(255,255,255,.55);opacity:0;pointer-events:none;z-index:-1}
+.ux-on .ux-press::after{animation:ux-ping .5s ease-out}
+@keyframes ux-ping{0%{opacity:.9;transform:scale(0)}100%{opacity:0;transform:scale(18)}}
+
+/* 2. Arrow nudge on main calls to action */
+.ux-on .ux-magnet{transition:transform .35s cubic-bezier(.2,.8,.2,1.2),color .35s ease}
+.ux-on .ux-magnet .ux-arrow{display:inline-block;margin-left:8px;transition:transform .35s cubic-bezier(.2,.8,.2,1.4)}
+.ux-on .ux-magnet:hover .ux-arrow{transform:translateX(5px)}
+.ux-arrow{display:none}
+.ux-on .ux-arrow{display:inline-block}
+
+/* 3. Glass nav that floats on scroll (Opal style) */
+.ux-on .nav{transition:margin .45s ease,border-radius .45s ease,box-shadow .45s ease,background .45s ease,top .45s ease}
+.ux-on .nav.ux-float{top:12px;margin:0 16px;border-radius:999px;background:rgba(255,255,255,.72);border:1px solid rgba(227,232,235,.9);box-shadow:0 14px 40px rgba(1,40,59,.14)}
+
+/* 4. Electric underline that follows the cursor (Surge style) */
+.ux-on .navlinks{position:relative}
+.ux-on .navlinks a:not(.btn){border-bottom-color:transparent!important}
+.ux-bar{position:absolute;bottom:-2px;height:3px;border-radius:3px;background:linear-gradient(90deg,var(--blue),var(--teal));pointer-events:none;opacity:0;transition:left .35s cubic-bezier(.3,.8,.3,1),width .35s cubic-bezier(.3,.8,.3,1),opacity .2s ease}
+.ux-on .ux-bar.ux-show{opacity:1}
+
+/* 5. Stretchy highlight on the Solutions picker (Opal style) */
+.ux-on .pk-tabs{position:relative}
+.ux-on .pk-tab{position:relative;z-index:1;transition:color .3s ease,border-color .3s ease,transform .2s ease}
+.ux-on .pk-tab[aria-selected="true"]{background:transparent;border-color:transparent}
+.ux-hl{position:absolute;left:0;right:0;border-radius:14px;background:var(--navy);box-shadow:0 10px 26px rgba(1,40,59,.22);z-index:0;pointer-events:none}
+.ux-hl.ux-ready{transition:top .45s cubic-bezier(.3,1.3,.5,1),height .45s cubic-bezier(.3,1.3,.5,1)}
+.ux-off .ux-hl,.ux-off .ux-bar{display:none}
+
+/* 6. Paper plane send (Dart style) */
+.ux-on .ux-send{position:relative;overflow:hidden}
+.ux-send .ux-label{display:inline-block;transition:transform .45s cubic-bezier(.5,0,.5,1),opacity .3s ease}
+.ux-send .ux-plane{position:absolute;left:50%;top:50%;width:26px;height:26px;margin:-13px 0 0 -13px;opacity:0;transform:scale(.4) rotate(-20deg);pointer-events:none}
+.ux-on .ux-send.ux-fly .ux-label{transform:translateY(-140%);opacity:0}
+.ux-on .ux-send.ux-fly .ux-plane{animation:ux-plane 1.4s cubic-bezier(.5,0,.4,1) forwards}
+.ux-on .ux-send.ux-fly::after{content:"Sent \2713";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;opacity:0;animation:ux-sent .4s ease 1.15s forwards}
+@keyframes ux-plane{0%{opacity:0;transform:scale(.4) rotate(-20deg)}15%{opacity:1;transform:scale(1) rotate(0)}35%{transform:translate(-14px,6px) rotate(-8deg)}100%{opacity:0;transform:translate(220px,-70px) rotate(-18deg) scale(.7)}}
+@keyframes ux-sent{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+/* 7. Live sample dashboard (Meridian style) */
+.ux-on .wyg-bars i{transition:width 1.1s cubic-bezier(.2,.8,.2,1)}
+.ux-on .wyg-table tbody tr{transition:opacity .5s ease,transform .5s ease}
+.ux-on .wyg-pre .wyg-table tbody tr{opacity:0;transform:translateX(-14px)}
+.ux-on .wyg-table em{display:inline-block;transition:transform .35s cubic-bezier(.3,1.6,.5,1)}
+.ux-on .wyg-pre .wyg-table em{transform:scale(0)}
+.ux-on .wyg-kpis div{transition:transform .5s ease,opacity .5s ease}
+.ux-on .wyg-pre .wyg-kpis div{opacity:0;transform:translateY(10px)}
+.ux-on .wyg-card{transition:transform .3s ease,box-shadow .3s ease}
+.ux-on .wyg-card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(1,40,59,.14)}
+
+/* Preview guide panel */
+.ux-guide{position:fixed;right:16px;bottom:16px;z-index:50;width:300px;max-width:calc(100vw - 32px);background:var(--navy);color:#fff;border-radius:18px;box-shadow:0 20px 50px rgba(1,40,59,.35);font-family:"Source Sans 3",Arial,sans-serif;font-size:14px}
+.ux-guide summary{list-style:none;cursor:pointer;padding:14px 16px;font-family:Montserrat,Arial,sans-serif;font-weight:800;font-size:13px;letter-spacing:.04em;display:flex;align-items:center;justify-content:space-between;gap:10px}
+.ux-guide summary::-webkit-details-marker{display:none}
+.ux-guide summary span{color:var(--teal)}
+.ux-guide .ux-body{padding:0 16px 16px}
+.ux-guide p{margin:0 0 10px;color:#C9D6DC}
+.ux-guide ol{margin:0 0 12px;padding-left:20px;display:grid;gap:6px}
+.ux-guide a{color:#fff;font-weight:600}
+.ux-guide small{color:#9DB3BE}
+.ux-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;margin-bottom:12px;background:var(--navy2);border-radius:12px;font-family:Montserrat,Arial,sans-serif;font-weight:700;font-size:13px}
+.ux-switch{position:relative;width:46px;height:26px;border-radius:99px;border:0;background:#3B5566;cursor:pointer;transition:background .25s ease;flex:0 0 auto}
+.ux-switch::after{content:"";position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform .25s ease}
+.ux-switch[aria-checked="true"]{background:var(--teal2)}
+.ux-switch[aria-checked="true"]::after{transform:translateX(20px)}
+.ux-switch:focus-visible,.ux-play:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+.ux-play{font:inherit;font-weight:700;color:var(--navy);background:var(--teal);border:0;border-radius:99px;padding:3px 10px;margin-left:6px;cursor:pointer}
+
+@media (prefers-reduced-motion: reduce){
+  .ux-on .btn-primary::before,.ux-on .btn-dark::before{transition:none}
+  .ux-on .ux-press::after{animation:none}
+  .ux-on *,.ux-bar,.ux-hl{transition-duration:.01ms!important;animation-duration:.01ms!important}
+}
+
+.ux-on .navlinks .btn{flex-shrink:0;white-space:nowrap}
+
+/* ---------- Round 2 ---------- */
+
+/* 8. Chaos to Order: the method assembles as you scroll */
+.ux-mark{display:none}
+.ux-on .ux-mark{display:block;overflow:visible;width:112px;height:112px;margin:0 auto 26px}
+.ux-mark rect{transform-box:fill-box;transform-origin:center}
+.ux-on .ps.ux-scroll li .ps-tile{transform:translate(calc(var(--x) * 2.2 * (1 - var(--k,1))),calc(var(--y) * 2.2 * (1 - var(--k,1)))) rotate(calc(var(--r) * 1.6 * (1 - var(--k,1))));opacity:calc(.45 + .55 * var(--k,1));transition:none}
+.ux-on .ps.ux-scroll li h3,.ux-on .ps.ux-scroll li p{opacity:var(--t,1);transform:translateY(calc(10px * (1 - var(--t,1))));transition:none}
+.ux-on .ps.ux-scroll::before{transform:scaleX(var(--line,1));transition:none}
+.ux-on .ps.ux-scroll li.ux-done .ps-tile{box-shadow:0 0 0 6px var(--navy),0 0 0 9px rgba(0,162,152,.35)}
+@media (max-width:900px){.ux-on .ps.ux-scroll::before{transform:scaleY(var(--line,1))}}
+
+/* 9. Pipeline check calculator */
+.pc{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:stretch}
+.pc-in,.pc-out{border-radius:var(--radius);padding:30px}
+.pc-in{background:#fff;border:1px solid var(--cloud);display:grid;gap:30px;align-content:center}
+.pc-field label{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-family:Montserrat,Arial,sans-serif;font-weight:700;font-size:15px;color:var(--navy);margin-bottom:12px}
+.pc-field output{font-size:22px;font-weight:800;color:var(--teal2);font-variant-numeric:tabular-nums}
+.pc-field input[type=range]{width:100%;-webkit-appearance:none;appearance:none;height:8px;border-radius:99px;background:linear-gradient(90deg,var(--teal2) var(--fill,50%),var(--cloud) var(--fill,50%));outline:none;cursor:pointer}
+.pc-field input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:#fff;border:3px solid var(--teal2);box-shadow:0 4px 12px rgba(1,40,59,.2);transition:transform .2s ease}
+.pc-field input[type=range]::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:#fff;border:3px solid var(--teal2);box-shadow:0 4px 12px rgba(1,40,59,.2)}
+.pc-field input[type=range]:active::-webkit-slider-thumb{transform:scale(1.15)}
+.pc-field input[type=range]:focus-visible{outline:3px solid var(--blue);outline-offset:6px}
+.pc-field small{display:block;margin-top:8px;color:var(--slate);font-size:14px}
+.pc-out{background:var(--navy);color:#fff;display:flex;flex-direction:column;gap:16px;position:relative;overflow:hidden}
+.pc-out .eyebrow{color:var(--teal)}
+.pc-big{font-family:Montserrat,Arial,sans-serif;font-weight:800;font-size:clamp(44px,6vw,64px);line-height:1;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.pc-sub{font-size:18px;color:#D1DCE0;margin:0}
+.pc-sub b{color:#fff}
+.pc-bars{display:grid;gap:10px;margin-top:4px}
+.pc-bar{display:grid;grid-template-columns:150px 1fr 44px;gap:12px;align-items:center;font-size:14px;color:#D1DCE0}
+.pc-bar span:last-child{text-align:right;color:#fff;font-weight:700;font-variant-numeric:tabular-nums}
+.pc-track{height:12px;border-radius:99px;background:var(--navy2);overflow:hidden}
+.pc-track i{display:block;height:100%;border-radius:99px;background:var(--teal);transition:width .45s cubic-bezier(.2,.8,.2,1)}
+.pc-track.now i{background:#7FD3E6}
+.pc-note{font-size:13px;color:#9DB3BE;margin:auto 0 0}
+.pc-out .btn{align-self:flex-start}
+@media (max-width:900px){.pc{grid-template-columns:1fr}.pc-bar{grid-template-columns:110px 1fr 40px}}
+
+/* 10. FAQ cards that light up and open */
+.ux-on .faq.ux-acc .faq-item{position:relative;overflow:hidden;isolation:isolate;padding:0;transition:border-color .35s ease,box-shadow .35s ease}
+.ux-on .faq.ux-acc .faq-item::before{content:"";position:absolute;inset:0;z-index:-1;background:#E6F5F3;clip-path:circle(0 at var(--gx,0) var(--gy,50%));transition:clip-path .55s cubic-bezier(.3,.7,.2,1)}
+.ux-on .faq.ux-acc .faq-item:hover,.ux-on .faq.ux-acc .faq-item.ux-open,.ux-on .faq.ux-acc .faq-item:focus-within{border-color:var(--teal2);box-shadow:0 10px 28px rgba(0,125,117,.12)}
+.ux-on .faq.ux-acc .faq-item:hover::before,.ux-on .faq.ux-acc .faq-item.ux-open::before{clip-path:circle(150% at var(--gx,0) var(--gy,50%))}
+.faq-q{all:unset;box-sizing:border-box;display:flex;width:100%;align-items:center;justify-content:space-between;gap:16px;cursor:pointer;font-family:Montserrat,Arial,sans-serif;font-weight:800;font-size:18px;color:var(--navy)}
+.ux-on .faq.ux-acc .faq-q{padding:22px 26px}
+.faq-q:focus-visible{outline:3px solid var(--blue);outline-offset:-3px;border-radius:16px}
+.faq-ic{flex:0 0 30px;height:30px;border-radius:50%;background:var(--mist);position:relative;transition:background .3s ease,transform .4s cubic-bezier(.3,1.4,.5,1)}
+.faq-ic::before,.faq-ic::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:2px;margin:-1px 0 0 -6px;background:var(--teal2);border-radius:2px}
+.faq-ic::after{transform:rotate(90deg);transition:transform .3s ease}
+.ux-open .faq-ic{background:var(--teal2);transform:rotate(180deg)}
+.ux-open .faq-ic::before,.ux-open .faq-ic::after{background:#fff}
+.ux-open .faq-ic::after{transform:rotate(0)}
+.ux-off .faq-ic{display:none}
+.ux-ans{display:grid;grid-template-rows:1fr}
+.ux-ans>div{overflow:hidden;min-height:0}
+.ux-on .faq.ux-acc .ux-ans{grid-template-rows:0fr;transition:grid-template-rows .45s cubic-bezier(.3,.7,.2,1)}
+.ux-on .faq.ux-acc .faq-item.ux-open .ux-ans{grid-template-rows:1fr}
+.ux-on .faq.ux-acc .ux-ans p{padding:0 26px 22px}
+.ux-off .faq-q{cursor:default;margin-bottom:8px}
+
+/* ---------- Round 3: Show Checkup ---------- */
+
+/* 11. One question at a time */
+#cq-see-score{margin-top:10px}
+.cq-nav #cq-see-score{margin-top:0}
+.cq-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:18px}
+.cq-prog,.cq-back,.cq-next{display:none}
+.ux-on .cq-step .q{display:none;margin:4px 0 0}
+.ux-on .cq-step .q.cq-cur{display:block}
+.ux-on .cq-step .q>label{font-family:Montserrat,Arial,sans-serif;font-size:clamp(19px,2.4vw,23px);line-height:1.3;margin:2px 0 18px;outline:none}
+.ux-on .cq-step .q.cq-fwd{animation:cq-fwd .42s cubic-bezier(.2,.8,.2,1)}
+.ux-on .cq-step .q.cq-bwd{animation:cq-bwd .42s cubic-bezier(.2,.8,.2,1)}
+@keyframes cq-fwd{from{opacity:0;transform:translateX(32px)}to{opacity:1;transform:none}}
+@keyframes cq-bwd{from{opacity:0;transform:translateX(-32px)}to{opacity:1;transform:none}}
+.ux-on .cq-step:not(.cq-last) #cq-see-score{display:none}
+.ux-on .cq-step{padding:30px 32px}
+.ux-on .cq-nav{margin-top:24px}
+.ux-on .cq-back{display:inline-flex;align-items:center;gap:6px;background:none;border:0;padding:10px 4px;font:700 15px Montserrat,Arial,sans-serif;color:var(--slate);cursor:pointer;border-radius:8px}
+.ux-on .cq-back:hover{color:var(--navy)}
+.ux-on .cq-back:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.ux-on .cq-back.cq-hide{visibility:hidden}
+.ux-on .cq-next{display:inline-flex;gap:8px;margin-left:auto}
+.ux-on .cq-next[hidden]{display:none}
+.ux-on .cq-nav .btn:disabled{opacity:.4;cursor:not-allowed}
+.ux-on .btn-primary:disabled::before{transform:scaleX(0)!important}
+.ux-on #cq-see-score.cq-ready{animation:cq-glow 1.5s ease-out 2}
+@keyframes cq-glow{0%{box-shadow:0 0 0 0 rgba(0,162,152,.55)}100%{box-shadow:0 0 0 16px rgba(0,162,152,0)}}
+
+/* 12. Stage progress meter */
+.ux-on .cq-prog{display:block;margin-bottom:26px}
+.cq-prog-top{display:flex;justify-content:space-between;gap:12px;font:700 13px Montserrat,Arial,sans-serif;color:var(--slate);margin-bottom:12px}
+.cq-count{color:var(--navy)}
+.cq-meter{display:flex;gap:6px}
+.cq-seg{display:flex;flex-direction:column;gap:8px;min-width:0}
+.cq-track{display:block;height:8px;border-radius:99px;background:var(--cloud);overflow:hidden}
+.cq-track i{display:block;height:100%;width:0;border-radius:99px;background:var(--teal2);transition:width .55s cubic-bezier(.65,0,.35,1)}
+.cq-lab{font:800 10.5px Montserrat,Arial,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:#9AA6AD;transition:color .3s ease;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cq-seg.cq-done .cq-lab{color:var(--navy)}
+.cq-seg.cq-on .cq-lab{color:var(--teal2)}
+
+/* 13. Answers that fill and check */
+.ux-on .cq-opt{position:relative;align-items:center;padding:15px 18px 15px 54px;border:1.5px solid var(--cloud);border-radius:14px;background:#fff;font-weight:600;color:var(--navy);-webkit-tap-highlight-color:transparent;user-select:none;transition:border-color .2s ease,background .25s ease,color .25s ease,box-shadow .25s ease,transform .15s ease}
+.ux-on .cq-opt input{position:absolute;opacity:0;width:1px;height:1px;margin:0;pointer-events:none}
+.ux-on .cq-opt::before{content:"";position:absolute;left:18px;top:50%;width:22px;height:22px;margin-top:-11px;box-sizing:border-box;border-radius:50%;border:2px solid #B9C4CA;background:#fff;transition:border-color .2s ease}
+.ux-on .cq-opt::after{content:"";position:absolute;left:26px;top:50%;width:6px;height:11px;margin-top:-8px;box-sizing:border-box;border:solid var(--teal2);border-width:0 2.5px 2.5px 0;transform:rotate(45deg) scale(0);transition:transform .28s cubic-bezier(.3,1.6,.5,1)}
+@media (hover:hover){
+  .ux-on .cq-opt:hover{border-color:var(--teal2);background:#fff;box-shadow:0 6px 18px rgba(1,40,59,.08)}
+  .ux-on .cq-opt:hover::before{border-color:var(--teal2)}
+}
+.ux-on .cq-opt:active{transform:scale(.98)}
+.ux-on .cq-opt:has(input:checked){background:var(--teal2);border-color:var(--teal2);color:#fff;box-shadow:0 8px 22px rgba(0,125,117,.25)}
+.ux-on .cq-opt:has(input:checked)::before{border-color:#fff}
+.ux-on .cq-opt:has(input:checked)::after{transform:rotate(45deg) scale(1)}
+.ux-on .cq-opt:has(input:focus-visible){outline:3px solid var(--blue);outline-offset:2px}
+.ux-on .cq-opt.cq-pop{animation:cq-pop .38s cubic-bezier(.3,1.6,.5,1)}
+@keyframes cq-pop{0%{transform:scale(.97)}60%{transform:scale(1.015)}100%{transform:none}}
+
+/* 14. Score reveal */
+.ux-on .results .band .fill{transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.ux-on .results.cq-anim .cq-dial{animation:cq-dial-in .6s cubic-bezier(.3,1.4,.5,1) both}
+.ux-on .results.cq-anim .cq-band,.ux-on .results.cq-anim .cq-fix,.ux-on .results.cq-anim .cq-share{animation:cq-up .5s cubic-bezier(.2,.8,.2,1) both}
+.ux-on .results.cq-anim .cq-band{animation-delay:1.7s}
+.ux-on .results.cq-anim .cq-fix{animation-delay:2.4s}
+.ux-on .results.cq-anim .cq-share{animation-delay:2.6s}
+@keyframes cq-dial-in{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:none}}
+@keyframes cq-up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+
+@media (max-width:600px){
+  .ux-on .cq-step{padding:22px 18px}
+  .cq-seg{flex:1 1 0!important}
+  .cq-lab{font-size:9.5px;letter-spacing:.06em;text-overflow:clip}
+}
+
+/* ---------- About page ---------- */
+/* 1. Stats count up */
+.ux-on .fstats dt{font-variant-numeric:tabular-nums}
+.ux-on .fstats div{transition:opacity .6s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.ux-on .fstats div:nth-child(2){transition-delay:.08s}.ux-on .fstats div:nth-child(3){transition-delay:.16s}.ux-on .fstats div:nth-child(4){transition-delay:.24s}
+.ux-on .fstats.ux-pre div{opacity:0;transform:translateY(14px)}
+/* 2. Quote inks in */
+.ux-on .ux-w{transition:opacity .45s ease,color .45s ease}
+.ux-on .ux-pre .ux-w{opacity:.12;transition:none}
+/* 3. Portrait wipe */
+.ux-on img.ux-portrait{clip-path:inset(0 0 0 0 round 18px);transition:clip-path 1.1s cubic-bezier(.65,0,.35,1),transform 1.5s cubic-bezier(.2,.8,.2,1)}
+.ux-on img.ux-portrait.ux-pre{clip-path:inset(100% 0 0 0 round 18px);transform:scale(1.06);transition:none}
+.ux-on img.ux-portrait.ux-done{clip-path:none}
+/* 4. Cards rise in, gradient bar draws */
+.ux-on .rec{position:relative;border-top-color:transparent;transition:opacity .6s ease,transform .7s cubic-bezier(.2,.8,.2,1),box-shadow .35s ease}
+.ux-on .rec::before{content:"";position:absolute;left:16px;right:16px;top:-4px;height:4px;border-radius:4px;background:linear-gradient(90deg,var(--blue),var(--teal));transform-origin:left center;transition:transform .9s cubic-bezier(.65,0,.35,1) .3s}
+.ux-on .recs.ux-pre .rec{opacity:0;transform:translateY(28px);transition:none}
+.ux-on .recs.ux-pre .rec::before{transform:scaleX(0);transition:none}
+/* 5. Marker sweep on key phrases */
+/* layer 1: the marker glow; layer 2: a solid underline that draws under the phrase when you hover the card */
+.ux-on .rec-hl{background-image:linear-gradient(transparent 58%,rgba(0,162,152,.28) 58%),linear-gradient(var(--teal2),var(--teal2));background-repeat:no-repeat;background-position:0 0,0 100%;background-size:100% 100%,0% 3px;padding-bottom:2px;transition:background-size 1s cubic-bezier(.65,0,.35,1) .8s}
+.ux-on .rec:nth-child(2) .rec-hl{transition-delay:.95s}.ux-on .rec:nth-child(3) .rec-hl{transition-delay:1.1s}
+.ux-on .recs.ux-pre .rec-hl{background-size:0% 100%,0% 3px;transition:none}
+.ux-on .recs .rec:hover .rec-hl{background-size:100% 100%,100% 3px;transition:background-size .7s cubic-bezier(.65,0,.35,1) 0s}
+.ux-on .recs.ux-played .rec-hl{transition:background-size .5s cubic-bezier(.65,0,.35,1) 0s}
+/* phones and tablets have no hover, so the underline draws on its own after the glow */
+@media (hover:none){
+  .ux-on .rec-hl{background-size:100% 100%,100% 3px;transition:background-size 1s cubic-bezier(.65,0,.35,1) .8s}
+}
+/* 6. Spotlight the card you hover */
+@media (hover:hover) and (min-width:900px){
+  .ux-on .recs:hover .rec{opacity:.5;transform:scale(.98)}
+  .ux-on .recs .rec:hover{opacity:1;transform:translateY(-6px);box-shadow:0 26px 60px rgba(1,40,59,.18)}
+}
+@media (prefers-reduced-motion: reduce){
+  .ux-on .fstats.ux-pre div,.ux-on .recs.ux-pre .rec{opacity:1;transform:none}
+  .ux-on .ux-pre .ux-w{opacity:1}
+  .ux-on img.ux-portrait.ux-pre{clip-path:none;transform:none}
+  .ux-on .recs.ux-pre .rec::before{transform:none}
+  .ux-on .recs.ux-pre .rec-hl{background-size:100% 100%,0% 3px}
+}

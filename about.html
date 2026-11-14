@@ -3,21 +3,44 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>About Exhibit RX | Pharma and Life Sciences Trade-Show Partner</title>
-<meta name="description" content="Exhibit RX was built from inside global pharma and life-science trade-show programs to close the gap between running an event well and getting its full commercial value." />
+<title>About Exhibit RX | Trade Show Management for Pharma and Life Sciences</title>
+<meta name="description" content="Why Exhibit RX exists: a founder-led trade show management partner built from years inside pharma and life-science exhibition programs." />
 <meta property="og:type" content="website" />
-<meta property="og:title" content="About Exhibit RX | Pharma and Life Sciences Trade-Show Partner" />
-<meta property="og:description" content="Exhibit RX was built from inside global pharma and life-science trade-show programs to close the gap between running an event well and getting its full commercial value." />
+<meta property="og:title" content="About Exhibit RX | Trade Show Management for Pharma and Life Sciences" />
+<meta property="og:description" content="Why Exhibit RX exists: a founder-led trade show management partner built from years inside pharma and life-science exhibition programs." />
 <meta property="og:image" content="https://exhibitrx.com/images/og-image.jpg" />
-<meta property="og:url" content="https://exhibitrx.com/about.html" />
-<link rel="canonical" href="https://exhibitrx.com/about.html" />
+<meta property="og:url" content="https://exhibitrx.com/about" />
+<link rel="canonical" href="https://exhibitrx.com/about" />
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2301283B'/%3E%3Crect x='12' y='17' width='18' height='18' rx='4' fill='%23fff' transform='rotate(-24 21 26)'/%3E%3Crect x='18' y='40' width='18' height='18' rx='4' fill='%23fff' transform='rotate(16 27 49)'/%3E%3Crect x='13' y='70' width='18' height='18' rx='4' fill='%23fff' transform='rotate(-12 22 79)'/%3E%3Crect x='42' y='15' width='18' height='18' rx='4' fill='%23008CAF' transform='rotate(8 51 24)'/%3E%3Crect x='41' y='42' width='18' height='18' rx='4' fill='%23008CAF' transform='rotate(-6 50 51)'/%3E%3Crect x='41' y='67' width='18' height='18' rx='4' fill='%23008CAF' transform='rotate(4 50 76)'/%3E%3Crect x='67' y='15' width='18' height='18' rx='4' fill='%2300A298'/%3E%3Crect x='67' y='41' width='18' height='18' rx='4' fill='%2300A298'/%3E%3Crect x='67' y='67' width='18' height='18' rx='4' fill='%2300A298'/%3E%3C/svg%3E" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600&display=swap" />
 <link rel="stylesheet" href="css/styles.css" />
+<link rel="stylesheet" href="css/ux.css" />
+<style>
+  /* Busy trade show photo: placement options for the UX preview */
+  .busy-img{display:none;margin:0}
+  .busy-img img{width:100%;height:100%;object-fit:cover;display:block;border-radius:var(--radius);box-shadow:0 30px 70px rgba(0,0,0,.28)}
+  body[data-place="hero"] .about-hero{display:grid;grid-template-columns:1.1fr .9fr;gap:52px;align-items:center}
+  body[data-place="hero"] .busy-img[data-for="hero"]{display:block;aspect-ratio:4/3;max-height:380px}
+  body[data-place="problem"] .prob-split{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center}
+  body[data-place="problem"] .prob-split .head{margin-bottom:0}
+  body[data-place="problem"] .busy-img[data-for="problem"]{display:block;aspect-ratio:4/3;max-height:400px}
+  body[data-place="problem"] .busy-img[data-for="problem"] img{box-shadow:var(--shadow)}
+  body[data-place="behind"] #about-hero{background:linear-gradient(90deg,rgba(1,40,59,.94) 0%,rgba(1,40,59,.82) 55%,rgba(1,40,59,.55) 100%),var(--busy-bg) center/cover no-repeat;padding:110px 0 104px}
+  @media(max-width:900px){
+    body[data-place="hero"] .about-hero,body[data-place="problem"] .prob-split{grid-template-columns:1fr;gap:28px}
+    body[data-place="hero"] .busy-img[data-for="hero"],body[data-place="problem"] .busy-img[data-for="problem"]{max-height:260px;aspect-ratio:auto;height:240px}
+    body[data-place="behind"] #about-hero{background:linear-gradient(rgba(1,40,59,.88),rgba(1,40,59,.88)),var(--busy-bg) center/cover no-repeat;padding:80px 0 76px}
+  }
+  .ux-guide[open]{max-height:calc(100vh - 32px);overflow:auto}
+  .ux-guide .ux-pick{margin:4px 0 12px;display:flex;flex-wrap:wrap;gap:6px}
+  .ux-guide .ux-pick button{font:inherit;font-size:13px;font-weight:700;color:#fff;background:#24465a;border:0;border-radius:99px;padding:5px 11px;cursor:pointer}
+  .ux-guide .ux-pick button[aria-pressed="true"]{background:var(--teal);color:var(--navy)}
+  .ux-guide .ux-pick-label{display:block;font-weight:700;color:#fff;margin-top:6px}
+</style>
 </head>
-<body>
+<body data-place="hero" data-photo="floor">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
   <symbol id="erx-mark" viewBox="0 0 100 100">
     <rect x="1" y="6" width="22" height="22" rx="4" fill="currentColor" transform="rotate(-24 12 17)"/>
@@ -31,27 +54,30 @@
     <rect x="68" y="68" width="22" height="22" rx="4" fill="#00A298"/>
   </symbol>
 </svg>
-<div class="topbar"><strong>Exhibiting January to June 2027?</strong> Most teams lock plans by January. <a href="index.html#audit">Get your Show Diagnosis</a></div>
+<div class="topbar"><strong>Planning your 2027 shows?</strong> Start with a free Show Diagnosis. <a href="https://calendly.com/togarjohnson/exhibit-rx-discovery-call" target="_blank" rel="noopener">Book a call</a></div>
 <nav class="nav"><div class="wrap navin">
   <a class="logo" href="index.html" style="color:var(--navy)"><svg width="40" height="40" aria-hidden="true"><use href="#erx-mark"/></svg><span>Exhibit <span style="color:var(--teal)">RX</span><span class="tag">Cure the Chaos</span></span></a>
   <div class="navlinks">
-    <a href="index.html#how">How it works</a>
-    <a href="index.html#solutions">Solutions</a>
+    <a href="index.html#solutions">Services</a>
+    <a href="index.html#how">How we work</a>
     <a href="checkup.html">Show Checkup</a>
-    <a href="index.html#faq">FAQ</a>
     <a href="about.html" class="active">About</a>
-    <a class="btn btn-dark" href="index.html#audit">Get your Show Diagnosis</a>
+    <a href="index.html#faq">FAQ</a>
+    <a class="btn btn-dark" href="https://calendly.com/togarjohnson/exhibit-rx-discovery-call" target="_blank" rel="noopener">Book a Show Diagnosis</a>
   </div>
 </div></nav>
 
-<header class="hero small"><div class="wrap">
+<header class="hero small" id="about-hero"><div class="wrap about-hero">
+  <div class="ah-text">
   <div class="breadcrumb"><a href="index.html">Home</a> / About</div>
-  <div class="eyebrow">Built from inside life-science trade-show programs</div>
+  <div class="eyebrow">Built from inside pharma trade show programs</div>
   <h1 style="max-width:820px">Why Exhibit RX exists.</h1>
-  <p style="max-width:760px;margin-top:18px">Exhibit RX was created from firsthand experience managing complex global pharma trade-show programs, and seeing the gap between executing an event well and getting its full commercial value.</p>
+  <p style="max-width:760px;margin-top:18px">Exhibit RX was built from years of running pharma trade show programs with a lean team. The same problems showed up every year: too many vendors, too little time, and good conversations that disappeared after the show. Exhibit RX exists to fix that, from the first planning call to the last follow-up.</p>
+  </div>
+  <figure class="busy-img" data-for="hero"><img src="images/expo-floor-wide.jpg" alt="A busy trade show floor with attendees walking between exhibitor booths" width="1200" height="900" /></figure>
 </div></header>
 
-<section class="section mist"><div class="wrap">
+<section class="section mist" id="founder"><div class="wrap">
   <div class="head"><div class="eyebrow">Experience behind the method</div><h2>Founder Togar G. Johnson</h2></div>
   <div style="display:flex;flex-wrap:wrap;gap:36px;align-items:flex-start;max-width:900px">
     <div style="flex:0 1 280px"><img src="images/togar-founder.jpg" alt="Togar G. Johnson, founder of Exhibit RX" width="720" height="1080" style="width:100%;height:auto;display:block;border-radius:var(--radius);box-shadow:var(--shadow)" />
@@ -73,49 +99,124 @@
   </div>
 </div></section>
 
-<section class="section"><div class="wrap">
-  <div class="head"><div class="eyebrow">In the field</div><h2>From the show floor to large-scale public events.</h2><p>Real, qualified conversations on the show floor, the outcome every stage of the Exhibit RX Method is designed to drive toward.</p></div>
-  <div class="carousel" aria-roledescription="carousel" aria-label="Photos from trade shows and events Togar has run">
-    <div class="carousel-track" tabindex="0">
-      <figure class="slide"><img src="images/dover-air-show.jpg" alt="Crowds, vendor tents and aircraft at the Thunder Over Dover air show" loading="lazy" /><figcaption>Thunder Over Dover 2022, Dover Air Force Base, where Togar led marketing and sponsorships. Photo: U.S. Air Force.</figcaption></figure>
-      <figure class="slide"><img src="images/togar-podium-2.jpg" alt="Togar Johnson addressing an audience from a podium" loading="lazy" /><figcaption>Speaking to the room, not just the booth.</figcaption></figure>
-      <figure class="slide"><img src="images/expo-floor-wide.jpg" alt="Wide view of a busy life-science trade show exhibit hall" loading="lazy" /><figcaption>The scale the Exhibit RX Method is built to operate at.</figcaption></figure>
-      <figure class="slide"><img src="images/dover-concert-crowd.jpg" alt="Crowd at a 4,000-person concert at Dover Air Force Base" loading="lazy" /><figcaption>A concert at Dover AFB hosted by Togar, with more than 4,000 attendees.</figcaption></figure>
-    </div>
-    <button class="carousel-btn prev" type="button" aria-label="Previous photo">&#8249;</button>
-    <button class="carousel-btn next" type="button" aria-label="Next photo">&#8250;</button>
-    <div class="carousel-dots" role="tablist"></div>
+<section class="section" id="recommendations"><div class="wrap">
+  <style>
+    .rec-hl{background:none;color:inherit;padding:0}
+    .recs{display:grid;grid-template-columns:1fr;gap:24px;margin-top:8px}
+    @media (min-width:760px){.recs{grid-template-columns:repeat(2,1fr)}}
+    .rec{display:flex;flex-direction:column;background:#fff;border:1px solid var(--cloud);border-top:4px solid var(--teal2);border-radius:var(--radius);padding:28px 26px;box-shadow:var(--shadow);margin:0}
+    .rec .rec-tag{font-family:Montserrat,Arial,sans-serif;font-size:16px;font-weight:800;line-height:1.3;letter-spacing:-.005em;color:var(--teal2);margin:0 0 16px}
+    .rec blockquote{margin:0 0 24px;font-size:18px;line-height:1.6;color:var(--navy);flex:1}
+    .rec blockquote p{margin:0 0 12px}.rec blockquote p:last-child{margin:0}
+    .rec figcaption{display:flex;gap:12px;align-items:center;border-top:1px solid var(--cloud);padding-top:16px}
+    .rec .rec-init{flex:0 0 44px;width:44px;height:44px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-family:Montserrat,Arial,sans-serif;font-weight:800;font-size:14px}
+    .rec .rec-name{font-weight:800;font-size:17px;color:var(--navy);display:block}
+    .rec .rec-role,.rec .rec-org{font-size:15px;color:var(--slate);display:block;line-height:1.4}
+    .recs-more{margin-top:26px}
+    .recs-more a{color:var(--teal2);font-weight:700}
+  </style>
+  <div class="head"><div class="eyebrow">Recommendations</div><h2>From the booth to the follow-up.</h2><p>In their own words, from recommendations on Togar's LinkedIn profile.</p></div>
+  <div class="recs">
+    <figure class="rec">
+      <p class="rec-tag">World Vaccine Congress, DC</p>
+      <blockquote>
+        <p>"At the World Vaccine Congress in Washington, DC March 2026, Togar played <mark class="rec-hl">an instrumental role in attracting vaccine developers</mark> at various stages of development to SPI Pharma's booth and generating interest in our technologies."</p>
+        <p>"Togar actively sought my input, asked thoughtful questions, and worked to understand the science behind the adjuvants so he could communicate their value effectively to the right audiences."</p>
+      </blockquote>
+      <figcaption><span class="rec-init" aria-hidden="true">JK</span><span><span class="rec-name">Juhienah Khalaf</span><span class="rec-role">Director of Adjuvant Portfolio</span><span class="rec-org">Inimmune Corporation. Exhibit partner.</span></span></figcaption>
+    </figure>
+    <figure class="rec">
+      <p class="rec-tag">Trade shows and congresses</p>
+      <blockquote>
+        <p>"I've really valued the work we did together, <mark class="rec-hl">especially at the trade shows and congresses</mark>. I had fun and learned a ton!"</p>
+      </blockquote>
+      <figcaption><span class="rec-init" aria-hidden="true">MP</span><span><span class="rec-name">Matthieu Privat</span><span class="rec-role">Business Development Manager</span><span class="rec-org">Q-VANT Biosciences. Industry partner.</span></span></figcaption>
+    </figure>
+    <figure class="rec">
+      <p class="rec-tag">Event planning and execution</p>
+      <blockquote>
+        <p>"He is <mark class="rec-hl">particularly strong in event planning</mark>, where he brings ideas to life and manages the details of experiences with care and creativity."</p>
+        <p>"I recommend him without hesitation to any team that values strong interpersonal skills, creativity, event coordination, and a genuinely uplifting presence."</p>
+      </blockquote>
+      <figcaption><span class="rec-init" aria-hidden="true">AC</span><span><span class="rec-name">Amanda Coulter</span><span class="rec-role">Head of Marketing</span><span class="rec-org">SPI Pharma</span></span></figcaption>
+    </figure>
+    <figure class="rec">
+      <p class="rec-tag">Customer focus across teams</p>
+      <blockquote>
+        <p>"Togar consistently demonstrated a unique ability to <mark class="rec-hl">combine strategic marketing expertise with a genuine commitment to customer satisfaction</mark>."</p>
+        <p>"He was always willing to collaborate across departments, and together we often developed creative solutions to better serve our customers and address their evolving needs."</p>
+      </blockquote>
+      <figcaption><span class="rec-init" aria-hidden="true">BM</span><span><span class="rec-name">Brittany MacKinnon</span><span class="rec-role">Operations and Client Relations</span><span class="rec-org">SPI Pharma</span></span></figcaption>
+    </figure>
   </div>
+  <p class="recs-more"><a href="https://www.linkedin.com/in/togarjohnson/details/recommendations/" target="_blank" rel="noopener">Read the full recommendations on LinkedIn &rarr;</a></p>
 </div></section>
 
-<section class="section mist"><div class="wrap">
-  <div class="head"><div class="eyebrow">Quick answers</div><h2>What problem does Exhibit RX solve?</h2><p>The pieces around a trade show are usually disconnected. Exhibit RX connects strategy, preparation, execution and measurement, helps your team see what actually happened after the show, and makes each show better than the last.</p></div>
+<section class="section mist" id="problem"><div class="wrap prob-split">
+  <div class="head"><div class="eyebrow">What I saw from the inside</div><h2>Lean teams carry heavy shows.</h2><p>Most life-science companies invest heavily in trade shows and staff them with marketing teams of two or three people. Those teams manage builders, shipping, budgets, sales calendars, technical experts and lead follow-up, on top of their day jobs. The shows still happen. What gets lost is the commercial value: the meetings that never got booked and the leads no one owned.</p></div>
+  <figure class="busy-img" data-for="problem"><img src="images/expo-floor-wide.jpg" alt="A busy trade show floor with attendees walking between exhibitor booths" width="1200" height="900" loading="lazy" /></figure>
+</div></section>
+
+<section class="section" id="how-we-work"><div class="wrap">
+  <div class="head"><div class="eyebrow">Why trust Exhibit RX with your trade show investment</div><h2>Founder-led. Flexible. Focused on results.</h2></div>
+  <div class="whygrid">
+    <div><h3>You work with the founder</h3><p>Togar leads every engagement personally. No hand-offs to a junior account team.</p></div>
+    <div><h3>A flexible, partner-led model</h3><p>When a project needs more hands, such as onsite support or a specialist vendor, we bring in trusted partners and coordinate them for you.</p></div>
+    <div><h3>Your systems stay yours</h3><p>You keep your builder, CRM and sales process. We take on what you need, from one piece of one show to your full calendar.</p></div>
+    <div><h3>Scope agreed up front</h3><p>Every engagement is defined in writing before we start, so you know exactly what we're handling and what you'll receive.</p></div>
+    <div><h3>Shows that run well</h3><p>Smooth planning, vendor coordination and show days, so your team can focus on customers.</p></div>
+    <div><h3>Shows that pay off</h3><p>Every engagement is measured against the goals we set together at the start.</p></div>
+  </div>
+  <p class="muted" style="margin-top:30px">Exhibit RX is a trade show management partner for pharma and life-science companies. We can take one part of your show or run your whole program. <a href="index.html#solutions" style="color:var(--teal2);font-weight:700">See our services &rarr;</a></p>
 </div></section>
 
 <section class="cta" id="audit"><div class="wrap cta-in">
   <div><div class="eyebrow" style="color:var(--teal)">Complimentary Show Diagnosis</div><h2>Bring your next show. Leave with three priorities to strengthen it.</h2><p style="color:#D1DCE0">A complimentary 30-minute call. No obligation.</p></div>
-  <a class="btn btn-primary" href="https://calendly.com/togarjohnson/exhibit-rx-discovery-call" target="_blank" rel="noopener">Get your Show Diagnosis</a>
+  <a class="btn btn-primary" href="https://calendly.com/togarjohnson/exhibit-rx-discovery-call" target="_blank" rel="noopener">Book a free Show Diagnosis</a>
 </div></section>
 
 <footer class="footer"><div class="wrap">
   <a class="logo" href="index.html" style="color:#fff"><svg width="44" height="44" aria-hidden="true"><use href="#erx-mark"/></svg><span>Exhibit <span style="color:var(--teal)">RX</span><span class="tag">Cure the Chaos</span></span></a>
-  <div class="flinks"><a href="index.html#how">How it works</a><a href="index.html#solutions">Solutions</a><a href="checkup.html">Show Checkup</a><a href="about.html">About</a><a href="index.html#faq">FAQ</a><a href="privacy.html">Privacy</a><a href="https://www.linkedin.com/in/togarjohnson">LinkedIn</a></div>
-  <p>Cure the Chaos. Prove the Value.</p>
-  <p class="small muted">The global trade-show performance partner for pharma and life sciences.</p>
+  <div class="flinks"><a href="index.html#solutions">Services</a><a href="index.html#how">How we work</a><a href="checkup.html">Show Checkup</a><a href="about.html">About</a><a href="index.html#faq">FAQ</a><a href="privacy.html">Privacy</a><a href="https://www.linkedin.com/in/togarjohnson">LinkedIn</a></div>
+  <p class="small"><a href="mailto:solutions@exhibitrx.com" style="color:inherit">solutions@exhibitrx.com</a></p>
+  <p>Cure the Chaos. Turn Complexity Into Opportunity.</p>
+  <p class="small muted">Trade show management for pharma and life sciences, from planning to performance.</p>
 </div></footer>
+<script src="scripts/ux.js"></script>
 <script>
-document.querySelectorAll('.carousel').forEach(function(c){
-  var t=c.querySelector('.carousel-track'),s=[].slice.call(t.children),d=c.querySelector('.carousel-dots');
-  s.forEach(function(_,i){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label','Go to photo '+(i+1));b.onclick=function(){go(i)};d.appendChild(b)});
-  function cur(){var x=t.scrollLeft,best=0;s.forEach(function(el,i){if(Math.abs(el.offsetLeft-t.offsetLeft-x)<Math.abs(s[best].offsetLeft-t.offsetLeft-x))best=i});return best}
-  function go(i){i=(i+s.length)%s.length;t.scrollTo({left:s[i].offsetLeft-t.offsetLeft,behavior:'smooth'})}
-  function mark(){var i=cur();[].forEach.call(d.children,function(b,j){b.classList.toggle('on',j===i)})}
-  c.querySelector('.prev').onclick=function(){go(cur()-1)};
-  c.querySelector('.next').onclick=function(){go(cur()+1)};
-  t.addEventListener('scroll',function(){clearTimeout(t._m);t._m=setTimeout(mark,80)});
-  t.addEventListener('keydown',function(e){if(e.key==='ArrowRight'){e.preventDefault();go(cur()+1)}if(e.key==='ArrowLeft'){e.preventDefault();go(cur()-1)}});
-  mark();
-});
+/* UX preview: try the busy trade show photo in different places */
+(function(){
+  var body=document.body, KEY='erx-busy';
+  var photos={
+    floor:{src:'images/expo-floor-wide.jpg',alt:'A busy trade show floor with attendees walking between exhibitor booths',label:'Booth aisle'},
+    crowd:{src:'https://images.unsplash.com/photo-1560439514-4e9645039924?auto=format&fit=crop&w=1400&q=80',alt:'A packed exhibition hall seen from above, crowded with attendees',label:'Crowd from above'}
+  };
+  var places=[['hero','Top, beside headline'],['behind','Behind headline'],['problem','Beside "Lean teams"'],['none','No photo']];
+  try{ var saved=JSON.parse(localStorage.getItem(KEY)||'{}'); if(saved.place) body.dataset.place=saved.place; if(saved.photo&&photos[saved.photo]) body.dataset.photo=saved.photo; }catch(e){}
+  function apply(){
+    var p=photos[body.dataset.photo]||photos.floor;
+    [].forEach.call(document.querySelectorAll('.busy-img img'),function(im){ im.src=p.src; im.alt=p.alt; });
+    document.getElementById('about-hero').style.setProperty('--busy-bg','url("'+p.src+'")');
+    [].forEach.call(document.querySelectorAll('.ux-pick button'),function(b){ b.setAttribute('aria-pressed',String(body.dataset[b.dataset.k]===b.dataset.v)); });
+    try{ localStorage.setItem(KEY,JSON.stringify({place:body.dataset.place,photo:body.dataset.photo})); }catch(e){}
+  }
+  var g=document.querySelector('.ux-guide .ux-body');
+  if(g){
+    var box=document.createElement('div');
+    box.innerHTML='<span class="ux-pick-label">Busy trade show photo: where</span><div class="ux-pick">'+
+      places.map(function(x){ return '<button type="button" data-k="place" data-v="'+x[0]+'">'+x[1]+'</button>'; }).join('')+'</div>'+
+      '<span class="ux-pick-label">Which photo</span><div class="ux-pick">'+
+      Object.keys(photos).map(function(k){ return '<button type="button" data-k="photo" data-v="'+k+'">'+photos[k].label+'</button>'; }).join('')+'</div>';
+    g.insertBefore(box,g.querySelector('ol'));
+    box.addEventListener('click',function(e){
+      var b=e.target.closest('button'); if(!b) return;
+      body.dataset[b.dataset.k]=b.dataset.v; apply();
+      var t=body.dataset.place==='problem'?document.getElementById('problem'):document.getElementById('about-hero');
+      if(body.dataset.place!=='none') t.scrollIntoView({block:'start',behavior:'smooth'});
+    });
+  }
+  apply();
+})();
 </script>
 <script defer src="/_vercel/insights/script.js"></script>
 </body>
