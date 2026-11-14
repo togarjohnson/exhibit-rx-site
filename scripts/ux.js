@@ -141,6 +141,8 @@
     '<li><a href="#faq">FAQ cards light up and open</a></li>')+
     '</ol><small>Preview only. Nothing here is on exhibitrx.com yet.</small></div>';
   body.appendChild(g);
+  /* Show the preview guide only on preview links, never on the live site */
+  if(!/(\.vercel\.app|localhost|127\.0\.0\.1)$/.test(location.hostname)) g.style.display='none';
   var sw=g.querySelector('.ux-switch');
   sw.addEventListener('click',function(){
     on=!on; sw.setAttribute('aria-checked',String(on)); apply(); onScroll();
