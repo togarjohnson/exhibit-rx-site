@@ -138,7 +138,7 @@
     '<li><a href="#deliverables">Live sample dashboard</a> <small>(Meridian)</small><button type="button" class="ux-play" data-play="dash">Replay</button></li>'+
     '<li><a href="#how">Chaos to Order method</a> <small>(scroll slowly)</small></li>'+
     '<li><a href="#pipeline-check">Pipeline check calculator</a></li>'+
-    '<li><a href="#about">Recommendations rotate</a> <small>(7 seconds each, pauses on hover)</small></li>'+
+    '<li><a href="#about">Recommendations rotate</a> <small>(6 seconds each, pauses on hover)</small></li>'+
     '<li><a href="#faq">FAQ cards light up and open</a></li>')+
     '</ol><small>Preview only. Nothing here is on exhibitrx.com yet.</small></div>';
   body.appendChild(g);
@@ -414,40 +414,27 @@
 /* ---------- Round 4: rotating recommendations (home page) ---------- */
 (function(){
   var root=document.getElementById('qrot'); if(!root) return;
-  var DUR=7000; /* time each recommendation stays up */
+  var DUR=6000; /* time each recommendation stays up */
   var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
   function on(){ return document.body.classList.contains('ux-on'); }
   var track=root.querySelector('.qrot-track');
   var slides=[].slice.call(root.querySelectorAll('.qrot-slide'));
-  var barsBox=root.querySelector('.qrot-bars'), pauseBtn=root.querySelector('.qrot-pause');
-  var n=slides.length; if(n<2){ pauseBtn.hidden=true; return; }
-  var bars=slides.map(function(s,i){
-    var b=document.createElement('button'); b.type='button'; b.className='qrot-bar';
-    var who=s.querySelector('.qrot-name'); b.setAttribute('aria-label','Recommendation '+(i+1)+' of '+n+(who?': '+who.textContent:''));
-    b.appendChild(document.createElement('i'));
-    b.addEventListener('click',function(){ go(i,true); });
-    barsBox.appendChild(b); return b;
-  });
+  var pauseBtn=root.querySelector('.qrot-pause');
+  var n=slides.length; if(n<2){ if(pauseBtn) pauseBtn.remove(); return; }
   var idx=0, elapsed=0, last=0, inView=false, hover=false, focusIn=false, userPaused=reduce;
-  function go(i,manual){
+  function go(i){
     idx=(i+n)%n; elapsed=0;
     slides.forEach(function(s,k){ var a=k===idx; s.classList.toggle('is-on',a); s.setAttribute('aria-hidden',String(!a)); s.setAttribute('aria-label',(k+1)+' of '+n); });
-    bars.forEach(function(b,k){ b.classList.toggle('is-on',k===idx); b.classList.toggle('is-done',k<idx); b.style.setProperty('--p',0); if(k===idx) b.setAttribute('aria-current','true'); else b.removeAttribute('aria-current'); });
-    track.setAttribute('aria-live',manual?'polite':'off');
   }
   function running(){ return on() && !userPaused && inView && !hover && !focusIn && !document.hidden; }
   function setPaused(p){
-    userPaused=p; root.classList.toggle('is-paused',p);
-    pauseBtn.setAttribute('aria-label',p?'Play rotation':'Pause rotation');
+    userPaused=p;
+    pauseBtn.textContent=p?'Play rotation':'Pause rotation'; pauseBtn.setAttribute('aria-label',p?'Play rotation':'Pause rotation');
     track.setAttribute('aria-live',p?'polite':'off');
   }
   function tick(t){
     var dt=last?Math.min(100,t-last):0; last=t;
-    if(running()){
-      elapsed+=dt;
-      bars[idx].style.setProperty('--p',Math.min(1,elapsed/DUR));
-      if(elapsed>=DUR) go(idx+1);
-    }
+    if(running()){ elapsed+=dt; if(elapsed>=DUR) go(idx+1); }
     requestAnimationFrame(tick);
   }
   pauseBtn.addEventListener('click',function(){ setPaused(!userPaused); });
@@ -460,5 +447,27 @@
   } else inView=true;
   go(0); setPaused(userPaused);
   requestAnimationFrame(tick);
-  root._go=go;
+
+  /* Preview-only design options: quote mark and Founding Client urgency */
+  var guide=document.querySelector('.ux-guide'), band=document.querySelector('.founding-band');
+  if(!guide) return;
+  var ol=guide.querySelector('ol');
+  var li=document.createElement('li');
+  li.innerHTML='Large quote mark <button type="button" class="ux-play" data-opt="qmark" aria-pressed="false">Show</button>';
+  ol.appendChild(li);
+  var qb=li.querySelector('button');
+  qb.addEventListener('click',function(){
+    var o=root.classList.toggle('qmark'); qb.textContent=o?'Hide':'Show'; qb.setAttribute('aria-pressed',String(o));
+    root.scrollIntoView({block:'center',behavior:reduce?'auto':'smooth'});
+  });
+  if(band){
+    var li2=document.createElement('li');
+    li2.innerHTML='<a href="#founding">Founding urgency</a><br><span class="ux-urg">'+
+      [['tracker','Spot tracker'],['pulse','Pulsing line'],['badge','Red badge'],['none','None']].map(function(o){ return '<button type="button" class="ux-play" data-urg="'+o[0]+'" aria-pressed="'+(band.getAttribute('data-urg')===o[0])+'">'+o[1]+'</button>'; }).join('')+'</span>';
+    ol.appendChild(li2);
+    var ubs=[].slice.call(li2.querySelectorAll('[data-urg]'));
+    function mark(){ ubs.forEach(function(b){ var a=b.getAttribute('data-urg')===band.getAttribute('data-urg'); b.setAttribute('aria-pressed',String(a)); b.style.opacity=a?'1':'.55'; }); }
+    ubs.forEach(function(b){ b.addEventListener('click',function(){ band.setAttribute('data-urg',b.getAttribute('data-urg')); mark(); band.scrollIntoView({block:'center',behavior:reduce?'auto':'smooth'}); }); });
+    mark();
+  }
 })();
