@@ -372,7 +372,8 @@
       reset:function(){ if(!on()) return; img.classList.remove('ux-done'); img.classList.add('ux-pre'); },
       play:function(){ if(on()) img.classList.remove('ux-pre'); },
       finish:function(){ img.classList.remove('ux-pre'); img.classList.add('ux-done'); } };
-    watch(img,fx.portrait,.25);
+    /* watch the photo's frame, not the photo: a fully clipped image never counts as on screen, so it would stay hidden */
+    watch(img.parentElement,fx.portrait,.25);
   }
 
   /* 4 and 5. Recommendation cards rise in, top bar draws, key phrases get a marker sweep */
