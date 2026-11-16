@@ -556,3 +556,22 @@ p,li,blockquote{text-wrap:pretty}
    (the plain nav-link rules were stripping its side padding and turning its text green on green) */
 .navlinks .btn{padding:10px 20px}
 .navlinks .btn-dark,.navlinks .btn-dark:hover{color:#fff;border-color:transparent}
+
+/* Mobile menu (900px and narrower) */
+.navtoggle{display:none}
+@media(max-width:900px){
+  .navtoggle{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 14px;border:1px solid var(--cloud);border-radius:999px;background:#fff;color:var(--navy);font:700 14px Montserrat,Arial,sans-serif;cursor:pointer}
+  .navtoggle:focus-visible{outline:2px solid var(--teal2);outline-offset:2px}
+  .navtoggle-bars{display:inline-flex;flex-direction:column;gap:4px;width:18px}
+  .navtoggle-bars i{display:block;height:2px;border-radius:2px;background:currentColor;transition:transform .25s ease,opacity .2s ease}
+  .nav-open .navtoggle-bars i:nth-child(1){transform:translateY(6px) rotate(45deg)}
+  .nav-open .navtoggle-bars i:nth-child(2){opacity:0}
+  .nav-open .navtoggle-bars i:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+  /* the open panel hangs from the full-width nav bar */
+  .nav.nav-open .navin{position:static}
+  .nav.nav-open .navlinks{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;padding:6px 24px 20px;background:#fff;border-bottom:1px solid var(--cloud);box-shadow:0 18px 30px rgba(1,40,59,.12);font-size:17px}
+  .nav.nav-open.ux-float .navlinks{top:calc(100% + 8px);border:1px solid var(--cloud);border-radius:18px}
+  .nav.nav-open .navlinks a:not(.btn){padding:14px 2px;border-bottom:1px solid var(--cloud)!important}
+  .nav.nav-open .navlinks .btn{margin-top:16px;padding:14px 20px;justify-content:center}
+  .nav.nav-open .navlinks .ux-bar{display:none}
+}
