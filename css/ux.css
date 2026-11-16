@@ -10,7 +10,10 @@
 .ux-on .btn-primary:hover::before,.ux-on .btn-dark:hover::before,.ux-on .btn-primary:focus-visible::before,.ux-on .btn-dark:focus-visible::before{transform:scaleX(1)}
 .ux-on .hero .btn-primary:hover,.ux-on .cta .btn-primary:hover{color:var(--navy);background:var(--teal2)}
 /* keep the nav button text white on hover (the plain nav link hover was turning it green on green) */
-.ux-on .navlinks .btn-dark{padding:9px 18px}
+/* no border on filled buttons: the hover fill sits inside the border, which left a dark ring around the green pill.
+   Padding grows by the old 2px border so every button keeps its exact size. */
+.ux-on .btn-primary,.ux-on .btn-dark{border-width:0;padding:16px 24px}
+.ux-on .navlinks .btn-dark{padding:12px 22px}
 .ux-on .navlinks .btn-dark,.ux-on .navlinks .btn-dark:hover{color:#fff;border-color:transparent}
 /* the click: quick press down, springy release, and a ring that pops outward */
 .ux-on .btn-primary:active,.ux-on .btn-dark:active{transform:scale(.95)!important;transition-duration:.08s}
