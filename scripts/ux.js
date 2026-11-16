@@ -138,6 +138,7 @@
     '<li><a href="#deliverables">Live sample dashboard</a> <small>(Meridian)</small><button type="button" class="ux-play" data-play="dash">Replay</button></li>'+
     '<li><a href="#how">Chaos to Order method</a> <small>(scroll slowly)</small></li>'+
     '<li><a href="#pipeline-check">Pipeline check calculator</a></li>'+
+    '<li><a href="#about">Recommendations rotate</a> <small>(7 seconds each, pauses on hover)</small></li>'+
     '<li><a href="#faq">FAQ cards light up and open</a></li>')+
     '</ol><small>Preview only. Nothing here is on exhibitrx.com yet.</small></div>';
   body.appendChild(g);
@@ -408,4 +409,56 @@
     var sw=guide.querySelector('.ux-switch');
     if(sw) sw.addEventListener('click',function(){ if(!on()) Object.keys(fx).forEach(function(k){ fx[k].finish(); }); });
   }
+})();
+
+/* ---------- Round 4: rotating recommendations (home page) ---------- */
+(function(){
+  var root=document.getElementById('qrot'); if(!root) return;
+  var DUR=7000; /* time each recommendation stays up */
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function on(){ return document.body.classList.contains('ux-on'); }
+  var track=root.querySelector('.qrot-track');
+  var slides=[].slice.call(root.querySelectorAll('.qrot-slide'));
+  var barsBox=root.querySelector('.qrot-bars'), pauseBtn=root.querySelector('.qrot-pause');
+  var n=slides.length; if(n<2){ pauseBtn.hidden=true; return; }
+  var bars=slides.map(function(s,i){
+    var b=document.createElement('button'); b.type='button'; b.className='qrot-bar';
+    var who=s.querySelector('.qrot-name'); b.setAttribute('aria-label','Recommendation '+(i+1)+' of '+n+(who?': '+who.textContent:''));
+    b.appendChild(document.createElement('i'));
+    b.addEventListener('click',function(){ go(i,true); });
+    barsBox.appendChild(b); return b;
+  });
+  var idx=0, elapsed=0, last=0, inView=false, hover=false, focusIn=false, userPaused=reduce;
+  function go(i,manual){
+    idx=(i+n)%n; elapsed=0;
+    slides.forEach(function(s,k){ var a=k===idx; s.classList.toggle('is-on',a); s.setAttribute('aria-hidden',String(!a)); s.setAttribute('aria-label',(k+1)+' of '+n); });
+    bars.forEach(function(b,k){ b.classList.toggle('is-on',k===idx); b.classList.toggle('is-done',k<idx); b.style.setProperty('--p',0); if(k===idx) b.setAttribute('aria-current','true'); else b.removeAttribute('aria-current'); });
+    track.setAttribute('aria-live',manual?'polite':'off');
+  }
+  function running(){ return on() && !userPaused && inView && !hover && !focusIn && !document.hidden; }
+  function setPaused(p){
+    userPaused=p; root.classList.toggle('is-paused',p);
+    pauseBtn.setAttribute('aria-label',p?'Play rotation':'Pause rotation');
+    track.setAttribute('aria-live',p?'polite':'off');
+  }
+  function tick(t){
+    var dt=last?Math.min(100,t-last):0; last=t;
+    if(running()){
+      elapsed+=dt;
+      bars[idx].style.setProperty('--p',Math.min(1,elapsed/DUR));
+      if(elapsed>=DUR) go(idx+1);
+    }
+    requestAnimationFrame(tick);
+  }
+  pauseBtn.addEventListener('click',function(){ setPaused(!userPaused); });
+  root.addEventListener('mouseenter',function(){ hover=true; });
+  root.addEventListener('mouseleave',function(){ hover=false; });
+  root.addEventListener('focusin',function(e){ var fv=true; try{ fv=e.target.matches(':focus-visible'); }catch(x){} if(e.target!==pauseBtn && fv) focusIn=true; });
+  root.addEventListener('focusout',function(){ focusIn=false; });
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(en){ inView=en[0].isIntersecting; },{threshold:.5}).observe(root);
+  } else inView=true;
+  go(0); setPaused(userPaused);
+  requestAnimationFrame(tick);
+  root._go=go;
 })();
