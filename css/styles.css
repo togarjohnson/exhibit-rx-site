@@ -562,3 +562,18 @@ p,li,blockquote{text-wrap:pretty}
 .urg-sq i.open{border-color:var(--brick);background:var(--brick)}
 .urg-sq i:nth-child(1){transform:rotate(-10deg)}.urg-sq i:nth-child(2){transform:rotate(6deg)}.urg-sq i:nth-child(3){transform:rotate(-4deg)}
 @media (prefers-reduced-motion: reduce){.urg-dot::after{animation:none;display:none}}
+
+/* Founding Clients page: urgency on the dark hero (brighter red for contrast on navy) */
+.fc-hero{--brick:#FF6B5E}
+.fc-hero .urg-inline{color:inherit}
+.fc-hero[data-urg="limited"] .urg-inline{color:var(--brick)}
+.fc-hero[data-urg="tracker"] .urg-inline{display:none}
+.hero.fc-hero p.urg-track{display:none;align-items:center;gap:10px;margin:14px 0 0;color:var(--brick);font-weight:700;font-size:17px}
+.fc-hero[data-urg="tracker"] p.urg-track{display:flex}
+.fc-hero .urg-sq i{border-color:rgba(255,255,255,.3)}
+.fc-hero .urg-sq i.open{border-color:var(--brick);background:var(--brick)}
+.fc-prev{position:fixed;right:16px;bottom:16px;z-index:60;display:flex;flex-wrap:wrap;align-items:center;gap:8px;max-width:calc(100vw - 32px);background:var(--navy);color:#fff;border-radius:14px;padding:12px 14px;font-size:13px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.fc-prev[hidden]{display:none}
+.fc-prev b{font-family:Montserrat,Arial,sans-serif;letter-spacing:.06em;font-size:12px}
+.fc-prev button{font:inherit;font-weight:700;color:var(--navy);background:var(--teal);border:0;border-radius:99px;padding:4px 11px;cursor:pointer;opacity:.55}
+.fc-prev button[aria-pressed="true"]{opacity:1}
