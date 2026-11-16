@@ -448,8 +448,8 @@
   go(0); setPaused(userPaused);
   requestAnimationFrame(tick);
 
-  /* Preview-only design options: quote mark and Founding Client urgency */
-  var guide=document.querySelector('.ux-guide'), band=document.querySelector('.founding-band');
+  /* Preview-only design option: quote mark */
+  var guide=document.querySelector('.ux-guide');
   if(!guide) return;
   var ol=guide.querySelector('ol');
   var li=document.createElement('li');
@@ -460,14 +460,4 @@
     var o=root.classList.toggle('qmark'); qb.textContent=o?'Hide':'Show'; qb.setAttribute('aria-pressed',String(o));
     root.scrollIntoView({block:'center',behavior:reduce?'auto':'smooth'});
   });
-  if(band){
-    var li2=document.createElement('li');
-    li2.innerHTML='<a href="#founding">Founding urgency</a><br><span class="ux-urg">'+
-      [['tracker','Spot tracker'],['pulse','Pulsing line'],['badge','Red badge'],['none','None']].map(function(o){ return '<button type="button" class="ux-play" data-urg="'+o[0]+'" aria-pressed="'+(band.getAttribute('data-urg')===o[0])+'">'+o[1]+'</button>'; }).join('')+'</span>';
-    ol.appendChild(li2);
-    var ubs=[].slice.call(li2.querySelectorAll('[data-urg]'));
-    function mark(){ ubs.forEach(function(b){ var a=b.getAttribute('data-urg')===band.getAttribute('data-urg'); b.setAttribute('aria-pressed',String(a)); b.style.opacity=a?'1':'.55'; }); }
-    ubs.forEach(function(b){ b.addEventListener('click',function(){ band.setAttribute('data-urg',b.getAttribute('data-urg')); mark(); band.scrollIntoView({block:'center',behavior:reduce?'auto':'smooth'}); }); });
-    mark();
-  }
 })();
