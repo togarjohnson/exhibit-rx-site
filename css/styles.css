@@ -525,3 +525,53 @@ p,li,blockquote{text-wrap:pretty}
 @media (min-width:600px){.btn{white-space:nowrap}}
 @media (min-width:901px){.whygrid.why4{grid-template-columns:repeat(4,1fr)}}
 @media (min-width:600px){.btn{flex-shrink:0}}
+/* Rotating recommendations (home page) */
+.qrot{margin:24px 0 0;background:#fff;border-left:4px solid var(--teal2);border-radius:0 14px 14px 0;padding:22px 24px 16px;box-shadow:0 6px 20px rgba(1,40,59,.06)}
+.qrot-track{display:grid}
+.qrot-slide{grid-area:1/1;margin:0;display:flex;flex-direction:column;justify-content:flex-start;gap:16px;opacity:0;visibility:hidden;transition:opacity 1s ease-in-out,visibility 0s linear 1s}
+.qrot-slide.is-on{opacity:1;visibility:visible;transition:opacity 1.2s ease-in-out 1s,visibility 0s linear 1s}
+.qrot blockquote{margin:0;font-size:18px;line-height:1.55;color:var(--navy)}
+.qrot figcaption{display:flex;gap:12px;align-items:center}
+.qrot-init{flex:0 0 40px;width:40px;height:40px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-family:Montserrat,Arial,sans-serif;font-weight:800;font-size:13px}
+.qrot-name{display:block;font-weight:800;font-size:16px;color:var(--navy);line-height:1.3}
+.qrot-role{display:block;font-size:14px;color:var(--slate);line-height:1.35}
+.qrot-foot{display:flex;align-items:center;margin-top:16px}
+.qrot-pause{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.qrot-pause:focus-visible{position:static;width:auto;height:auto;margin:0 14px 0 0;clip:auto;overflow:visible;font:inherit;font-size:14px;font-weight:700;color:var(--navy);background:#fff;border:1px solid var(--cloud);border-radius:99px;padding:4px 12px;outline:2px solid var(--teal2);outline-offset:2px}
+.qrot-more{font-size:14px;font-weight:700;color:var(--teal2);white-space:nowrap;text-decoration:none}
+.qrot-more:hover{text-decoration:underline}
+@media(max-width:520px){.qrot{padding:18px 18px 14px}.qrot blockquote{font-size:17px}}
+/* Option: large faint quotation mark in place of the teal left border */
+.qrot{position:relative;overflow:hidden}
+.qrot.qmark{border-left:0;border-radius:14px;padding:58px 28px 18px}
+.qrot.qmark::before{content:"\201C";position:absolute;left:18px;top:-6px;font-family:Georgia,"Times New Roman",serif;font-size:150px;line-height:1;color:var(--teal2);opacity:.16;pointer-events:none}
+.qrot.qmark .qrot-track,.qrot.qmark .qrot-foot{position:relative}
+@media (prefers-reduced-motion: reduce){.qrot-slide,.qrot-slide.is-on{transition:none}}
+/* Founding Client urgency: red badge on the home page band, red "Limited spots available." on the program page */
+.founding-band{--brick:#A93226}
+.urg-badge{display:inline-block;margin-left:10px;padding:3px 10px;border-radius:99px;background:var(--brick);color:#fff;font-size:11px;font-weight:800;letter-spacing:.12em;vertical-align:2px;white-space:nowrap}
+.fc-hero .urg-inline{color:#FF6B5E}
+
+/* Nav "Book a Show Diagnosis" pill: even padding and white text on hover on every page
+   (the plain nav-link rules were stripping its side padding and turning its text green on green) */
+.navlinks .btn{padding:10px 20px}
+.navlinks .btn-dark,.navlinks .btn-dark:hover{color:#fff;border-color:transparent}
+
+/* Mobile menu (900px and narrower) */
+.navtoggle{display:none}
+@media(max-width:900px){
+  .navtoggle{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 14px;border:1px solid var(--cloud);border-radius:999px;background:#fff;color:var(--navy);font:700 14px Montserrat,Arial,sans-serif;cursor:pointer}
+  .navtoggle:focus-visible{outline:2px solid var(--teal2);outline-offset:2px}
+  .navtoggle-bars{display:inline-flex;flex-direction:column;gap:4px;width:18px}
+  .navtoggle-bars i{display:block;height:2px;border-radius:2px;background:currentColor;transition:transform .25s ease,opacity .2s ease}
+  .nav-open .navtoggle-bars i:nth-child(1){transform:translateY(6px) rotate(45deg)}
+  .nav-open .navtoggle-bars i:nth-child(2){opacity:0}
+  .nav-open .navtoggle-bars i:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+  /* the open panel hangs from the full-width nav bar */
+  .nav.nav-open .navin{position:static}
+  .nav.nav-open .navlinks{display:flex;position:absolute;top:100%;left:0;right:0;flex-direction:column;align-items:stretch;gap:0;padding:6px 24px 20px;background:#fff;border-bottom:1px solid var(--cloud);box-shadow:0 18px 30px rgba(1,40,59,.12);font-size:17px}
+  .nav.nav-open.ux-float .navlinks{top:calc(100% + 8px);border:1px solid var(--cloud);border-radius:18px}
+  .nav.nav-open .navlinks a:not(.btn){padding:14px 2px;border-bottom:1px solid var(--cloud)!important}
+  .nav.nav-open .navlinks .btn{margin-top:16px;padding:14px 20px;justify-content:center}
+  .nav.nav-open .navlinks .ux-bar{display:none}
+}

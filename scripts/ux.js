@@ -138,6 +138,7 @@
     '<li><a href="#deliverables">Live sample dashboard</a> <small>(Meridian)</small><button type="button" class="ux-play" data-play="dash">Replay</button></li>'+
     '<li><a href="#how">Chaos to Order method</a> <small>(scroll slowly)</small></li>'+
     '<li><a href="#pipeline-check">Pipeline check calculator</a></li>'+
+    '<li><a href="#about">Recommendations rotate</a> <small>(6 seconds each, pauses on hover)</small></li>'+
     '<li><a href="#faq">FAQ cards light up and open</a></li>')+
     '</ol><small>Preview only. Nothing here is on exhibitrx.com yet.</small></div>';
   body.appendChild(g);
@@ -371,7 +372,8 @@
       reset:function(){ if(!on()) return; img.classList.remove('ux-done'); img.classList.add('ux-pre'); },
       play:function(){ if(on()) img.classList.remove('ux-pre'); },
       finish:function(){ img.classList.remove('ux-pre'); img.classList.add('ux-done'); } };
-    watch(img,fx.portrait,.25);
+    /* watch the photo's frame, not the photo: a fully clipped image never counts as on screen, so it would stay hidden */
+    watch(img.parentElement,fx.portrait,.25);
   }
 
   /* 4 and 5. Recommendation cards rise in, top bar draws, key phrases get a marker sweep */
@@ -408,4 +410,55 @@
     var sw=guide.querySelector('.ux-switch');
     if(sw) sw.addEventListener('click',function(){ if(!on()) Object.keys(fx).forEach(function(k){ fx[k].finish(); }); });
   }
+})();
+
+/* ---------- Round 4: rotating recommendations (home page) ---------- */
+(function(){
+  var root=document.getElementById('qrot'); if(!root) return;
+  var DUR=6000; /* time each recommendation stays up */
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function on(){ return document.body.classList.contains('ux-on'); }
+  var track=root.querySelector('.qrot-track');
+  var slides=[].slice.call(root.querySelectorAll('.qrot-slide'));
+  var pauseBtn=root.querySelector('.qrot-pause');
+  var n=slides.length; if(n<2){ if(pauseBtn) pauseBtn.remove(); return; }
+  var idx=0, elapsed=0, last=0, inView=false, hover=false, focusIn=false, userPaused=reduce;
+  function go(i){
+    idx=(i+n)%n; elapsed=0;
+    slides.forEach(function(s,k){ var a=k===idx; s.classList.toggle('is-on',a); s.setAttribute('aria-hidden',String(!a)); s.setAttribute('aria-label',(k+1)+' of '+n); });
+  }
+  function running(){ return on() && !userPaused && inView && !hover && !focusIn && !document.hidden; }
+  function setPaused(p){
+    userPaused=p;
+    pauseBtn.textContent=p?'Play rotation':'Pause rotation'; pauseBtn.setAttribute('aria-label',p?'Play rotation':'Pause rotation');
+    track.setAttribute('aria-live',p?'polite':'off');
+  }
+  function tick(t){
+    var dt=last?Math.min(100,t-last):0; last=t;
+    if(running()){ elapsed+=dt; if(elapsed>=DUR) go(idx+1); }
+    requestAnimationFrame(tick);
+  }
+  pauseBtn.addEventListener('click',function(){ setPaused(!userPaused); });
+  root.addEventListener('mouseenter',function(){ hover=true; });
+  root.addEventListener('mouseleave',function(){ hover=false; });
+  root.addEventListener('focusin',function(e){ var fv=true; try{ fv=e.target.matches(':focus-visible'); }catch(x){} if(e.target!==pauseBtn && fv) focusIn=true; });
+  root.addEventListener('focusout',function(){ focusIn=false; });
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(en){ inView=en[0].isIntersecting; },{threshold:.5}).observe(root);
+  } else inView=true;
+  go(0); setPaused(userPaused);
+  requestAnimationFrame(tick);
+
+  /* Preview-only design option: quote mark */
+  var guide=document.querySelector('.ux-guide');
+  if(!guide) return;
+  var ol=guide.querySelector('ol');
+  var li=document.createElement('li');
+  li.innerHTML='Large quote mark <button type="button" class="ux-play" data-opt="qmark" aria-pressed="false">Show</button>';
+  ol.appendChild(li);
+  var qb=li.querySelector('button');
+  qb.addEventListener('click',function(){
+    var o=root.classList.toggle('qmark'); qb.textContent=o?'Hide':'Show'; qb.setAttribute('aria-pressed',String(o));
+    root.scrollIntoView({block:'center',behavior:reduce?'auto':'smooth'});
+  });
 })();
