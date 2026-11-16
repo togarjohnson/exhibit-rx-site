@@ -525,3 +525,30 @@ p,li,blockquote{text-wrap:pretty}
 @media (min-width:600px){.btn{white-space:nowrap}}
 @media (min-width:901px){.whygrid.why4{grid-template-columns:repeat(4,1fr)}}
 @media (min-width:600px){.btn{flex-shrink:0}}
+/* Rotating recommendations (home page) */
+.qrot{margin:24px 0 0;background:#fff;border-left:4px solid var(--teal2);border-radius:0 14px 14px 0;padding:22px 24px 16px;box-shadow:0 6px 20px rgba(1,40,59,.06)}
+.qrot-track{display:grid}
+.qrot-slide{grid-area:1/1;margin:0;display:flex;flex-direction:column;justify-content:flex-start;gap:16px;opacity:0;visibility:hidden;transform:translateY(8px);transition:opacity .6s ease,transform .6s ease,visibility 0s linear .6s}
+.qrot-slide.is-on{opacity:1;visibility:visible;transform:none;transition:opacity .6s ease .15s,transform .6s ease .15s,visibility 0s}
+.qrot blockquote{margin:0;font-size:18px;line-height:1.55;color:var(--navy)}
+.qrot figcaption{display:flex;gap:12px;align-items:center}
+.qrot-init{flex:0 0 40px;width:40px;height:40px;border-radius:50%;background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;font-family:Montserrat,Arial,sans-serif;font-weight:800;font-size:13px}
+.qrot-name{display:block;font-weight:800;font-size:16px;color:var(--navy);line-height:1.3}
+.qrot-role{display:block;font-size:14px;color:var(--slate);line-height:1.35}
+.qrot-foot{display:flex;align-items:center;gap:12px;margin-top:18px;padding-top:14px;border-top:1px solid var(--cloud)}
+.qrot-bars{display:flex;gap:6px;flex:1;min-width:0}
+.qrot-bar{flex:1;max-width:56px;height:24px;padding:0;border:0;background:none;cursor:pointer;position:relative}
+.qrot-bar::before,.qrot-bar i{content:"";position:absolute;left:0;right:0;top:50%;height:4px;margin-top:-2px;border-radius:4px;background:var(--cloud)}
+.qrot-bar i{right:auto;width:0;background:var(--teal2)}
+.qrot-bar.is-done i{width:100%}
+.qrot-bar.is-on i{width:calc(var(--p,0)*100%)}
+.qrot-bar:focus-visible{outline:2px solid var(--teal2);outline-offset:2px;border-radius:4px}
+.qrot-pause{flex:0 0 28px;width:28px;height:28px;border-radius:50%;border:1px solid var(--cloud);background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;padding:0}
+.qrot-pause span{width:8px;height:10px;border-left:3px solid var(--navy);border-right:3px solid var(--navy)}
+.qrot.is-paused .qrot-pause span{width:0;height:0;border:0;border-left:9px solid var(--navy);border-top:6px solid transparent;border-bottom:6px solid transparent;margin-left:2px}
+.qrot-pause:hover{border-color:var(--teal2)}
+.qrot-more{font-size:14px;font-weight:700;color:var(--teal2);white-space:nowrap;text-decoration:none}
+.qrot-more:hover{text-decoration:underline}
+.qrot-foot .qrot-pause[hidden],.qrot-bars:empty{display:none}
+@media(max-width:520px){.qrot{padding:18px 18px 14px}.qrot blockquote{font-size:17px}.qrot-foot{flex-wrap:wrap}.qrot-more{flex-basis:100%}}
+@media (prefers-reduced-motion: reduce){.qrot-slide,.qrot-slide.is-on{transition:none;transform:none}}
