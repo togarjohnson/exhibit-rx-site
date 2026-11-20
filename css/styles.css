@@ -549,8 +549,11 @@ p,li,blockquote{text-wrap:pretty}
 @media (prefers-reduced-motion: reduce){.qrot-slide,.qrot-slide.is-on{transition:none}}
 /* Founding Client urgency: red badge on the home page band, red "Limited spots available." on the program page */
 .founding-band{--brick:#A93226}
-.urg-badge{display:inline-block;margin-left:10px;padding:3px 10px;border-radius:99px;background:var(--brick);color:#fff;font-size:11px;font-weight:800;letter-spacing:.12em;vertical-align:2px;white-space:nowrap}
+.urg-badge{display:inline-block;animation:urg-pulse 2.4s ease-in-out infinite;transform-origin:center;margin-left:10px;padding:3px 10px;border-radius:99px;background:var(--brick);color:#fff;font-size:11px;font-weight:800;letter-spacing:.12em;vertical-align:2px;white-space:nowrap}
 .fc-hero .urg-inline{color:#FF6B5E}
+@keyframes urg-pulse{0%,100%{transform:scale(1);box-shadow:0 0 0 0 rgba(169,50,38,.55)}50%{transform:scale(1.06);box-shadow:0 0 0 8px rgba(169,50,38,0)}}
+@media (prefers-reduced-motion:reduce){.urg-badge{animation:none}}
+.nowrap{white-space:nowrap}
 
 /* Nav "Book a Show Diagnosis" pill: even padding and white text on hover on every page
    (the plain nav-link rules were stripping its side padding and turning its text green on green) */
