@@ -474,7 +474,7 @@
           page:location.href
         })
       }).then(function(r){return r.json().then(function(j){if(!r.ok||String(j.success)==='false')throw new Error(j.message||'failed');return j})})
-      .then(function(){form.hidden=true;form.parentNode.querySelector('.mini-done').hidden=false;if(window.va)window.va('event',{name:src})})
+      .then(function(){form.hidden=true;form.parentNode.querySelector('.mini-done').hidden=false;if(window.va)window.va('event',{name:src});if(typeof gtag==='function')gtag('event','generate_lead',{form_name:src})})
       .catch(function(){status.innerHTML='That didn\'t go through. Please email <a href="mailto:solutions@exhibitrx.com" style="color:inherit;font-weight:700">solutions@exhibitrx.com</a> and we\'ll take it from there.'});
     });
   });

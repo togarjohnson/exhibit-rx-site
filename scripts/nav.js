@@ -19,3 +19,10 @@
   document.addEventListener('click',function(e){ if(nav.classList.contains('nav-open')&&!nav.contains(e.target)) set(false); });
   addEventListener('resize',function(){ if(innerWidth>900) set(false); });
 })();
+
+/* GA4: count clicks on any Show Diagnosis (Calendly) booking link */
+document.addEventListener('click',function(e){
+  var a=e.target.closest&&e.target.closest('a[href*="calendly.com"]');
+  if(!a||typeof gtag!=='function') return;
+  gtag('event','show_diagnosis_click',{link_url:a.href,link_text:(a.textContent||'').trim().slice(0,100),page_path:location.pathname});
+});

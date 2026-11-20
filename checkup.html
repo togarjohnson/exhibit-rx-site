@@ -353,7 +353,11 @@
       return res.json();
     }).then(function(){
       var hash = 'a=' + (results.dataset.answers || '');
-      window.location.href = 'report.html#' + hash;
+      var go = function(){ if(!go.done){ go.done = true; window.location.href = 'report.html#' + hash; } };
+      if (typeof gtag === 'function') {
+        gtag('event', 'generate_lead', { form_name: 'show_checkup', event_callback: go });
+        setTimeout(go, 1000);
+      } else { go(); }
     }).catch(function(err){
       status.textContent = (err && err.message === 'blocked')
         ? "Please use your work email address. Personal addresses like Gmail or Yahoo can't receive the report."
